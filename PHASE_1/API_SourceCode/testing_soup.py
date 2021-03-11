@@ -10,6 +10,8 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
 
+import re
+
 cred = credentials.Certificate('/Users/ayaanadil/Desktop/SENG3011/')
 
 firebase_admin.initialize_app(cred, {
@@ -33,9 +35,15 @@ outbreak_links_list = soup.find('ul',class_="list-bullet feed-item-list")  ## ge
 
 for link in outbreak_links_list.find_all('a'):
 
-	print(link.getText()) ## gets title of text
-	print(link.get('href'))
-	## also extract date
+	link_to_next_page = link.get('href')
+	pattern_1 = "^https"
 
-	link_to_next_page = requests.get(base_url + link.get('href'))
-	soup_2 = BeautifulSoup(link_to_next_page, 'html.parser')
+	result = re.match(pattern_1, link_to_next_page)
+
+	if(result):
+		next_page = requests.get(link_to_next_page)
+	else :
+		
+		edited_base_url = base_url[:19]
+		new_link = edited_base_url + link_to_next_page
+		next_page = requests.get(new_link)
