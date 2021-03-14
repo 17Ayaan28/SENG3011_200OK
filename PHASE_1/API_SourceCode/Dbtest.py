@@ -13,7 +13,7 @@ firebase = pyrebase.initialize_app(config)
 
 db = firebase.database()
 
-data = {
+data1 = {
     "url":"https://www.who.int/csr/don/17-january-2020-novel-coronavirus-japan-ex-china/en/",
     "date_of_publication":"2020-01-17 xx:xx:xx",
     "headline":"Novel Coronavirus \u2013 Japan (ex-China)",
@@ -33,26 +33,120 @@ data = {
     ]
 }
 
-jdata = json.dumps(data)
+
+data2 = {
+    "url":"https://www.who.int/csr/don/17-january-2020-novel-coronavirus-japan-ex-china/en/",
+    "date_of_publication":"2021-01-17 xx:xx:xx",
+    "headline":"Novel Coronavirus \u2013 Japan (ex-China)",
+    "main_text":"On 15 January 2020, the Monistry of Health, Labour and Welfare, Japan (MHLW) reported an imported case of laboratory-confirmed 2019-novel coronavirus (2019-nCoV) from Wuhan, Hubei Province, China. The case-patient is male, between the age of 30-39 years, living in Japan. The case-patient travelled to Wuhan, China in late December and developed fever on 3 January 2020 while staying in Wuhan. He did not visit the Huanan Seafood Wholesale Market or any other live animal markets in Wuhan. He has indicated that he was in close contact with a person with pneumonia. On 6 January, he traveled back to Japan and tested negative for influenza when he visited a local clinic on the same day.",
+    "reports":
+    [
+        {	
+            "diseases":["2019-nCoV"],
+            "event_date":"2020-01-03 xx:xx:xx to 2020-01-15",
+            "locations":
+            [
+                {"country":"Korean", "location": "Wuhan, Hubei Province"},
+                {"country":"Japan", "location": ""}
+            ],
+            "syndromes":["Fever of unknown Origin"]
+        }
+    ]
+}
+
+retval = []
+
+#jdata = json.dumps(data)
 #print(jdata)
 
 #remove
 #db.child("Novel Coronavirus").child("China").remove(data)
 
 #push
-db.child("Novel Coronavirus").child("China").set(data)
+db.child("report").child("1").set(data1)
+db.child("report").child("2").set(data2)
 
 #update
-db.child("Novel Coronavirus").child("China").update(data)
+#db.child("covid").update(data)
 
 #retrieve
-rdata = db.child("Novel Coronavirus").child("China").get()
-print(rdata.val())
+#rdata = db.child("covid").child("china").get()
+#print(rdata.val())
 
-all_data = db.child("Novel Coronavirus").child("China").get()
+#rdata2 = db.child("covid").child("china").child("url").get()
+#print(rdata2.key())
+#print(rdata2.val())
+
+'''
+all_data = db.child("covid").child("china").get()
 for data in all_data.each():
     print(data.key())
     print(data.val())
+    print("\n")
+'''
 
 #data_by_date = db.child("Novel Coronavirus").child("China").order_by_child("date_of_publication").equal_to("2020-01-17 xx:xx:xx").get()
 #print(data_by_date)
+
+#retrieve by search key term
+key_term = "ministry of health" 
+
+'''
+all_data = db.child("report")
+
+for data in all_data.get().each():
+    if data.val() is not None and key_term.lower() in data.val()["main_text"].lower():
+        print(data.val())
+'''
+
+#retrieve by search date
+start_date = "2021-01-10"
+end_date = "2021-01-20"
+
+'''
+all_data = db.child("report")
+
+for data in all_data.get().each():
+    if data.val() is not None and end_date > data.val()["date_of_publication"] > start_date:
+        print(data.val())
+'''
+
+
+#retrieve by search location
+location = "china"
+
+'''
+all_data = db.child("report")
+
+for data in all_data.get().each():
+    if data.val() is not None:
+        for report in data.val()["reports"]:
+            for locset in report["locations"]:
+                if location.lower() in locset["country"].lower() or location.lower() in locset["location"].lower():
+                    print(data.val())
+'''
+
+#query test
+
+key_term = "ministry of health" 
+location = "china"
+start_date = "2020-01-10"
+end_date = "2020-01-20"
+
+all_data = db.child("report")
+
+for data in all_data.get().each():
+    if data.val() is not None and key_term.lower() in data.val()["main_text"].lower():
+        if end_date > data.val()["date_of_publication"] > start_date:
+            t = False
+            for report in data.val()["reports"]:
+                for locset in report["locations"]:
+                    if location.lower() in locset["country"].lower() or location.lower() in locset["location"].lower():
+                        retval.append(data.val())
+                        t = True
+                        break
+                if t:
+                    break
+                        
+
+print(retval)
