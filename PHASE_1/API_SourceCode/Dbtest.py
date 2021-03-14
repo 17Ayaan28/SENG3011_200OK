@@ -54,7 +54,7 @@ data2 = {
     ]
 }
 
-retval = []
+retval = {}
 
 #jdata = json.dumps(data)
 #print(jdata)
@@ -88,15 +88,20 @@ for data in all_data.each():
 #data_by_date = db.child("Novel Coronavirus").child("China").order_by_child("date_of_publication").equal_to("2020-01-17 xx:xx:xx").get()
 #print(data_by_date)
 
-#retrieve by search key term
-key_term = "ministry of health" 
 
+#retrieve by search keyterms
 '''
+key_terms = "ministry,nCoV,Zika"
+key_terms = key_terms.split(",")
+
+
 all_data = db.child("report")
 
 for data in all_data.get().each():
-    if data.val() is not None and key_term.lower() in data.val()["main_text"].lower():
-        print(data.val())
+    for term in key_terms:
+        if data.val() is not None and term.lower() in data.val()["main_text"].lower():
+            print(data.val())
+            break
 '''
 
 #retrieve by search date
@@ -128,25 +133,37 @@ for data in all_data.get().each():
 
 #query test
 
-key_term = "ministry of health" 
-location = "china"
+key_terms = "health,Zika"
+key_terms = key_terms.split(",")
+location = "japan"
 start_date = "2020-01-10"
-end_date = "2020-01-20"
+end_date = "2021-01-20"
 
-all_data = db.child("report")
-
-for data in all_data.get().each():
-    if data.val() is not None and key_term.lower() in data.val()["main_text"].lower():
+all_data = db.child("report").get()
+i = 0
+for data in all_data.each():
+    if data.val() is not None:
         if end_date > data.val()["date_of_publication"] > start_date:
             t = False
             for report in data.val()["reports"]:
                 for locset in report["locations"]:
                     if location.lower() in locset["country"].lower() or location.lower() in locset["location"].lower():
-                        retval.append(data.val())
+                        if len(key_terms) == 0:
+                            retval[i] = data.val()
+                            i = i + 1
+                        else:
+                            for term in key_terms:
+                                if term.lower() in data.val()["main_text"].lower():
+                                    retval[i] = data.val()
+                                    i = i + 1
+                                    break
                         t = True
                         break
                 if t:
                     break
-                        
 
-print(retval)
+
+if not retval:
+    print("No relevent data")
+else:
+    print(retval)
