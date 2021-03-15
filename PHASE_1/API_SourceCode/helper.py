@@ -9,8 +9,8 @@ def read_list(file):
     return json.loads(data)
 
 
-disease_list = read_list('diseases.json')
-syndrome_list = read_list('syndromes.json')
+disease_list = read_list('dataset/diseases.json')
+syndrome_list = read_list('dataset/syndromes.json')
 
 
 def new_article(url):
