@@ -1,5 +1,8 @@
 import json, re
 from bs4 import BeautifulSoup
+import spacy
+
+nlp = spacy.load("en_core_web_sm")
 
 def read_list(file):
     f = open(file, "r")
@@ -104,8 +107,20 @@ def get_syndromes(text):
                 syndromes.append(syndrome['name'])
     return syndromes
 
-def get_event_date(text):
-    pass
+def nlp_doc(text):
+    return nlp(text)
 
-def get_locations(text):
-    pass
+def get_event_date(doc):
+    for ent in doc.ents:
+        if (ent.label_ == "DATE"):
+            tmp = ent.text
+            if (tmp.lower().startswith(('jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'))):
+                return ent.text
+    return None
+
+def get_locations(doc):
+    res = set()
+    for ent in doc.ents:
+        if (ent.label_ == "GPE"):
+            res.add(ent.text)
+    return list(res)
