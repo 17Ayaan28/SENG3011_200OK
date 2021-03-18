@@ -241,6 +241,6 @@ db = firebase.database()
 
 
 for dummy in data:
-    db.child("reports").push(dummy)
+    db.child("dummy").push(dummy)
 
 
