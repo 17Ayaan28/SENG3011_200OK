@@ -63,8 +63,8 @@ retval = {}
 #db.child("Novel Coronavirus").child("China").remove(data)
 
 #push
-db.child("report").child("1").set(data1)
-db.child("report").child("2").set(data2)
+#db.child("report").child("1").set(data1)
+#db.child("report").child("2").set(data2)
 
 #update
 #db.child("covid").update(data)
