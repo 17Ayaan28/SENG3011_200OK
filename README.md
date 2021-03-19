@@ -1,5 +1,4 @@
 # SENG3011_200OK
-# Project Overview
 
 # Team Members
 - z5196145  Abhyudit Gupta
@@ -29,10 +28,6 @@ Management Information: [Here](https://github.com/17Ayaan28/SENG3011_200OK/blob/
 Swagger: [Here](https://app.swaggerhub.com/apis-docs/z5158415/API-200OK/1.0.0-oas3#/)
 
 API URL: http://australia-southeast1-seng3011-306108.cloudfunctions.net/
-
-#### API Implementation
-
-Log file: [Here](https://github.com/17Ayaan28/SENG3011_200OK/blob/3224848015c9482b40acf0adb1ab14108fb05d2a/PHASE_1/TestScripts/log_file.json)
 
 ### Deliverable 3:
 
