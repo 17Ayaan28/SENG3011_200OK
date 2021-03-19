@@ -33,11 +33,9 @@ Access logs:
 
 https://australia-southeast1-seng3011-306108.cloudfunctions.net/nlogs (The default number of logs returned is 10)
 
-Alternatively you could specify the number of logs returned,
-
-https://australia-southeast1-seng3011-306108.cloudfunctions.net/nlogs?limit=<Number>
+Alternatively you could specify the number of logs returned: 
  
-For example: https://australia-southeast1-seng3011-306108.cloudfunctions.net/nlogs?limit=20
+e.g. https://australia-southeast1-seng3011-306108.cloudfunctions.net/nlogs?limit=20
 
 ### Deliverable 3:
 
