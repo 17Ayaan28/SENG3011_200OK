@@ -32,7 +32,7 @@ API URL: http://australia-southeast1-seng3011-306108.cloudfunctions.net/
 
 #### API Implementation
 
-Log file: 
+Log file: [Here](https://github.com/17Ayaan28/SENG3011_200OK/blob/3224848015c9482b40acf0adb1ab14108fb05d2a/PHASE_1/TestScripts/log_file.json)
 
 ### Deliverable 3:
 
