@@ -1,6 +1,9 @@
 import json, re
 from bs4 import BeautifulSoup
 import spacy
+from dateutil import parser
+from datetime import datetime
+import geocoder
 
 nlp = spacy.load("en_core_web_sm")
 
@@ -113,14 +116,26 @@ def nlp_doc(text):
 def get_event_date(doc):
     for ent in doc.ents:
         if (ent.label_ == "DATE"):
-            tmp = ent.text
-            if (tmp.lower().startswith(('jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'))):
-                return ent.text
+            # tmp = ent.text
+            # if (tmp.lower().startswith(('jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'))):
+                # return ent.text
+            try:
+                # print("before: ", ent.text)
+                dt = parser.parse(ent.text)
+                formatted = dt.strftime("%Y-%m-%d %H:%M:%S")
+                # print("formatted: ", formatted)
+                # print("========================")
+                return formatted
+            except Exception as e:
+                print(e)
+                continue
+            
     return None
 
 def get_locations(doc):
     res = set()
     for ent in doc.ents:
         if (ent.label_ == "GPE"):
-            res.add(ent.text)
+            g = geocoder.geonames(ent.text,key="ellend")
+            res.add(g.geonames_id)
     return list(res)
