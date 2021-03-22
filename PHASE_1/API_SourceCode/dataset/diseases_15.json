@@ -1,0 +1,17 @@
+[
+    { "name": "malaria" },
+    { "name": "marburg hemorrhagic fever" },
+    { "name": "measles" },
+    { "name": "mers-cov" },
+    { "name": "mumps" },
+    { "name": "nipah virus infection" },
+    { "name": "norovirus infection" },
+    { "name": "pertussis" },
+    { "name": "plague" },
+    { "name": "pneumococcal disease" },
+    { "name": "poliomyelitis infection" },
+    { "name": "q fever" },
+    { "name": "rabies" },
+    { "name": "rift valley fever" },
+    { "name": "rotavirus infection" }
+]
