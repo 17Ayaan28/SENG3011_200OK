@@ -28,8 +28,8 @@ def get_disease_json_name(new_name):
     return names[new_name]
 
 
-disease_list = read_list('diseases_15.json')
-syndrome_list = read_list('syndromes.json')
+disease_list = read_list('dataset/diseases_15.json')
+syndrome_list = read_list('dataset/syndromes.json')
 
 
 def new_article(url):
@@ -255,7 +255,7 @@ def get_date1(text):
     matches3 = re.findall(pattern3, text, re.DOTALL)
     matches3_complete = []
     for match3 in matches3:
-        matches3_complete.append(year+"-xx-xx xx:xx:xx")
+        matches3_complete.append(match3+"-xx-xx xx:xx:xx")
 
     complete = matches1_complete + matches2_complete + matches3_complete
     # sort
