@@ -6,18 +6,20 @@ import re
 
 base_url = "https://www.cdc.gov"
 
-hanta_url = "https://www.cdc.gov/hantavirus/outbreaks/index.html"
+histo_url = "https://www.cdc.gov/fungal/cdc-and-fungal/histoplasmosis.html"
+histo_page = requests.get(histo_url)
 
-hanta_page = requests.get(hanta_url)
+soup = BeautifulSoup(histo_page.text, 'html.parser')
 
-soup = BeautifulSoup(hanta_page.text, 'html.parser')
-
-url_linked_list = soup.find('ul', id='nav-group-c016f')
+url_linked_list = soup.find('ul', id='nav-group-d3177')
 url_list = url_linked_list.find_all('a')
-
+url_list.append(histo_url)
 for url in url_list:
 
-    next_url = base_url + url.get('href')
+    if (str(url).startswith("https://www.cdc.gov")):
+        next_url = url
+    else:
+        next_url = base_url + url.get('href')
 
     next_page = requests.get(next_url)
 
