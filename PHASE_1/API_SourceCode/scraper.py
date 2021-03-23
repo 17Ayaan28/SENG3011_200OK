@@ -68,7 +68,7 @@ def scraper(disease, url):
 
     # article['main_text'] = helper.get_main_text(main
     doc = helper.nlp_doc(main_text)
-    report['event_date'] = helper.get_event_date(doc)
+    report['event_date'] = helper.get_date(main_text)
 
     report['locations'] = helper.get_locations(doc)
 
