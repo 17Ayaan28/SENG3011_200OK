@@ -129,7 +129,7 @@ def remove(string):
 
 def convert_month(month):
     #date_string = re.sub(r'\.', '', date_string)
-    print(month)
+    #print(month)
     if(month == "Jan" or month == "January"):
         return "1"
     elif(month == "Feb" or month == "February"):
@@ -211,7 +211,7 @@ def get_date(text):
     date = date_object.strftime('%Y-%m-%d')
     return date + " xx:xx:xx"
     """
-
+"""
 def convert_month(date_string):
     date_string = re.sub(r'\.', '', date_string)
     date_string = re.sub(r'Jan ', 'January ', date_string)
@@ -227,6 +227,7 @@ def convert_month(date_string):
     date_string = re.sub(r'Dec ', 'December ', date_string)
 
     return date_string
+"""
 
 def get_date1(text):
     # Extact
@@ -308,5 +309,6 @@ def get_geoname_id(place_name):
 
     return geonames_id
 
-text = "Nov. 12, 2021"
-print(get_date1(text))
+# Testing
+#text = "Nov. 12, 2021"
+#print(get_date1(text))
