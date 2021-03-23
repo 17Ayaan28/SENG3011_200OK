@@ -22,7 +22,16 @@ for dummy in all_data.each():
 '''
 
 
-all_data = db.child("data").get()
-syndromes = ["Fever of unknown Origin"]
+all_data = db.child("data_s").get()
+date1 = "2014-12-17 xx-xx-xx"
+date2 = "2014-12-01 xx-xx-xx"
+date3 = "2020-02-25 xx-xx-xx"
+
 for data in all_data.each():
-    db.child("data").child(data.key()).child("reports").child(0).child("syndromes").set(syndromes)
+  if data.val()['url'] == "https://www.cdc.gov/vhf/marburg/outbreaks/summaries.html":
+    db.child("data_s").child(data.key()).child("date_of_publication").set(date1)
+  elif data.val()['url'] == "https://www.cdc.gov/vhf/marburg/outbreaks/chronology.html":
+    db.child("data_s").child(data.key()).child("date_of_publication").set(date2)
+  elif data.val()['url'] == "https://www.cdc.gov/vhf/rvf/outbreaks/summaries.html":
+    db.child("data_s").child(data.key()).child("date_of_publication").set(date3)
+
