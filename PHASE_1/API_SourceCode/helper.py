@@ -55,45 +55,41 @@ def new_report():
 
 def get_date_headline(head, main, url):
 
-    #headline = head.find('title')
-    #headline = headline.get_text() if headline else ""
-    """
-    headline = main.find('h1') if main else head.find('title')
-    if(main):
-        headline = headline if headline else main.find('h3')
-    headline = headline.get_text() if headline else ""
-    """
-    #print('\n\n----------')
-    #print(main)
-    #print('url ', url)
     headline = ""
+
     if(main):
-        #print('url ', url)
+
         headline = main.find('h1')
-        #print('h1 ', headline)
+
         if(not headline):
             headline = main.find('h3')
-            #print('h3 headline')
-    #print('----------\n\n')
 
     if(not headline):
         headline = head.find('title')
 
     headline = headline.get_text() if headline else ""
-    #print(headline)
+
     if(re.compile(" - ").search(headline)):
+
         headline = headline[:headline.find(" - ")]
+
     elif(re.compile(" | ").search(headline)):
+
         headline =  headline[:headline.find(" | ")]
         
-    #print(headline)
-    #print('-----------\n\n')
+    dop = head.find('meta', property='article:published_time')
 
-    # date format: 2018-11-01 xx:xx:xx
-    #date = head.find('meta', property='article:published_time')
-    date_of_publication = head.find('meta', property='article:published_time')
-    date_of_publication = date_of_publication['content'] + ' xx:xx:xx' if date_of_publication else ""
-    
+    if (not dop):
+
+        dop = head.find('meta', property='cdc:last_updated')['content']
+
+        if (dop):
+            date_of_publication = get_date(dop)
+        else:
+            date_of_publication = ""
+    else :
+        date_of_publication = get_date(dop)
+
     return date_of_publication, headline
 
 def get_main_text():
