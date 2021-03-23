@@ -127,7 +127,7 @@ def get_event_date(doc):
                 # print("========================")
                 return formatted
             except Exception as e:
-                print(e)
+                # print(e)
                 continue
             
     return None

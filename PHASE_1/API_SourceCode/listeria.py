@@ -40,5 +40,5 @@ if (succeed):
         if (strLink.startswith("/listeria/outbreaks/")):
             link = urllib.parse.urljoin(URL, strLink)
             print(link)
+            scraper.scraper("listeria", link)
 
-scraper.scraper("listeria", "https://www.cdc.gov/listeria/outbreaks/hispanic-soft-cheese-02-21/index.html")
