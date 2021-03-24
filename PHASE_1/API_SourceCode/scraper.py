@@ -8,6 +8,7 @@ def not_empty(href):
     return href and not re.compile("^$").search(href)
 
 def scraper(disease, url):
+    print("Scraping: " + url)
     f = open(disease + ".json", "a")
 
     headers = {
@@ -67,10 +68,15 @@ def scraper(disease, url):
     article['reports'].append(report)
 
     # article['main_text'] = helper.get_main_text(main
-    doc = helper.nlp_doc(main_text)
+    # doc = helper.nlp_doc(main_text)
     report['event_date'] = helper.get_date(main_text)
 
-    report['locations'] = helper.get_locations(doc)
+    # report['locations'] = helper.get_locations(doc)
+    locations = helper.get_locations(main_text)
+    for lo in locations:
+        item = {}
+        item["geonames_id"] = lo
+        report["locations"].append(item)
 
     if (report['diseases'] and report['event_date'] and report['locations']):
         json.dump(article, f)
