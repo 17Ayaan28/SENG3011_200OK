@@ -26,7 +26,6 @@ url_list2_2 = soup.find_all(lambda tag: tag.name=='a' and tag.has_attr('href') a
 url_list2_21 = soup.find_all(lambda tag: tag.name=='a' and tag.has_attr('href') and tag['href'].endswith('/blooddonorinfections.htm'))
 url_list += url_list2 + url_list2_2 + url_list2_21
 
-print(url_list, '\n-----------------')
 for url in url_list:
     
     if (str(url).startswith(base_url)):
