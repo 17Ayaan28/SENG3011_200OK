@@ -76,7 +76,6 @@ for u in ul:
 
 shigellosis_links = ""
 
-"""
 # Salmonellosiss current outbreaks
 # salmonelosiss_links = current_outbreak_links + past_outbreak_links
 for outbreak_link in current_outbreak_links:
@@ -211,7 +210,6 @@ for past_outbreak in past_outbreak_links:
             report["locations"].append(item)
 
     article["reports"].append(report)    
-"""
 
 # sars
 for sars_link in sars_outbreak_links:
