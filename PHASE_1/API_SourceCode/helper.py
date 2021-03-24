@@ -29,8 +29,8 @@ def get_disease_json_name(new_name):
     return names[new_name]
 
 
-disease_list = read_list('diseases_15.json')
-syndrome_list = read_list('syndromes.json')
+disease_list = read_list('dataset/diseases.json')
+syndrome_list = read_list('dataset/syndromes.json')
 
 
 def new_article(url):
