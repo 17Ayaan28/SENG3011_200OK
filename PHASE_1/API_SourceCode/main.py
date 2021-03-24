@@ -1,16 +1,5 @@
-print("Lacey's scraper: ")
+from Ellen import ellen_main
 
-print(">>>> influenza ")
-import influenza
+from Lacey import lacey_main
 
-print(">>>> monkeypox ")
-import monkeypox
-
-print(">>>> listeria ")
-import listeria
-
-print(">>>> hepatitis-a ")
-import hepatitis
-
-print(">>>> hantavirus ")
-import hantavirus
+from Ayaan import ayaan_main

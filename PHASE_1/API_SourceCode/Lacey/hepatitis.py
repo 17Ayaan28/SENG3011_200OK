@@ -2,7 +2,7 @@ import time
 import requests, json
 from bs4 import BeautifulSoup
 import urllib.parse, re
-import scraper
+from Lacey import scraper
 
 scraper.scraper("hepatitis-a", "https://www.cdc.gov/hepatitis/outbreaks/2017March-HepatitisA.htm")
 scraper.scraper("hepatitis-a", "https://www.cdc.gov/hepatitis/outbreaks/2019/hav-berries/index.htm")

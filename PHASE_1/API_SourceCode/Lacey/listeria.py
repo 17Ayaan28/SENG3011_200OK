@@ -3,7 +3,7 @@ import time
 import requests, json
 from bs4 import BeautifulSoup
 import urllib.parse, re
-import scraper
+from Lacey import scraper
 
 headers = {
     "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
