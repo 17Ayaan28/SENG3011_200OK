@@ -11,12 +11,18 @@ histo_page = requests.get(histo_url)
 
 soup = BeautifulSoup(histo_page.text, 'html.parser')
 
-url_linked_list = soup.find('ul', id='nav-group-d3177')
-url_list = url_linked_list.find_all('a')
+url_linked_list1 = soup.find('ul', id='nav-group-d3177')
+url_list = url_linked_list1.find_all('a')
 url_list.append(histo_url)
+
+url_linked_list2 = soup.find('ul', id='nav-group-dd420')
+url_list2 = url_linked_list2.find_all(lambda tag: tag.name=='a' and tag.has_attr('href') and tag['href'].endswith('/maps.html'))
+url_list2_2 = url_linked_list2.find_all(lambda tag: tag.name=='a' and tag.has_attr('href') and tag['href'].endswith('/statistics.html'))
+url_list = url_list + url_list2 + url_list2_2
+
 for url in url_list:
 
-    if (str(url).startswith("https://www.cdc.gov")):
+    if (str(url).startswith(base_url)):
         next_url = url
     else:
         next_url = base_url + url.get('href')
@@ -39,7 +45,6 @@ for url in url_list:
         for s in syndicates:
             main_text.append(" ")
             main_text.append(s.get_text().replace('\n', ' '))
-        main_text = "\n".join(main_text).strip()
 
     if not(syndicates):
         for para in soup.find_all('p'):
@@ -47,7 +52,7 @@ for url in url_list:
             para=str(para).replace('</p>', ' ')
             para=str(para).replace('\n', ' ')
             main_text.append(para)
-        main_text = "\n".join(main_text).strip()
+    main_text = "\n".join(main_text).strip()
         
     article['main_text'] = main_text
     

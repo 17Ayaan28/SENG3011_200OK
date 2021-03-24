@@ -6,18 +6,27 @@ import re
 
 base_url = "https://www.cdc.gov"
 
-hanta_url = "https://www.cdc.gov/hantavirus/outbreaks/index.html"
+hiv_url = "https://www.cdc.gov/hiv/basics/statistics.html"
+hiv_page = requests.get(hiv_url)
 
-hanta_page = requests.get(hanta_url)
+soup = BeautifulSoup(hiv_page.text, 'html.parser')
 
-soup = BeautifulSoup(hanta_page.text, 'html.parser')
+#url_linked_list = soup.find('ul', id='nav-group-d3177')
+#url_list = url_linked_list.find_all('a')
+url_list = []
+url_list.append(hiv_url)
 
-url_linked_list = soup.find('ul', id='nav-group-c016f')
-url_list = url_linked_list.find_all('a')
+"""
+Need to enable javascript to view content- Selelium library
+url_list.append("https://www.cdc.gov/hiv/basics/covid-19.html#")
+"""
 
 for url in url_list:
 
-    next_url = base_url + url.get('href')
+    if (str(url).startswith(base_url)):
+        next_url = url
+    else:
+        next_url = base_url + url.get('href')
 
     next_page = requests.get(next_url)
 
@@ -44,7 +53,6 @@ for url in url_list:
             para=str(para).replace('</p>', ' ')
             para=str(para).replace('\n', ' ')
             main_text.append(para)
-
     main_text = "\n".join(main_text).strip()
         
     article['main_text'] = main_text
