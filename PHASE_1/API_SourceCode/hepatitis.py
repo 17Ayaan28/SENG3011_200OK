@@ -34,7 +34,7 @@ for url in url_list:
     else:
         next_url = base_url + url.get('href')
         
-    notReport = re.match("^.*.gov#nav-group-[0-9a-z]{5}$", str(url))
+    notReport = str(next_url).startswith("https://www.cdc.gov#nav-group-")
     if notReport:
         continue
     
