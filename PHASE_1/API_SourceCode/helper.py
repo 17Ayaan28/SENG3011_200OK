@@ -29,8 +29,8 @@ def get_disease_json_name(new_name):
     return names[new_name]
 
 
-disease_list = read_list('diseases_15.json')
-syndrome_list = read_list('syndromes.json')
+disease_list = read_list('dataset/diseases.json')
+syndrome_list = read_list('dataset/syndromes.json')
 
 
 def new_article(url):
@@ -54,6 +54,30 @@ def new_report():
 
     return report
 
+def get_headline(raw_content):
+    main = raw_content.find('main')
+    head = raw_content.find('head')
+    headline = ""
+    if(main):
+        #print('url ', url)
+        headline = main.find('h1')
+        #print('h1 ', headline)
+        if(not headline):
+            headline = main.find('h3')
+            #print('h3 headline')
+    #print('----------\n\n')
+
+    if(not headline):
+        headline = head.find('title')
+
+    headline = headline.get_text() if headline else ""
+    #print(headline)
+    if(re.compile(" - ").search(headline)):
+        headline = headline[:headline.find(" - ")]
+    elif(re.compile(" | ").search(headline)):
+        headline =  headline[:headline.find(" | ")]
+
+    return headline
 
 def get_date_headline(head, main, url):
 
@@ -323,6 +347,8 @@ def get_geoname_id(place_name):
 
 #text = "Nov. 12, 2021"
 #print(get_date1(text))
+def review(text):
+    return re.compile("Page last reviewed").search(text)
 
 def get_date_of_publication(raw_content):
     # get from <head>
@@ -346,11 +372,12 @@ def get_date_of_publication(raw_content):
             #return get_date(date["content"])
             return date["content"] + " xx:xx:xx"
         else:
-            datetime = main.find('p', class_ = 'newupdated-outbreak')
-            if (datetime):
-                print(datetime.get_text())
-                date_of_publication = get_date(datetime.get_text())
-                #return date_of_publication
+            if(main):
+                datetime = main.find('p', class_ = 'newupdated-outbreak')
+                if (datetime):
+                    print(datetime.get_text())
+                    date_of_publication = get_date(datetime.get_text())
+                    #return date_of_publication
     if(not date_of_publication):
         date = head.find('meta', property="cdc:last_updated")
         if(date):
@@ -362,8 +389,16 @@ def get_date_of_publication(raw_content):
             
 
     if(not date_of_publication):
-        span = main.find('span', id="last-reviewed-date")
-        date_of_publication = get_date(span.get_text())
+        if(main):
+            div = main.find('div', text=review)
+            if(div):
+                span = div.find('span')
+            #span = main.find('span', id="last-reviewed-date")
+            if(span):
+                date_of_publication = get_date(span.get_text())
+
+    if(not date_of_publication):
+        date_of_publication = "0000-00-00 00:00:00"
     
     return date_of_publication
         
