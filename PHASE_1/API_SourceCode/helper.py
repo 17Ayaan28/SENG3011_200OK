@@ -368,8 +368,9 @@ def get_date_of_publication(raw_content):
     return date_of_publication
         
 
-
+"""
 raw = requests.get("https://www.cdc.gov/media/releases/2014/p0617-Mers.html")
 content = BeautifulSoup(raw.content, 'html.parser')
 #print(content.find('meta', property="article:published_time"))
 print(get_date_of_publication(content))
+"""
