@@ -4,6 +4,9 @@ import requests, json
 import helper
 import re
 
+f = open("hepatitis.json", "w", encoding='utf8')
+
+
 base_url = "https://www.cdc.gov"
 
 hepa_url = "https://www.cdc.gov/hepatitis/outbreaks/hepatitisaoutbreaks.htm"
@@ -23,6 +26,7 @@ url_list2_2 = soup.find_all(lambda tag: tag.name=='a' and tag.has_attr('href') a
 url_list2_21 = soup.find_all(lambda tag: tag.name=='a' and tag.has_attr('href') and tag['href'].endswith('/blooddonorinfections.htm'))
 url_list += url_list2 + url_list2_2 + url_list2_21
 
+print(url_list, '\n-----------------')
 for url in url_list:
     
     if (str(url).startswith(base_url)):
@@ -30,7 +34,7 @@ for url in url_list:
     else:
         next_url = base_url + url.get('href')
         
-    notReport = str(next_url).startswith("https://www.cdc.gov#nav-group-")
+    notReport = re.match("^.*.gov#nav-group-[0-9a-z]{5}$", str(url))
     if notReport:
         continue
     
@@ -64,6 +68,16 @@ for url in url_list:
     
     report['diseases'] = helper.get_diseases(main_text)
     report['syndromes'] = helper.get_syndromes(main_text)
+    report['event_date'] = helper.get_date(main_text)
+
+    locations = []
+    item = {}
+    locations_list = helper.get_locations(main_text)
+    for l in locations_list:
+        item["geonames_id"] = helper.get_geoname_id(l)
+        locations.append(item)
+    report["locations"] = locations
     article['reports'].append(report)
 
-    print(article)
+    json.dump(article, f, ensure_ascii=False)
+    f.write(',\n')

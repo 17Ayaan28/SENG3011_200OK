@@ -4,6 +4,7 @@ import requests, json
 import helper
 import re
 
+f = open("histoplasmosis.json", "w", encoding='utf8')
 base_url = "https://www.cdc.gov"
 
 histo_url = "https://www.cdc.gov/fungal/cdc-and-fungal/histoplasmosis.html"
@@ -62,6 +63,16 @@ for url in url_list:
     
     report['diseases'] = helper.get_diseases(main_text)
     report['syndromes'] = helper.get_syndromes(main_text)
+    report['event_date'] = helper.get_date(main_text)
+
+    locations = []
+    item = {}
+    locations_list = helper.get_locations(main_text)
+    for l in locations_list:
+        item["geonames_id"] = helper.get_geoname_id(l)
+        locations.append(item)
+    report["locations"] = locations
     article['reports'].append(report)
 
-    print(article)
+    json.dump(article, f, ensure_ascii=False)
+    f.write(',\n')
