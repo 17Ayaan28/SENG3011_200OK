@@ -180,6 +180,7 @@ for link_item in links:
 
             article = helper.new_article(link_array[0])
             article["headline"] = h2.get_text()
+            article["date_of_publication"] = helper.get_date_of_publication(content)
             article["main_text"] = p_tag
 
             report = helper.new_report()
@@ -218,6 +219,7 @@ for link_item in links:
 
             article = helper.new_article(link_array[1])
             article["headline"] = "Known Cases and Outbreaks of Marburg Hemorrhagic Fever"
+            article["date_of_publication"] = helper.get_date_of_publication(content)
             report = helper.new_report()
 
             report["diseases"] = [helper.get_disease_json_name(name)]
@@ -270,10 +272,11 @@ for link_item in links:
             article["headline"] = headline
 
             # date of publication
-            date_of_publication = syndicates[1].find('div', class_="card-body bg-gray-l3")
-            date_of_publication = date_of_publication.find('p').text
-            date_of_publication = helper.get_date(date_of_publication)
+            #date_of_publication = syndicates[1].find('div', class_="card-body bg-gray-l3")
+            #date_of_publication = date_of_publication.find('p').text
+            #date_of_publication = helper.get_date(date_of_publication)
             #print(date_of_publication)
+            article["date_of_publication"] = helper.get_date_of_publication(content)
 
             # main_text
             div = syndicates[1].find('div', class_="card mb-3")
@@ -329,6 +332,8 @@ for link_item in links:
             
             # main_text
             article["main_text"] = p_tag
+
+            article["date_of_publication"] = helper.get_date_of_publication(content)
 
             # Report
             report = helper.new_report()
