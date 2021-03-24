@@ -29,8 +29,8 @@ def get_disease_json_name(new_name):
     return names[new_name]
 
 
-disease_list = read_list('dataset/diseases.json')
-syndrome_list = read_list('dataset/syndromes.json')
+disease_list = read_list('diseases_15.json')
+syndrome_list = read_list('syndromes.json')
 
 
 def new_article(url):
@@ -97,6 +97,7 @@ def get_date_headline(head, main, url):
     date_of_publication = date_of_publication['content'] + ' xx:xx:xx' if date_of_publication else ""
     
     return date_of_publication, headline
+
 
 def get_main_text():
     pass
@@ -327,18 +328,29 @@ def get_date_of_publication(raw_content):
     # get from <head>
     head = raw_content.find('head')
     main = raw_content.find('main')
-    date = head.find('meta', property="article:published_time")
+    url = head.find('link', rel="canonical")
+    date = head.find('meta', property="article:published_time") 
     #print(date_of_publication)
     date_of_publication = ""
-    if(date):
-        return get_date(date["content"])
-        #date["content"] + " xx:xx:xx"
+    if(url):
+        url = url["href"]
+        #print(url)
+        if(re.compile('media/releases/').search(url)):
+            #print('haha')
+            strong = main.find('h4', text="Press Release")
+            p = strong.find_next_sibling('p')
+            if(p):  
+                date_of_publication = get_date(p.get_text())
     else:
-        datetime = main.find('p', class_ = 'newupdated-outbreak')
-        if (datetime):
-            print(datetime.get_text())
-            date_of_publication = get_date(datetime.get_text())
-            #return date_of_publication
+        if(date):
+            #return get_date(date["content"])
+            return date["content"] + " xx:xx:xx"
+        else:
+            datetime = main.find('p', class_ = 'newupdated-outbreak')
+            if (datetime):
+                print(datetime.get_text())
+                date_of_publication = get_date(datetime.get_text())
+                #return date_of_publication
     if(not date_of_publication):
         date = head.find('meta', property="cdc:last_updated")
         if(date):
@@ -352,11 +364,12 @@ def get_date_of_publication(raw_content):
     if(not date_of_publication):
         span = main.find('span', id="last-reviewed-date")
         date_of_publication = get_date(span.get_text())
+    
+    return date_of_publication
         
 
-"""
-raw = requests.get("https://www.cdc.gov/salmonella/typhimurium-02-21/index.html")
+
+raw = requests.get("https://www.cdc.gov/media/releases/2014/p0617-Mers.html")
 content = BeautifulSoup(raw.content, 'html.parser')
-print(content.find('meta', property="article:published_time"))
+#print(content.find('meta', property="article:published_time"))
 print(get_date_of_publication(content))
-"""
