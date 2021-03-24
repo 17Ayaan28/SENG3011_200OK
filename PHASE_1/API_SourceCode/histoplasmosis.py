@@ -26,7 +26,11 @@ for url in url_list:
         next_url = url
     else:
         next_url = base_url + url.get('href')
-
+    
+    notReport = str(next_url).startswith("https://www.cdc.gov#nav-group-")
+    if notReport:
+        continue
+    
     next_page = requests.get(next_url)
 
     soup = BeautifulSoup(next_page.text, 'html.parser')
