@@ -298,7 +298,7 @@ for link_item in links:
             #print(main_text)
             # event date
             event_date = helper.get_date(main_text)
-
+            report["event_date"] = event_date
             # locations
             locations = []
             locations_list = helper.get_locations(main_text)
@@ -307,6 +307,8 @@ for link_item in links:
                 item["geonames_id"] = l
                 locations.append(item)
             report["locations"] = locations
+            
+            article["reports"].append(report)
 
             json.dump(article, f, ensure_ascii=False)
             f.write(',\n')
