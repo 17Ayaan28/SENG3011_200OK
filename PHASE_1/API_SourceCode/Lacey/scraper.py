@@ -1,6 +1,8 @@
 import requests, json
 from bs4 import BeautifulSoup
 import urllib.parse, re
+import sys
+sys.path.append("..")
 import helper
 import time
 

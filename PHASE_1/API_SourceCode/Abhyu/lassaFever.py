@@ -1,5 +1,7 @@
 from bs4 import BeautifulSoup 
 import requests, json
+import sys
+sys.path.append("..")
 import helper, time
 import re, urllib.parse
 

@@ -1,6 +1,8 @@
 import requests, json
 from bs4 import BeautifulSoup
 import urllib.parse, re
+import sys
+sys.path.append("..")
 import helper
 
 f = open("matt.json", "w", encoding='utf8')
@@ -212,7 +214,7 @@ for past_outbreak in past_outbreak_links:
             report["locations"].append(item)
 
     article["reports"].append(report)    
-    
+
 print(">>>> Sars")
 # sars
 for sars_link in sars_outbreak_links:

@@ -3,6 +3,8 @@ import requests, json
 from bs4 import BeautifulSoup
 import urllib.parse, re
 from collections import deque
+import sys
+sys.path.append("..")
 import helper
 
 f = open("data.json", "w", encoding='utf8')
