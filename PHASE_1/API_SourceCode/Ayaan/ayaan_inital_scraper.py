@@ -7,7 +7,7 @@ import helper
 import re
 
 ## Scraping Reports for Cutaneous and Inhalation Anthrax
-
+print(">>>> Cutaneous and Inhalationo Anthrax")
 base_url = "https://www.cdc.gov"
 
 anthrax_url = "https://www.cdc.gov/anthrax/resources/index.html"
@@ -30,7 +30,7 @@ for url in url_list:
 	article = helper.new_article(next_url)
 	report = helper.new_report()
 
-	article['date_of_publication'], article['headline'] = helper.get_date_headline(soup.find('head'), soup.find('main'), next_url)
+	article['date_of_publication'], article['headline'] = helper.get_date_headline(soup)
 
 	main_text = []
 	syndicates = soup.find_all('div', class_='syndicate')
@@ -67,7 +67,7 @@ for url in url_list:
 
 
 #Scraping reports for botulism
-
+print (">>>> botulism")
 botulism = "https://www.cdc.gov/botulism/resources.html"
 
 botulism_page = requests.get(botulism)
@@ -86,7 +86,7 @@ for url in links_list.find_all('a'):
 	article = helper.new_article(next_url)
 	report = helper.new_report()
 
-	article['date_of_publication'], article['headline'] = helper.get_date_headline(soup.find('head'), soup.find('main'), next_url)
+	article['date_of_publication'], article['headline'] = helper.get_date_headline(soup)
 
 	main_text = []
 	syndicates = soup.find_all('div', class_='syndicate')
@@ -106,7 +106,7 @@ for url in links_list.find_all('a'):
 	print(article)
 
 # Scraping reports for chikungunya
-
+print(">>>> chikungunya")
 chikungunya_url = "https://www.cdc.gov/chikungunya/geo/index.html"
 
 chikungunya_page = requests.get(chikungunya_url)
@@ -126,7 +126,7 @@ for url in url_list.find_all('a'):
 	article = helper.new_article(next_url)
 	report = helper.new_report()
 
-	article['date_of_publication'], article['headline'] = helper.get_date_headline(soup.find('head'), soup.find('main'), next_url)
+	article['date_of_publication'], article['headline'] = helper.get_date_headline(soup)
 
 	main_text = []
 	syndicates = soup.find_all('div', class_='syndicate')
@@ -146,7 +146,7 @@ for url in url_list.find_all('a'):
 	print(article)
 
 ## Dengue Scraping
-
+print(">>>> Dengue")
 dengue_url = "https://www.cdc.gov/dengue/statistics-maps/2021.html"
 
 dengue_page = requests.get(dengue_url)
@@ -168,7 +168,7 @@ for url in list_of_all_links.find_all('a'):
 	report = helper.new_report()
 
 
-	article['date_of_publication'], article['headline'] = helper.get_date_headline(soup.find('head'), soup.find('main'), next_url)
+	article['date_of_publication'], article['headline'] = helper.get_date_headline(soup)
 
 	main_text = []
 	syndicates = soup.find_all('div', class_='syndicate')
@@ -189,7 +189,7 @@ for url in list_of_all_links.find_all('a'):
 
 
 ## Ebola Scraping
-
+print(">>>> Ebola")
 ebola_url = "https://www.cdc.gov/vhf/ebola/outbreaks/index-2018.html"
 
 ebola_page = requests.get(ebola_url)
@@ -216,7 +216,7 @@ for url in list_of_all_links.find_all('a'):
 		report = helper.new_report()
 
 
-		article['date_of_publication'], article['headline'] = helper.get_date_headline(soup.find('head'), soup.find('main'), next_url)
+	article['date_of_publication'], article['headline'] = helper.get_date_headline(soup)
 
 		main_text = []
 		syndicates = soup.find_all('div', class_='syndicate')

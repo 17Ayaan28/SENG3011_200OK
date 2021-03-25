@@ -24,7 +24,7 @@ def contain_url(content):
 def jprint(obj):
     # create a formatted string of the Python JSON object
     text = json.dumps(obj, sort_keys=True, indent=4)
-    print(text)
+    # print(text)
 
 az_list = helper.get_az_list()
 
@@ -135,7 +135,6 @@ for link_item in links:
     content = BeautifulSoup(raw.content, 'html.parser')
     
     if("marburg" in name):
-
         syndicate = content.find('div', class_="syndicate")
         link_list = syndicate.find_all('a')
 
@@ -154,16 +153,14 @@ for link_item in links:
         link_list = syndicate.find_all('a')
         link_item["link"] = [urllib.parse.urljoin(outbreak_url, link_list[0]["href"])]
 
-print(links)
-
-
 for link_item in links:
 
     name = link_item["name"]
     link_array = link_item["link"]
 
     if("marburg" in name):
-        
+        print(">>>> marburg")
+
         # link 1 - Marburg Outbreaks 2005-2014
         raw = requests.get(link_array[0], headers)
         content = BeautifulSoup(raw.content, 'html.parser')
@@ -258,7 +255,7 @@ for link_item in links:
 
 
     elif("mers" in name):
-        print("mers")
+        print(">>>> mers")
         for link in link_array:
             raw = requests.get(link, headers)
             content = BeautifulSoup(raw.content, 'html.parser')
@@ -313,7 +310,7 @@ for link_item in links:
             f.write(',\n')
     
     else:
-        print("rift")
+        print(">>>> rift")
         raw = requests.get(link_array[0], headers)
         content = BeautifulSoup(raw.content, 'html.parser')
 

@@ -49,7 +49,7 @@ def scraper(disease, url):
     article = helper.new_article(URL)
     report = helper.new_report()
 
-    article['date_of_publication'], article['headline'] = helper.get_date_headline(soup.find('head'), soup.find('main'), URL)
+    article['date_of_publication'], article['headline'] = helper.get_date_headline(soup)
 
     main_text = []
     syndicates = soup.find_all('div', class_='syndicate')

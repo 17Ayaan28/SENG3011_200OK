@@ -1,3 +1,4 @@
+
 import json, re, requests
 from bs4 import BeautifulSoup
 from datetime import datetime
@@ -54,20 +55,9 @@ def new_report():
 
     return report
 
-
-def get_date_headline(head, main, url):
-
-    #headline = head.find('title')
-    #headline = headline.get_text() if headline else ""
-    """
-    headline = main.find('h1') if main else head.find('title')
-    if(main):
-        headline = headline if headline else main.find('h3')
-    headline = headline.get_text() if headline else ""
-    """
-    #print('\n\n----------')
-    #print(main)
-    #print('url ', url)
+def get_headline(raw_content):
+    main = raw_content.find('main')
+    head = raw_content.find('head')
     headline = ""
     if(main):
         #print('url ', url)
@@ -87,15 +77,12 @@ def get_date_headline(head, main, url):
         headline = headline[:headline.find(" - ")]
     elif(re.compile(" | ").search(headline)):
         headline =  headline[:headline.find(" | ")]
-        
-    #print(headline)
-    #print('-----------\n\n')
 
-    # date format: 2018-11-01 xx:xx:xx
-    #date = head.find('meta', property='article:published_time')
-    date_of_publication = head.find('meta', property='article:published_time')
-    date_of_publication = date_of_publication['content'] + ' xx:xx:xx' if date_of_publication else ""
-    
+    return headline
+
+def get_date_headline(content):
+    date_of_publication = get_date_of_publication(content)
+    headline = get_headline(content)
     return date_of_publication, headline
 
 
@@ -202,34 +189,6 @@ def get_date(text):
         date = get_date1(text)
     
     return date
-    
-
-
-    """
-    pattern = "(Jan(?:uary)?.?|Feb(?:ruary)?.?|Mar(?:ch)?.?|Apr(?:il)?.?|May?|Jun(?:e)?.?|Jul(?:y)?.?|Aug(?:ust)?.?|Sep(?:tember)?.?|Oct(?:ober)?.?|Nov(?:ember)?.?|Dec(?:ember)?).? ([0-9]?[0-9])(,?) ([0-9]{4})"
-    date_string = re.compile(pattern).search(text).group(0)
-    date_string = convert_month(date_string)
-    date_object = datetime.strptime(date_string, "%B %d, %Y")
-    date = date_object.strftime('%Y-%m-%d')
-    return date + " xx:xx:xx"
-    """
-"""
-def convert_month(date_string):
-    date_string = re.sub(r'\.', '', date_string)
-    date_string = re.sub(r'Jan ', 'January ', date_string)
-    date_string = re.sub(r'Feb ', 'February ', date_string)
-    date_string = re.sub(r'Mar ', 'March ', date_string)
-    date_string = re.sub(r'Apr ', 'April ', date_string)
-    date_string = re.sub(r'Jun ', 'June ', date_string)
-    date_string = re.sub(r'Jul ', 'July ', date_string)
-    date_string = re.sub(r'Aug ', 'Augest ', date_string)
-    date_string = re.sub(r'Sep ', 'September ', date_string)
-    date_string = re.sub(r'Oct ', 'October ', date_string)
-    date_string = re.sub(r'Nov ', 'November ', date_string)
-    date_string = re.sub(r'Dec ', 'December ', date_string)
-
-    return date_string
-"""
 
 def get_date1(text):
     # Extact
@@ -302,27 +261,15 @@ def get_locations(doc):
     doc = nlp(doc)
     for ent in doc.ents:
         if (ent.label_ == "GPE"):
-            g = geocoder.geonames(ent.text,key="ellend")
+            g = geocoder.geonames(ent.text,key="lacey")
             if (g and g.geonames_id):
                 res.add(g.geonames_id)
     return list(res)
 
-def get_geoname_id(place_name):
-
-    parameters = {
-        "username": "ellend",
-        "name": place_name
-    }
-
-    response = requests.get(api_get_place_id, params=parameters)
-
-    geonames_id = response.json()["geonames"]
-    geonames_id = geonames_id[0]["geonameId"] if len(geonames_id) > 0 else -1
-
-    return geonames_id
-
 #text = "Nov. 12, 2021"
 #print(get_date1(text))
+def review(text):
+    return re.compile("Page last reviewed").search(text)
 
 def get_date_of_publication(raw_content):
     # get from <head>
@@ -346,11 +293,12 @@ def get_date_of_publication(raw_content):
             #return get_date(date["content"])
             return date["content"] + " xx:xx:xx"
         else:
-            datetime = main.find('p', class_ = 'newupdated-outbreak')
-            if (datetime):
-                print(datetime.get_text())
-                date_of_publication = get_date(datetime.get_text())
-                #return date_of_publication
+            if(main):
+                datetime = main.find('p', class_ = 'newupdated-outbreak')
+                if (datetime):
+                    print(datetime.get_text())
+                    date_of_publication = get_date(datetime.get_text())
+                    #return date_of_publication
     if(not date_of_publication):
         date = head.find('meta', property="cdc:last_updated")
         if(date):
@@ -362,14 +310,15 @@ def get_date_of_publication(raw_content):
             
 
     if(not date_of_publication):
-        span = main.find('span', id="last-reviewed-date")
-        date_of_publication = get_date(span.get_text())
+        if(main):
+            div = main.find('div', text=review)
+            if(div):
+                span = div.find('span')
+            #span = main.find('span', id="last-reviewed-date")
+            if(span):
+                date_of_publication = get_date(span.get_text())
+
+    if(not date_of_publication):
+        date_of_publication = "0000-00-00 00:00:00"
     
     return date_of_publication
-        
-
-
-raw = requests.get("https://www.cdc.gov/media/releases/2014/p0617-Mers.html")
-content = BeautifulSoup(raw.content, 'html.parser')
-#print(content.find('meta', property="article:published_time"))
-print(get_date_of_publication(content))

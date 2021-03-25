@@ -50,6 +50,7 @@ for li in past_li:
     past_outbreak_links.append(urllib.parse.urljoin(cdc_base_url, a["href"]))
 #print(past_outbreak_links)
 
+
 # Sars links
 sars_homepage = "https://www.cdc.gov/sars/index.html"
 raw = requests.get(sars_homepage, headers)
@@ -75,6 +76,7 @@ for u in ul:
         
 
 shigellosis_links = ""
+print(">>>> salmonellosis")
 
 # Salmonellosiss current outbreaks
 # salmonelosiss_links = current_outbreak_links + past_outbreak_links
@@ -210,7 +212,8 @@ for past_outbreak in past_outbreak_links:
             report["locations"].append(item)
 
     article["reports"].append(report)    
-
+    
+print(">>>> Sars")
 # sars
 for sars_link in sars_outbreak_links:
 
