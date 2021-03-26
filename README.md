@@ -39,7 +39,10 @@ e.g. https://australia-southeast1-seng3011-306108.cloudfunctions.net/nlogs?limit
 
 #### Scraper
 The combined branch contains the pure scraper code, which can be run locally and generates json file.
-The 
+
+The scraper that connected to database can be found in main branch.
+
+The scraper that need to be perically run is deployed ini cloud function and can be found in the cloud function directory in main branch.
 
 
 ## Stage 2
