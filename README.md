@@ -29,7 +29,7 @@ Swagger: [Here](https://app.swaggerhub.com/apis-docs/z5158415/API-200OK/1.0.0-oa
 
 API URL: http://australia-southeast1-seng3011-306108.cloudfunctions.net/
 
-Access logs: 
+#### Access logs: 
 
 https://australia-southeast1-seng3011-306108.cloudfunctions.net/nlogs (The default number of logs returned is 10)
 
@@ -37,9 +37,13 @@ Alternatively you could specify the number of logs returned:
  
 e.g. https://australia-southeast1-seng3011-306108.cloudfunctions.net/nlogs?limit=20
 
-### Deliverable 3:
+#### Scraper
+The combined branch contains the pure scraper code, which can be run locally and generates json file.
+The 
+
 
 ## Stage 2
+### Deliverable 3:
 
 ### Deliverable 4:
 
