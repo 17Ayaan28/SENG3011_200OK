@@ -29,7 +29,7 @@ Swagger: [Here](https://app.swaggerhub.com/apis-docs/z5158415/API-200OK/1.0.0-oa
 
 API URL: http://australia-southeast1-seng3011-306108.cloudfunctions.net/
 
-#### Access logs: 
+#### Logs
 
 https://australia-southeast1-seng3011-306108.cloudfunctions.net/nlogs (The default number of logs returned is 10)
 
