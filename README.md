@@ -42,7 +42,7 @@ The combined branch contains the pure scraper code, which can be run locally and
 
 The scraper that connected to database can be found in main branch.
 
-The scraper that need to be perically run is deployed ini cloud function and can be found in the cloud function directory in main branch.
+The scraper that need to be perically run is deployed ini cloud function and can be found in GCP_function_code in main branch.
 
 
 ## Stage 2
