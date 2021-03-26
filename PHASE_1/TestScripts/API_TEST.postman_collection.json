@@ -1,0 +1,497 @@
+{
+	"info": {
+		"_postman_id": "accab6ce-afb0-441d-916b-7249d63a0d99",
+		"name": "API_TEST",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Missing  all parameters",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", () => {",
+							"  pm.expect(pm.response.code).to.eql(400);",
+							"  const responseJson = pm.response.json();",
+							"  console.log(responseJson);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://australia-southeast1-seng3011-306108.cloudfunctions.net/cdc-report-api-geo?start_date&end_date&location&key_terms",
+					"protocol": "https",
+					"host": [
+						"australia-southeast1-seng3011-306108",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"cdc-report-api-geo"
+					],
+					"query": [
+						{
+							"key": "start_date",
+							"value": null
+						},
+						{
+							"key": "end_date",
+							"value": null
+						},
+						{
+							"key": "location",
+							"value": null
+						},
+						{
+							"key": "key_terms",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Missing only start_date & end_date",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", () => {",
+							"  pm.expect(pm.response.code).to.eql(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://australia-southeast1-seng3011-306108.cloudfunctions.net/cdc-report-api-geo?start_date&end_date&location=Sdyney&key_terms=covid-19",
+					"protocol": "https",
+					"host": [
+						"australia-southeast1-seng3011-306108",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"cdc-report-api-geo"
+					],
+					"query": [
+						{
+							"key": "start_date",
+							"value": null
+						},
+						{
+							"key": "end_date",
+							"value": null
+						},
+						{
+							"key": "location",
+							"value": "Sdyney"
+						},
+						{
+							"key": "key_terms",
+							"value": "covid-19"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid date format",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", () => {",
+							"  pm.expect(pm.response.code).to.eql(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://australia-southeast1-seng3011-306108.cloudfunctions.net/cdc-report-api-geo?start_date=123456&end_date&location&key_terms",
+					"protocol": "https",
+					"host": [
+						"australia-southeast1-seng3011-306108",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"cdc-report-api-geo"
+					],
+					"query": [
+						{
+							"key": "start_date",
+							"value": "123456"
+						},
+						{
+							"key": "end_date",
+							"value": null
+						},
+						{
+							"key": "location",
+							"value": null
+						},
+						{
+							"key": "key_terms",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "start_date > end_date",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", () => {",
+							"  pm.expect(pm.response.code).to.eql(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://australia-southeast1-seng3011-306108.cloudfunctions.net/cdc-report-api?start_date=2019-11-01Txx:xx:xx&end_date=2020-01-01Txx:xx:xx&location&key_terms",
+					"protocol": "https",
+					"host": [
+						"australia-southeast1-seng3011-306108",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"cdc-report-api"
+					],
+					"query": [
+						{
+							"key": "start_date",
+							"value": "2019-11-01Txx:xx:xx"
+						},
+						{
+							"key": "end_date",
+							"value": "2020-01-01Txx:xx:xx"
+						},
+						{
+							"key": "location",
+							"value": null
+						},
+						{
+							"key": "key_terms",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search for multiple key terms",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"var reports = []",
+							"pm.test(\"Test data type of the article\", () => {",
+							"  pm.expect(jsonData).to.be.an(\"object\");",
+							"  pm.expect(jsonData.articles).to.be.an(\"array\");",
+							"  ",
+							"  for (let article of jsonData.articles) {",
+							"      pm.expect(article.main_text).to.be.a(\"string\");",
+							"      pm.expect(article.headline).to.be.a(\"string\");",
+							"      pm.expect(article.reports).to.be.an(\"array\");",
+							"      //pm.expect(article.date_of_publication).to.match(/\\d{4}-(\\d\\d|xx)-(\\d\\d|xx)\\s(\\d\\d|xx):(\\d\\d|xx):(\\d\\d|xx)\\s?to?\\s?(\\d{4}-(\\d\\d|xx)-(\\d\\d|xx)\\s(\\d\\d|xx):(\\d\\d|xx):(\\d\\d|xx))?/)",
+							"      //pm.expect(jsonData.reports.locations).to.be.an(\"array\");",
+							"      //pm.expect(jsonData.reports.diseases).to.be.an(\"array\");",
+							"      //pm.expect(jsonData.reports.syndromes).to.be.an(\"array\");",
+							"  }",
+							"  //pm.expect(jsonData.reports.event_date).to.be.an(\"array\");",
+							"  //pm.expect(jsonData.date_of_publication).to.match(/validation error at #\\/test\\/TC_[0-9]+\\/test/)",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", () => {",
+							"  pm.expect(pm.response.code).to.eql(200);",
+							"});",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://australia-southeast1-seng3011-306108.cloudfunctions.net/cdc-report-api?start_date=2019-11-01Txx:xx:xx&end_date=2020-01-01Txx:xx:xx&location&key_terms=listeria,ebola,salmonel",
+					"protocol": "https",
+					"host": [
+						"australia-southeast1-seng3011-306108",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"cdc-report-api"
+					],
+					"query": [
+						{
+							"key": "start_date",
+							"value": "2019-11-01Txx:xx:xx"
+						},
+						{
+							"key": "end_date",
+							"value": "2020-01-01Txx:xx:xx"
+						},
+						{
+							"key": "location",
+							"value": null
+						},
+						{
+							"key": "key_terms",
+							"value": "listeria,ebola,salmonel"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Return no results",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 200\", () => {",
+							"  pm.expect(pm.response.code).to.eql(200);",
+							"});",
+							"",
+							"pm.test(\"No articles found\", () => {",
+							"  pm.expect(jsonData.articles.length).to.eql(0);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://australia-southeast1-seng3011-306108.cloudfunctions.net/cdc-report-api?start_date=2019-12-31Txx:xx:xx&end_date=2020-01-01Txx:xx:xx&location&key_terms=listeria,ebola,salmonel",
+					"protocol": "https",
+					"host": [
+						"australia-southeast1-seng3011-306108",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"cdc-report-api"
+					],
+					"query": [
+						{
+							"key": "start_date",
+							"value": "2019-12-31Txx:xx:xx"
+						},
+						{
+							"key": "end_date",
+							"value": "2020-01-01Txx:xx:xx"
+						},
+						{
+							"key": "location",
+							"value": null
+						},
+						{
+							"key": "key_terms",
+							"value": "listeria,ebola,salmonel"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Case Insensitive - Capital",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://australia-southeast1-seng3011-306108.cloudfunctions.net/cdc-report-api?start_date=2019-11-01Txx:xx:xx&end_date=2020-01-01Txx:xx:xx&location=CANADA&key_terms=",
+					"protocol": "https",
+					"host": [
+						"australia-southeast1-seng3011-306108",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"cdc-report-api"
+					],
+					"query": [
+						{
+							"key": "start_date",
+							"value": "2019-11-01Txx:xx:xx"
+						},
+						{
+							"key": "end_date",
+							"value": "2020-01-01Txx:xx:xx"
+						},
+						{
+							"key": "location",
+							"value": "CANADA"
+						},
+						{
+							"key": "key_terms",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Case Insensitive - Lower Case",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://australia-southeast1-seng3011-306108.cloudfunctions.net/cdc-report-api?start_date=2019-11-01Txx:xx:xx&end_date=2020-01-01Txx:xx:xx&location=canada&key_terms=",
+					"protocol": "https",
+					"host": [
+						"australia-southeast1-seng3011-306108",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"cdc-report-api"
+					],
+					"query": [
+						{
+							"key": "start_date",
+							"value": "2019-11-01Txx:xx:xx"
+						},
+						{
+							"key": "end_date",
+							"value": "2020-01-01Txx:xx:xx"
+						},
+						{
+							"key": "location",
+							"value": "canada"
+						},
+						{
+							"key": "key_terms",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Location Hierarchy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://australia-southeast1-seng3011-306108.cloudfunctions.net/cdc-report-api?start_date=2018-11-01Txx:xx:xx&end_date=2020-01-01Txx:xx:xx&location=US&key_terms=",
+					"protocol": "https",
+					"host": [
+						"australia-southeast1-seng3011-306108",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"cdc-report-api"
+					],
+					"query": [
+						{
+							"key": "start_date",
+							"value": "2018-11-01Txx:xx:xx"
+						},
+						{
+							"key": "end_date",
+							"value": "2020-01-01Txx:xx:xx"
+						},
+						{
+							"key": "location",
+							"value": "US"
+						},
+						{
+							"key": "key_terms",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "No Input Parameters",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://australia-southeast1-seng3011-306108.cloudfunctions.net/cdc-report-api?start_date=&end_date=&location=&key_terms=",
+					"protocol": "https",
+					"host": [
+						"australia-southeast1-seng3011-306108",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"cdc-report-api"
+					],
+					"query": [
+						{
+							"key": "start_date",
+							"value": ""
+						},
+						{
+							"key": "end_date",
+							"value": ""
+						},
+						{
+							"key": "location",
+							"value": ""
+						},
+						{
+							"key": "key_terms",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
