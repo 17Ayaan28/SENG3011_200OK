@@ -77,7 +77,6 @@ for new_url in lassa_list:
 
 f.close()
 
-"""
 for article in articles:
 
   report = article["reports"][0]
@@ -102,4 +101,4 @@ for article in articles:
       db.child(test_db).push(article)
   if(urls == 0):
     db.child(test_db).push(article)
-"""
+
