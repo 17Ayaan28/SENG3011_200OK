@@ -379,11 +379,10 @@ def get_date_of_publication(raw_content):
                     real_time = ":".join(ts)
                     date_of_publication = date_of_publication[0:11] + real_time
 
-            
-
+    """       
     if(not date_of_publication):
         if(main):
-            div = main.find('div', text=review1)
+            #div = main.find('div', string=review1)
             #print(div)
             if(div):
                 span = div.find('span')
@@ -391,7 +390,7 @@ def get_date_of_publication(raw_content):
             #span = main.find('span', id="last-reviewed-date")
                 if(span):
                     date_of_publication = get_date(span.get_text())
-
+    """
     if(not date_of_publication):
         date_of_publication = "0000-00-00 00:00:00"
     
