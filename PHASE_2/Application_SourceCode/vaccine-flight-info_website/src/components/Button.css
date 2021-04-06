@@ -24,6 +24,10 @@
     transition: all 0.3s ease-out;
 }
 
+.btn-mobile {
+    padding: 8px 1px;
+}
+
 
 .btn--medium {
     padding: 8px 20px;

@@ -8,7 +8,7 @@
 .home,
 .search,
 .maps,
-.sign-up {
+.loggin {
   display: flex;
   height: 90vh;
   align-items: center;
@@ -32,7 +32,7 @@
   font-size: 100px;
 }
 
-.sign-up {
+.loggin{
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
