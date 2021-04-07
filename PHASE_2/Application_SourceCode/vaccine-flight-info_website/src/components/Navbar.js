@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {Link} from 'react-router-dom';
 import { Button } from './Button';
 import './Navbar.css'
-
+//import Page1 from "./Page1";
 
 function Navbar() {
     const [click, setClick] = useState(false);
@@ -37,6 +37,7 @@ function Navbar() {
                         <i className={click ? 'fas fa-times' : 'fas fa-bars'}></i>
                     </div>
                     <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+                        
                         <li className='nav-item'>
                             <Link to='/' className="nav-links" onClick={closeMobileMenu}>
                                Home
@@ -52,6 +53,7 @@ function Navbar() {
                                Map
                             </Link>
                         </li>
+
                         <li className="nav-item">
                             <Link to='/sign-up' className="nav-links-mobile" onClick={closeMobileMenu}>
                                Sign Up
