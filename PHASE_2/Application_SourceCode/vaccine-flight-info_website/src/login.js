@@ -3,6 +3,7 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './login.css'
 
 function login() {
 	return (
@@ -24,8 +25,8 @@ function login() {
 		          <Form.Group controlId="formBasicCheckbox">
 		            <Form.Check type="checkbox" label="Share Data with Airport Staff"/>
 		          </Form.Group>
-		          <Button variant="warning" type="submit">
-		            Register
+		          <Button variant="warning" type="submit" href='/home'>
+		            Log In
 		          </Button>
 		          <br/>
 			        <Form.Text className="text-muted">
@@ -35,7 +36,7 @@ function login() {
 		        </Form>
 	        </div>
 
-	        <Link to="/home"><Button id="backtohome" variant="warning" type="submit">
+	        <Link to="/fp"><Button id="backtohome" variant="warning" type="submit">
             	Back to home
           	</Button></Link>
 		</div>

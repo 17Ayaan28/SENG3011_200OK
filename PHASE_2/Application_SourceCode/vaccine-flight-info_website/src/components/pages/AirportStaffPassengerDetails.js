@@ -8,6 +8,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
+import Navbar from '../Navbar'
 
 const columns = [
   { id: 'name', label: 'NAME', minWidth: 170 },
@@ -69,6 +70,8 @@ export default function StickyHeadTable() {
   };
 
   return (
+      <>
+      <Navbar />
     <Paper className={classes.root}>
         <br />
       <TableContainer className={classes.container}>
@@ -114,5 +117,6 @@ export default function StickyHeadTable() {
         onChangeRowsPerPage={handleChangeRowsPerPage}
       />
     </Paper>
+    </>
   );
 }

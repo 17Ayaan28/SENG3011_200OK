@@ -3,7 +3,7 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import './register.css'
 function register() {
 	return (
 		<div id="bg">
@@ -39,7 +39,7 @@ function register() {
 		          <Form.Group controlId="formBasicCheckbox">
 		            <Form.Check type="checkbox" label="Share Data with Airport Staff"/>
 		          </Form.Group>
-		          <Button variant="warning" type="submit">
+		          <Button variant="warning" type="submit" href='/home'>
 		            Register
 		          </Button>
 		          <br/>
@@ -50,7 +50,7 @@ function register() {
 		        </Form>
 	        </div>
 
-	        <Link to="/home"><Button id="backtohome" variant="warning" type="submit">Back to home</Button></Link>
+	        <Link to="/fp"><Button id="backtohome" variant="warning" type="submit">Back to home</Button></Link>
 		</div>
 
 	);

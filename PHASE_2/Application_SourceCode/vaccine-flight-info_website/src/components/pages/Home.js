@@ -10,7 +10,7 @@ function Home() {
         <>
             <Navbar />
             <VidSlide />
-            <Cards />
+            {/* <Cards /> */}
         </>
     );
 }

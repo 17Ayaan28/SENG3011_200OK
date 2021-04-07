@@ -13,13 +13,17 @@ function App() {
   return (
       <>
         <Router>
-          <Route path='/' component={home} />
-          
+        <Route path='/'/>
         {/* <Home /> */}
-          <Switch>  
-            <Route path='/home' exact component={Home} />
+          <Switch> 
+            
+            <Route path='/fp' component={home} /> 
             <Route path='/login'  component={login} />
             <Route path='/register'  component={register} />
+            
+            <Route path='/' exact component={Home} />
+            <Route path='/home' exact component={Home} />
+
             <Route path='/flights' component={Flights} />
             <Route path='/airport-staff-flight-details' component={AirportStaffFlight} />
             <Route path='/mu7366passenger-details' component={AirportStaffPassengerDetails} />
