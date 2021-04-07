@@ -17,7 +17,7 @@ function Cards() {
 						/>
             <CardItem
 							src='images/russia_news.webp' 
-              text="Russia regsters world's first Covid-19 vaccine for animals"
+              text="Russia registers world's first Covid-19 vaccine for animals"
               label = 'Vaccine'
 							path = 'https://www.indiatoday.in/coronavirus-outbreak/vaccine-updates/story/russia-world-first-covid-19-vaccine-animals-1787543-2021-04-06' 
             />

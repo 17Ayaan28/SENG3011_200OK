@@ -1,0 +1,15 @@
+.currentDate {
+    text-align: center;
+    font-family: "Geneva, Verdana, sans-serif";
+    background-color: #fee;
+    position: relative;
+    box-sizing: border-box;
+    border: 1px solid #333;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    max-width: 250px;
+    width: 40%;
+    font-size: 29px;
+    margin: 0 auto;
+}
