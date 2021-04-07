@@ -42,11 +42,6 @@ function Navbar() {
                                Home
                             </Link>
                         </li>
-                        <li className='nav-item'>
-                            <Link to='/' className="nav-links" onClick={closeMobileMenu}>
-                               Home
-                            </Link>
-                        </li>
                         <li className="nav-item">
                             <Link to='/flights' className="nav-links" onClick={closeMobileMenu}>
                                Search Flights

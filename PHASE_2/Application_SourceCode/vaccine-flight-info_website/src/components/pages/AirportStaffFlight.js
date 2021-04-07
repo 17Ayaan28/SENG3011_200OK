@@ -1,16 +1,23 @@
-import React from 'react'
+import React, { useState }from 'react'
 import '../../App.css'
+import DatePicker from 'react-date-picker';
 import './AirportStaffFlight.css'
 import FlightCards from '../FlightCards'
+import {Link} from 'react-router-dom';
 
 export default function AirportStaffFlight() {
-
+    const [value, onChange] = useState(new Date());
     return (
     <>
         <br />
         <h1 className="flightdetails">Scheduled Flights</h1>
         <br />
-        <h1 className="currentDate">{getCurrentDate("-")}</h1>
+        <h1 className="datepicker">
+        <DatePicker
+            onChange={onChange}
+            value={value}
+        />
+        </h1>
         <FlightCards />
     </>
     );

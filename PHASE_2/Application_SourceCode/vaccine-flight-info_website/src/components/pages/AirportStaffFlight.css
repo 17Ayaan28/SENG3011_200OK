@@ -13,3 +13,19 @@
     font-size: 29px;
     margin: 0 auto;
 }
+
+.date-logo {
+    color: #000;
+    justify-self: start;
+    margin-left: 20px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .fa-arrow-alt-circle-right {
+    margin-left: 0.6rem;
+    font-size: 2.23rem;
+  }
