@@ -38,12 +38,12 @@ function vaccine_history() {
             <Form>
 			<Form.Group controlId="formBasicEmail">
 	          <Form.Label>Diseases to be vaccinated against: </Form.Label>
-	            <Form.Control type="Email" placeholder="Disease" />
+	            <Form.Control placeholder="Disease" />
 	          </Form.Group>
 
 	          <Form.Group controlId="formBasicEmail">
 	            <Form.Label>Vaccine Name:</Form.Label>
-	            <Form.Control type="Email" placeholder="Vaccine" />
+	            <Form.Control  placeholder="Vaccine" />
 	          </Form.Group>
 
 	          <Form.Group controlId="">

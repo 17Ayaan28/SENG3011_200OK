@@ -12,7 +12,7 @@ function register() {
 				<Form id="login_form">
 		          <Form.Group controlId="formBasicEmail">
 		            <Form.Label>First Name:</Form.Label>
-		            <Form.Control type="email" placeholder="First Name" />
+		            <Form.Control placeholder="First Name" />
 
 		          </Form.Group>
 
@@ -23,7 +23,7 @@ function register() {
 
 		          <Form.Group controlId="formBasicEmail">
 		            <Form.Label>Email</Form.Label>
-		            <Form.Control  placeholder="Email" />
+		            <Form.Control type="email"  placeholder="Email" />
 		          </Form.Group>
 
 		          <Form.Group controlId="formBasicPassword">
@@ -33,7 +33,7 @@ function register() {
 
 		           <Form.Group controlId="Confirm Password">
 		            <Form.Label>Confirm Password:</Form.Label>
-		            <Form.Control  placeholder="Confirm Password" />
+		            <Form.Control type="password" placeholder="Confirm Password" />
 		          </Form.Group>
 
 		          <Form.Group controlId="formBasicCheckbox">
