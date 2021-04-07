@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Button } from './Button';
 import './Navbar.css'
 
@@ -43,22 +43,32 @@ function Navbar() {
                             </Link>
                         </li>
                         <li className="nav-item">
+                            <Link to='/vaccine' className="nav-links" onClick={closeMobileMenu}>
+                               Vaccines
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to='/vaccination-history' className="nav-links" onClick={closeMobileMenu}>
+                               Vaccination History
+                            </Link>
+                        </li>
+                        <li className="nav-item">
                             <Link to='/flights' className="nav-links" onClick={closeMobileMenu}>
-                               Search Flights
+                               Register Flights
                             </Link>
                         </li>
                         <li className="nav-item">
                             <Link to='/airport-staff-flight-details' className="nav-links" onClick={closeMobileMenu}>
-                               Airport Staff
+                               Flight Details(Admin)
                             </Link>
                         </li>
                         <li className="nav-item">
                             <Link to='/fp' className="nav-links-mobile" onClick={closeMobileMenu}>
-                               Account
+                               Log out
                             </Link>                                
                         </li>
                     </ul>
-                    {button && <Button buttonStyle='btn--outline'>ACCOUNT</Button>}
+                    {button && <Button buttonStyle='btn--outline'>LOG OUT</Button>}
                 </div>
             </nav>
             </>

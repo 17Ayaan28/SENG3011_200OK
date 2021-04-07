@@ -7,8 +7,8 @@ import './home.css'
 
 function home() {
 	return (
-		<div id="a">
-		<h1 id="b">Destinated</h1>
+		<div id="a_photo">
+		<h1 id="b_photo_text">Destinated</h1>
 		<Link to="/register"><Button id="button1" variant="warning">Register</Button></Link>
 		<Link to="/login"><Button id="button2" variant="warning">Login</Button></Link>
 		</div>

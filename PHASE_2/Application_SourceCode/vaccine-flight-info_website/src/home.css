@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap');
 
 
-#a {
+#a_photo {
 	background-image: url('https://www.telegraph.co.uk/content/dam/travel/2020/11/10/VACCINE-VIRUS-TRAVEL_trans_NvBQzQNjv4BqqVzuuqpFlyLIwiB6NTmJwfSVWeZ_vEN7c6bHu2jJnT8.jpg');
     background-position: center;
     background-size: cover;
@@ -10,7 +10,7 @@
     background-repeat: no-repeat;
 }
 
-#b {
+#b_photo_text {
 	font-family: 'Dela Gothic One', cursive;
 	color: black;
 	font-size: 70px;

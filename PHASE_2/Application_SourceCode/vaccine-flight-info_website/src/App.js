@@ -6,9 +6,14 @@ import Home from './components/pages/Home';
 import home from './home';
 import login from './login';
 import register from './register';
-import Flights from './components/pages/Flights';
+import vaccine_history from './components/pages/vaccine_history';
 import AirportStaffFlight from './components/pages/AirportStaffFlight';
 import AirportStaffPassengerDetails from './components/pages/AirportStaffPassengerDetails';
+import Vaccine from './Vaccine_by_location'
+import TravelInfo from './TravelInfo'
+import FlightRegister from './components/pages/FlightRegister'
+
+
 function App() {
   return (
       <>
@@ -21,10 +26,12 @@ function App() {
             <Route path='/login'  component={login} />
             <Route path='/register'  component={register} />
             
-            <Route path='/' exact component={Home} />
+            <Route path='/' exact component={home} />
             <Route path='/home' exact component={Home} />
-
-            <Route path='/flights' component={Flights} />
+            <Route path='/vaccine' exact component={Vaccine} />
+            <Route path='/flights' component={FlightRegister} />
+            <Route path='/travelInfo' component={TravelInfo} />
+            <Route path='/vaccination-history' component={vaccine_history} />
             <Route path='/airport-staff-flight-details' component={AirportStaffFlight} />
             <Route path='/mu7366passenger-details' component={AirportStaffPassengerDetails} />
           </Switch>
