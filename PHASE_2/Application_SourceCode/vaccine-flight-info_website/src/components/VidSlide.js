@@ -7,7 +7,7 @@ function VidSlide() {
   return (
     <div className='hero-container'>
       <video src='/images/mockup.mp4' autoPlay loop muted/>
-      <h1>DESTINATION AWAITS</h1>
+      <h1>YOUR DESTINATION AWAITS</h1>
       <p>Get vaccinated and arrive at your destination safely</p>
       <div className='hero-btns'>
         <Button

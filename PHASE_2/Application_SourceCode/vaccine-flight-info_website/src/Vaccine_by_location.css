@@ -1,9 +1,9 @@
 #enter {
 	color: black;
 	font-size: 20px;
-	position: relative;
-	top: 10%;
-	left: 25%;
+	position: absolute;
+	top: 15%;
+	left: 34%;
 }
 
 #a {
@@ -31,5 +31,6 @@
 
 #form {
 	position: absolute;
-	left: 30%;
+	left: 35%;
+	top: 20%;
 }

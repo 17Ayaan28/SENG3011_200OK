@@ -4,7 +4,15 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './register.css'
+import Alert from 'react-bootstrap/Alert'
+
+function shoot() {
+	alert("Your account was successfully created.");
+}
+
 function register() {
+
+
 	return (
 		<div id="bg">
 			<h1 id="thiss">Destinated</h1>
@@ -39,9 +47,10 @@ function register() {
 		          <Form.Group controlId="formBasicCheckbox">
 		            <Form.Check type="checkbox" label="Share Data with Airport Staff"/>
 		          </Form.Group>
-		          <Button variant="warning" type="submit" href='/home'>
+		          <Button onClick={shoot} variant="warning" type="submit" href='/home'>
 		            Register
 		          </Button>
+
 		          <br/>
 			        <Form.Text className="text-muted">
 			          We'll never share your information with anyone without your permission.
