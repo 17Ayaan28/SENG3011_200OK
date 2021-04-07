@@ -3,7 +3,6 @@ import '../../App.css'
 import DatePicker from 'react-date-picker';
 import './AirportStaffFlight.css'
 import FlightCards from '../FlightCards'
-import {Link} from 'react-router-dom';
 
 export default function AirportStaffFlight() {
     const [value, onChange] = useState(new Date());
