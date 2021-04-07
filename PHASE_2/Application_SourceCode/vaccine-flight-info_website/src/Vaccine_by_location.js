@@ -17,7 +17,7 @@ function Vaccine() {
       <Navbar />
       <div>
         <p id='enter'>
-          Enter the location you are travelling to and any stop overs on the way:
+          Enter the location you are travelling:
         </p>
         <br />
         <Form id="form">

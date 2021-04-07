@@ -22,9 +22,6 @@ function login() {
 		            <Form.Control type="password" placeholder="Password" />
 		          </Form.Group>
 
-		          <Form.Group controlId="formBasicCheckbox">
-		            <Form.Check type="checkbox" label="Share Data with Airport Staff"/>
-		          </Form.Group>
 		          <Button variant="warning" type="submit" href='/home'>
 		            Log In
 		          </Button>

@@ -13,10 +13,10 @@ function TravelInfo() {
 		<Navbar />
       <div>
         <p>
-          <h1>Vaccinations for Travel to Uganda</h1>
+          <h1 id="travel_head">Vaccinations for Travel to Uganda</h1>
         </p>  
         <br/> <br/>
-		<Table striped bordered hover>
+		<Table id="travel_table" striped bordered hover>
 		  <thead>
 		    <tr>
 		      <th>#</th>
@@ -91,6 +91,13 @@ Unvaccinated travelers who are over 40 years old, immunocompromised, or have chr
 		    </tr>
 		  </tbody>
 		</Table>
+
+		<h1>Recent disease outbreaks in Uganda:</h1>
+
+		<h2>Rift Valley Fever Outbreaks: 2016 – present – Uganda</h2>
+
+		
+
       </div>
 	  </>
     );

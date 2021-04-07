@@ -1,3 +1,14 @@
 #color {
 	color: red;
 }
+
+#travel_head {
+	position: absolute;
+	top: 15%;
+	left: 35%;
+}
+
+#travel_table {
+	position: absolute;
+	top: 25%;
+}
