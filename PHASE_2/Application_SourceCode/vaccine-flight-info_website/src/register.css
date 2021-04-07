@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap');
+
+#login_form {
+	position: absolute;
+	top: 20%;
+	left: 18%;
+}
+
+#tit {
+	font-family: 'Dela Gothic One', cursive;
+	color: black;
+	font-size: 40px;
+	top: 2%;
+	left: 2%;
+	position: absolute;
+}
+
+#bg {
+
+	background-image: url('https://img1.goodfon.com/wallpaper/nbig/8/bc/samolet-nebo-minimalizm-1719.jpg');
+    background-position: center;
+    background-size: cover;
+    height: 800px;
+    width: 100%;
+    background-repeat: no-repeat;
+
+}
+
+#backtohome {
+	position: absolute;
+	left: 25%;
+	top: 3%;
+}
+
