@@ -1,0 +1,26 @@
+.hospital-maps{
+    height: 300px;
+    width: auto;
+    background-repeat: no-repeat;
+    border-radius: 20px;
+    text-align: center;
+	position: absolute;
+    box-sizing: border-box;
+    flex-flow: column;
+    align-items: center;
+	margin: 60px auto;
+    display: flex;
+    margin-left: 5%;
+}
+
+.hospsDiv{
+    text-align: center;
+	position: relative;
+    box-sizing: border-box;
+    flex-flow: column;
+    align-items: center;
+	margin: 70px auto;
+    display: flex;
+    margin-left: 50%;
+    
+}

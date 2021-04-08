@@ -7,7 +7,7 @@
 
 .home,
 .search,
-.maps,
+.airport-staff-flight-details,
 .loggin {
   display: flex;
   height: 90vh;
@@ -24,7 +24,7 @@
   font-size: 100px;
 }
 
-.maps {
+.airport-staff-flight-details {
   background-position: center;
   background-size: fill;
   background-repeat: no-repeat;

@@ -13,6 +13,7 @@ import Vaccine from './Vaccine_by_location'
 import TravelInfo from './TravelInfo'
 import FlightRegister from './components/pages/FlightRegister'
 import NewsOutbreaks from './components/pages/NewsOutbreaks'
+import Maps from './components/pages/Maps'
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             <Route path='/home' exact component={Home} />
             <Route path='/vaccine' exact component={Vaccine} />
             <Route path='/flights' component={FlightRegister} />
+            <Route path='/maps' component={Maps} />
             <Route path='/travelInfo' component={TravelInfo} />
             <Route path='/vaccination-history' component={vaccine_history} />
             <Route path='/airport-staff-flight-details' component={AirportStaffFlight} />
