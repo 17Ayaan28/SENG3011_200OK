@@ -11,7 +11,7 @@ function FlightRegister() {
     return (
       <>
       <Navbar />
-      <div>
+      <div className="margin-90">
         <p>
           
         </p>

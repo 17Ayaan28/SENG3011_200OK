@@ -7,6 +7,8 @@ import Navbar from './components/Navbar'
 import './TravelInfo.css'
 import Cards from './components/Cards'
 import { Link } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
+
 function TravelInfo() {
 
     return (
@@ -15,11 +17,11 @@ function TravelInfo() {
 		<p>
           <h1 id="travel_head">Vaccinations for Travel to Uganda<br />
 		  <Link to='/uganda-news'>
-		  <button className="newss" type='button'>Outbreaks Info and News</button> 
+		  <Button className="newss" type='button'>Outbreaks Info and News</Button> 
 		  </Link>
 
 		  <Link to='/maps'>
-		  <button className="mapss" type='button'>Maps</button> 
+		  <Button className="mapss" type='button'>Maps</Button> 
 		  </Link>
 		  </h1>
         </p>

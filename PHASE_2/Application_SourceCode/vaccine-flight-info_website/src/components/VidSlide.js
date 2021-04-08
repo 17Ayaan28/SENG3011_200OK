@@ -15,9 +15,8 @@ function VidSlide() {
           buttonStyle='btn--outline'
           buttonSize='btn--large'
         >
-          GET STARTED
+          <b>GET STARTED</b>
         </Button>
-        
       </div>
     </div>
   );

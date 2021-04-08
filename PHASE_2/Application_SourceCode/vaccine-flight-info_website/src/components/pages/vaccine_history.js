@@ -14,7 +14,7 @@ function vaccine_history() {
 		<br></br>
 		<h1>Diseases the user is vaccinated against:</h1>
 		<br></br>
-		<div>
+		<div className="margin-90">
 			<Table striped bordered hover>
 			  <thead>
 			    <tr>
@@ -39,41 +39,43 @@ function vaccine_history() {
 			    </tr>
 			  </tbody>
 			</Table>
+			<div className="margin-90">
+
 			<br></br>
-			
-			<h2 id="add_vaccine_head">Add New Vaccine:</h2>
+			<h2 id="add_vaccine_head"> Add New Vaccine:</h2>
 			<br></br>
 			<br></br>
-            <Form id="add_history_form">
+			<Form id="add_history_form">
 			<Form.Group controlId="formBasicEmail">
-	          <Form.Label>Diseases to be vaccinated against: </Form.Label>
-	            <Form.Control placeholder="Disease" />
-	          </Form.Group>
+			<Form.Label>Diseases to be vaccinated against: </Form.Label>
+				<Form.Control placeholder="Disease" />
+			</Form.Group>
 
-	          <Form.Group controlId="formBasicEmail">
-	            <Form.Label>Vaccine Name:</Form.Label>
-	            <Form.Control  placeholder="Vaccine" />
-	          </Form.Group>
+			<Form.Group controlId="formBasicEmail">
+				<Form.Label>Vaccine Name:</Form.Label>
+				<Form.Control  placeholder="Vaccine" />
+			</Form.Group>
 
-			  <Button variant="primary" type="submit">+</Button>
-			  <h6 id="file_upload_text">Upload File</h6>
+			<Button variant="primary" type="submit">Upload File</Button>
+			<h6 id="file_upload_text"></h6>
 
-			  
-			  <br></br>
+			
+			<br></br>
 
-	          <Form.Group controlId="">
-	            <Form.Check type="checkbox" label="Share Data with Airport Staff"/>
-	          </Form.Group>
-	          <Button variant="warning" type="submit">
-	            Add vaccine to list
-	          </Button>
+			<Form.Group controlId="">
+				<Form.Check type="checkbox" label="Share Data with Airport Staff"/>
+			</Form.Group>
+			<Button variant="warning" type="submit">
+				Add vaccine to list
+			</Button>
 
-			  
-	          <br/>
-		        <Form.Text className="text-muted">
-		          We'll never share your information with anyone without your permission.
-		        </Form.Text>
-		    </Form>
+			
+			<br/>
+				<Form.Text className="text-muted">
+				We'll never share your information with anyone without your permission.
+				</Form.Text>
+			</Form>
+			</div>
 		</div>
         </>
 	);
