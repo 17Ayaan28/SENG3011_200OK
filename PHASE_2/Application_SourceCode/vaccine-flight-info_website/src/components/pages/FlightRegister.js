@@ -1,13 +1,25 @@
 
 import {Link} from "react-router-dom";
-
+import React, { useState, forwardRef }from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-country-select/dist/react-bootstrap-country-select.css';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Navbar from '../Navbar'
-function FlightRegister() {
+import '../../App.css'
+import DatePicker from 'react-datepicker';
+import TimePicker from 'react-time-picker';
 
+function FlightRegister() {
+  const [startDate, setStartDate] = useState(new Date());
+  const ExampleCustomInput = forwardRef(
+      ({ value, onClick }, ref) => (
+        <button className="example-custom-input" onClick={onClick} ref={ref}>
+          {value}
+        </button>
+      ),
+  );
+    const [value1, Change] = useState('10:00');
     return (
       <>
       <Navbar />
@@ -31,8 +43,19 @@ function FlightRegister() {
           </Form.Group>
 
           <Form.Group controlId="formBasicPassword">
-            <Form.Label>Date and Time of Departure</Form.Label>
-            <Form.Control placeholder="Time Of Departure" />
+            <Form.Label id="date-right">Date of Depature</Form.Label>
+            <DatePicker className="datepicker_mobile"
+            selected={startDate}
+            onChange={date => setStartDate(date)}
+            customInput={<ExampleCustomInput />}
+            />
+          </Form.Group>
+          <Form.Group controlId="formBasicCheckbox">
+            <Form.Label id="time-right">Time of Depature</Form.Label>
+            <TimePicker className="timepicker-mobile"
+                onChange={Change}
+                value={value1}
+            />
           </Form.Group>
 
           <Form.Group controlId="formBasicCheckbox">
