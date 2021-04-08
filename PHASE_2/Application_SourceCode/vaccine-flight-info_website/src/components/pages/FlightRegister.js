@@ -19,7 +19,7 @@ function FlightRegister() {
         <Form>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Origin</Form.Label>
-            <Form.Control type="email" placeholder="Travel Origin" />
+            <Form.Control placeholder="Travel Origin" />
             <Form.Text className="text-muted">
               We'll never share your travel information without permission.
             </Form.Text>
@@ -31,7 +31,7 @@ function FlightRegister() {
           </Form.Group>
 
           <Form.Group controlId="formBasicPassword">
-            <Form.Label>Destination</Form.Label>
+            <Form.Label>Date and Time of Departure</Form.Label>
             <Form.Control placeholder="Time Of Departure" />
           </Form.Group>
 
