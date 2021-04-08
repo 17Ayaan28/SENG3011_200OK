@@ -12,7 +12,7 @@ import AirportStaffPassengerDetails from './components/pages/AirportStaffPasseng
 import Vaccine from './Vaccine_by_location'
 import TravelInfo from './TravelInfo'
 import FlightRegister from './components/pages/FlightRegister'
-
+import NewsOutbreaks from './components/pages/NewsOutbreaks'
 
 function App() {
   return (
@@ -34,6 +34,7 @@ function App() {
             <Route path='/vaccination-history' component={vaccine_history} />
             <Route path='/airport-staff-flight-details' component={AirportStaffFlight} />
             <Route path='/mu7366passenger-details' component={AirportStaffPassengerDetails} />
+            <Route path='/uganda-news' component={NewsOutbreaks} />
           </Switch>
         </Router>
       </>

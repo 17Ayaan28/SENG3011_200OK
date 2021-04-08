@@ -1,0 +1,12 @@
+
+
+
+.outbreaks-reports-wrapper{
+    width: 90%;
+    text-align: center;
+	position: relative;
+    box-sizing: border-box;
+    flex-flow: column;
+    align-items: center;
+	margin: 0 auto;
+}

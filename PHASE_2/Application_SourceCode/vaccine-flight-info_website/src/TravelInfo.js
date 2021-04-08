@@ -5,17 +5,28 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Table from 'react-bootstrap/Table';
 import Navbar from './components/Navbar'
 import './TravelInfo.css'
-
+import Cards from './components/Cards'
+import { Link } from "react-router-dom";
 function TravelInfo() {
 
     return (
 		<>
 		<Navbar />
-      <div>
-        <p>
-          <h1 id="travel_head">Vaccinations for Travel to Uganda</h1>
-        </p>  
-        <br/> <br/>
+		<p>
+          <h1 id="travel_head">Vaccinations for Travel to Uganda<br />
+		  <Link to='/uganda-news'>
+		  <button className="newss" type='button'>Outbreaks Info and News</button> 
+		  </Link>
+
+		  <Link to='/maps'>
+		  <button className="mapss" type='button'>Maps</button> 
+		  </Link>
+		  </h1>
+        </p>
+		
+      <div className="vaccine-table">
+		
+
 		<Table id="travel_table" striped bordered hover>
 		  <thead>
 		    <tr>
@@ -91,13 +102,6 @@ Unvaccinated travelers who are over 40 years old, immunocompromised, or have chr
 		    </tr>
 		  </tbody>
 		</Table>
-
-		<h1>Recent disease outbreaks in Uganda:</h1>
-
-		<h2>Rift Valley Fever Outbreaks: 2016 – present – Uganda</h2>
-
-		
-
       </div>
 	  </>
     );
