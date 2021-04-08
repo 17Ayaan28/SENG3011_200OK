@@ -1,12 +1,20 @@
-import React, { useState }from 'react'
+import React, { useState, forwardRef } from 'react'
 import '../../App.css'
-import DatePicker from 'react-date-picker';
+import DatePicker from 'react-datepicker';
 import './AirportStaffFlight.css'
 import FlightCards from '../FlightCards'
 import Navbar from '../Navbar'
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function AirportStaffFlight() {
-    const [value, onChange] = useState(new Date());
+    const [startDate, setStartDate] = useState(new Date());
+    const ExampleCustomInput = forwardRef(
+        ({ value, onClick }, ref) => (
+          <button className="example-custom-input" onClick={onClick} ref={ref}>
+            {value}
+          </button>
+        ),
+    );
     return (
     <>
         <Navbar />
@@ -14,9 +22,10 @@ export default function AirportStaffFlight() {
         <h1 className="flightdetails">Scheduled Flights</h1>
         <br />
         <h1 className="datepicker">
-        <DatePicker
-            onChange={onChange}
-            value={value}
+        <DatePicker className="datepicker"
+            selected={startDate}
+            onChange={date => setStartDate(date)}
+            customInput={<ExampleCustomInput />}
         />
         </h1>
         <FlightCards />
