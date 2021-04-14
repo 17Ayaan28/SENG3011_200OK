@@ -14,15 +14,18 @@ import TravelInfo from './TravelInfo'
 import FlightRegister from './components/pages/FlightRegister'
 import NewsOutbreaks from './components/pages/NewsOutbreaks'
 import Maps from './components/pages/Maps'
+import Profile from './components/pages/Profile'
 
 function App() {
   return (
       <>
         <Router>
-        <Route path='/'/>
         {/* <Home /> */}
           <Switch> 
-            
+            <Route path='/profile' component={Profile}/>
+
+            <Route path='/fp' component={home} /> 
+
             <Route path='/fp' component={home} /> 
             <Route path='/login'  component={login} />
             <Route path='/register'  component={register} />

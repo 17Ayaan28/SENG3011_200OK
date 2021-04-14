@@ -39,8 +39,6 @@ function vaccine_history() {
 			    </tr>
 			  </tbody>
 			</Table>
-			<div className="margin-90">
-
 			<br></br>
 			<h2 id="add_vaccine_head"> Add New Vaccine:</h2>
 			<br></br>
@@ -75,7 +73,6 @@ function vaccine_history() {
 				We'll never share your information with anyone without your permission.
 				</Form.Text>
 			</Form>
-			</div>
 		</div>
         </>
 	);
