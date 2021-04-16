@@ -15,6 +15,7 @@ import FlightRegister from './components/pages/FlightRegister'
 import NewsOutbreaks from './components/pages/NewsOutbreaks'
 import Maps from './components/pages/Maps'
 import Profile from './components/pages/Profile'
+import RenderList from './skyscanner'
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
             <Route path='/airport-staff-flight-details' component={AirportStaffFlight} />
             <Route path='/mu7366passenger-details' component={AirportStaffPassengerDetails} />
             <Route path='/uganda-news' component={NewsOutbreaks} />
+            <Route path='/skyscanner' component={RenderList} />
           </Switch>
         </Router>
       </>
