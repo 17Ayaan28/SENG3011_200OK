@@ -24,14 +24,24 @@ function register() {
 
 		          </Form.Group>
 
-		          <Form.Group controlId="formBasicPassword">
+		          <Form.Group controlId="formBasicEmail">
 		            <Form.Label>Last Name:</Form.Label>
 		            <Form.Control  placeholder="Last Name" />
 		          </Form.Group>
 
 		          <Form.Group controlId="formBasicEmail">
-		            <Form.Label>Email</Form.Label>
+		            <Form.Label>Email:</Form.Label>
 		            <Form.Control type="email"  placeholder="Email" />
+		          </Form.Group>
+
+				  <Form.Group controlId="formBasicEmail">
+		            <Form.Label>Phone No.:</Form.Label>
+		            <Form.Control type="phone#"  placeholder="Phone Number" />
+		          </Form.Group>
+
+				  <Form.Group controlId="formBasicEmail">
+		            <Form.Label>Passport No.:</Form.Label>
+		            <Form.Control type="passport#"  placeholder="Passport Number" />
 		          </Form.Group>
 
 		          <Form.Group controlId="formBasicPassword">
