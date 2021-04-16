@@ -55,7 +55,7 @@ function register() {
 		          </Form.Group>
 
 		          <Form.Group controlId="formBasicCheckbox">
-		            <Form.Check type="checkbox" label="Share Data with Airport Staff"/>
+		            <Form.Check type="checkbox" label="Share Data with Airport Staff" checked/>
 		          </Form.Group>
 		          <Button onClick={shoot} variant="warning" type="submit" href='/home'>
 		            Register
