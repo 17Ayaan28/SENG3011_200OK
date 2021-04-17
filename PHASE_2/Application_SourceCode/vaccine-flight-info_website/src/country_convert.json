@@ -1,0 +1,306 @@
+{
+    "american samoa": {
+      "cdc_name": "american-samoa",
+      "front_end_name": "american samoa"
+    },
+    "antigua and barbuda": {
+      "cdc_name": "antigua-and-barbuda",
+      "front_end_name": "antigua and barbuda"
+    },
+    "bahamas": {
+      "cdc_name": "the-bahamas",
+      "front_end_name": "bahamas"
+    },
+    "bolivia, plurinational state of": {
+      "cdc_name": "bolivia",
+      "front_end_name": "bolivia, plurinational state of"
+    },
+    "bonaire, saint eustatius and saba": {
+      "cdc_name": "bonaire",
+      "front_end_name": "bonaire, saint eustatius and saba"
+    },
+    "bosnia & herzegovina": {
+      "cdc_name": "bosnia-and-herzegovina",
+      "front_end_name": "bosnia & herzegovina"
+    },
+    "british indian ocean territory": {
+      "cdc_name": "british-indian-ocean-territory",
+      "front_end_name": "british indian ocean territory"
+    },
+    "brunei darussalam": {
+      "cdc_name": "brunei",
+      "front_end_name": "brunei darussalam"
+    },
+    "burkina faso": {
+      "cdc_name": "burkina-faso",
+      "front_end_name": "burkina faso"
+    },
+    "cabo verde": {
+      "cdc_name": "cape-verde",
+      "front_end_name": "cabo verde"
+    },
+    "cayman islands": {
+      "cdc_name": "cayman-islands",
+      "front_end_name": "cayman islands"
+    },
+    "central african republic": {
+      "cdc_name": "central-african-republic",
+      "front_end_name": "central african republic"
+    },
+    "christmas island": {
+      "cdc_name": "christmas-island",
+      "front_end_name": "christmas island"
+    },
+    "cocos (keeling) islands": {
+      "cdc_name": "cocos-islands",
+      "front_end_name": "cocos (keeling) islands"
+    },
+    "cook islands": {
+      "cdc_name": "cook-islands",
+      "front_end_name": "cook islands"
+    },
+    "costa rica": {
+      "cdc_name": "costa-rica",
+      "front_end_name": "costa rica"
+    },
+    "czech republic": {
+      "cdc_name": "czech-republic",
+      "front_end_name": "czech republic"
+    },
+    "côte d'ivoire": {
+      "cdc_name": "ivory-coast",
+      "front_end_name": "côte d'ivoire"
+    },
+    "democratic republic of congo": {
+      "cdc_name": "democratic-republic-of-congo",
+      "front_end_name": "democratic republic of congo"
+    },
+    "dominican republic": {
+      "cdc_name": "dominican-republic",
+      "front_end_name": "dominican republic"
+    },
+    "el salvador": {
+      "cdc_name": "el-salvador",
+      "front_end_name": "el salvador"
+    },
+    "equatorial guinea": {
+      "cdc_name": "equatorial-guinea",
+      "front_end_name": "equatorial guinea"
+    },
+    "falkland islands": {
+      "cdc_name": "falkland-islands",
+      "front_end_name": "falkland islands"
+    },
+    "faroe islands": {
+      "cdc_name": "faroe-islands",
+      "front_end_name": "faroe islands"
+    },
+    "french guiana": {
+      "cdc_name": "french-guiana",
+      "front_end_name": "french guiana"
+    },
+    "french polynesia": {
+      "cdc_name": "french-polynesia",
+      "front_end_name": "french polynesia"
+    },
+    "the gambia": {
+      "cdc_name": "the-gambia",
+      "front_end_name": "gambia"
+    },
+    "hong kong": {
+      "cdc_name": "hong-kong-sar",
+      "front_end_name": "hong kong"
+    },
+    "iran, islamic republic of": {
+      "cdc_name": "iran",
+      "front_end_name": "iran, islamic republic of"
+    },
+    "korea, democratic people's republic of": {
+      "cdc_name": "north-korea",
+      "front_end_name": "korea, democratic people's republic of"
+    },
+    "korea, republic of": {
+      "cdc_name": "south-korea",
+      "front_end_name": "korea, republic of"
+    },
+    "lao people's democratic republic": {
+      "cdc_name": "laos",
+      "front_end_name": "lao people's democratic republic"
+    },
+    "macau": {
+      "cdc_name": "macau-sar",
+      "front_end_name": "macau"
+    },
+    "macedonia, the former yugoslav republic of": {
+      "cdc_name": "north-macedonia",
+      "front_end_name": "macedonia, the former yugoslav republic of"
+    },
+    "marshall islands": {
+      "cdc_name": "marshall-islands",
+      "front_end_name": "marshall islands"
+    },
+    "micronesia, federated states of": {
+      "cdc_name": "micronesia",
+      "front_end_name": "micronesia, federated states of"
+    },
+    "myanmar": {
+      "cdc_name": "burma",
+      "front_end_name": "myanmar"
+    },
+    "new caledonia": {
+      "cdc_name": "new-caledonia",
+      "front_end_name": "new caledonia"
+    },
+    "new zealand": {
+      "cdc_name": "new-zealand",
+      "front_end_name": "new zealand"
+    },
+    "norfolk island": {
+      "cdc_name": "norfolk-island",
+      "front_end_name": "norfolk island"
+    },
+    "northern mariana islands": {
+      "cdc_name": "northern-mariana-islands",
+      "front_end_name": "northern mariana islands"
+    },
+    "papua new guinea": {
+      "cdc_name": "papua-new-guinea",
+      "front_end_name": "papua new guinea"
+    },
+    "pitcairn": {
+      "cdc_name": "pitcairn-islands",
+      "front_end_name": "pitcairn"
+    },
+    "puerto rico": {
+      "cdc_name": "puerto-rico",
+      "front_end_name": "puerto rico"
+    },
+    "republic of congo": {
+      "cdc_name": "congo",
+      "front_end_name": "republic of congo"
+    },
+    "russian federation": {
+      "cdc_name": "russia",
+      "front_end_name": "russian federation"
+    },
+    "saint barthélemy": {
+      "cdc_name": "saint-barthelemy",
+      "front_end_name": "saint barthélemy"
+    },
+    "saint helena, ascension and tristan da cunha": {
+      "cdc_name": "saint-helena",
+      "front_end_name": "saint helena, ascension and tristan da cunha"
+    },
+    "saint kitts and nevis": {
+      "cdc_name": "st-kitts-and-nevis",
+      "front_end_name": "saint kitts and nevis"
+    },
+    "saint lucia": {
+      "cdc_name": "saint-lucia",
+      "front_end_name": "saint lucia"
+    },
+    "saint martin": {
+      "cdc_name": "saint-martin",
+      "front_end_name": "saint martin"
+    },
+    "saint pierre and miquelon": {
+      "cdc_name": "saint-pierre-and-miquelon",
+      "front_end_name": "saint pierre and miquelon"
+    },
+    "saint vincent and the grenadines": {
+      "cdc_name": "saint-vincent-and-the-grenadines",
+      "front_end_name": "saint vincent and the grenadines"
+    },
+    "san marino": {
+      "cdc_name": "san-marino",
+      "front_end_name": "san marino"
+    },
+    "sao tome and principe": {
+      "cdc_name": "sao-tome-and-principe",
+      "front_end_name": "sao tome and principe"
+    },
+    "saudi arabia": {
+      "cdc_name": "saudi-arabia",
+      "front_end_name": "saudi arabia"
+    },
+    "sierra leone": {
+      "cdc_name": "sierra-leone",
+      "front_end_name": "sierra leone"
+    },
+    "sint maarten": {
+      "cdc_name": "sint-maarten",
+      "front_end_name": "sint maarten"
+    },
+    "solomon islands": {
+      "cdc_name": "solomon-islands",
+      "front_end_name": "solomon islands"
+    },
+    "south africa": {
+      "cdc_name": "south-africa",
+      "front_end_name": "south africa"
+    },
+    "south georgia and the south sandwich islands": {
+      "cdc_name": "south-georgia-south-sandwich-islands",
+      "front_end_name": "south georgia and the south sandwich islands"
+    },
+    "south sudan": {
+      "cdc_name": "south-sudan",
+      "front_end_name": "south sudan"
+    },
+    "sri lanka": {
+      "cdc_name": "sri-lanka",
+      "front_end_name": "sri lanka"
+    },
+    "swaziland": {
+      "cdc_name": "eswatini",
+      "front_end_name": "swaziland"
+    },
+    "syrian arab republic": {
+      "cdc_name": "syria",
+      "front_end_name": "syrian arab republic"
+    },
+    "tanzania, united republic of": {
+      "cdc_name": "tanzania",
+      "front_end_name": "tanzania, united republic of"
+    },
+    "timor-leste, democratic republic of": {
+      "cdc_name": "east-timor",
+      "front_end_name": "timor-leste, democratic republic of"
+    },
+    "trinidad and tobago": {
+      "cdc_name": "trinidad-and-tobago",
+      "front_end_name": "trinidad and tobago"
+    },
+    "turks and caicos islands": {
+      "cdc_name": "turks-and-caicos",
+      "front_end_name": "turks and caicos islands"
+    },
+    "united arab emirates": {
+      "cdc_name": "united-arab-emirates",
+      "front_end_name": "united arab emirates"
+    },
+    "united kingdom": {
+      "cdc_name": "united-kingdom",
+      "front_end_name": "united kingdom"
+    },
+    "united states": {
+      "cdc_name": "united-states",
+      "front_end_name": "united states"
+    },
+    "venezuela, bolivarian republic of": {
+      "cdc_name": "venezuela",
+      "front_end_name": "venezuela, bolivarian republic of"
+    },
+    "viet nam": {
+      "cdc_name": "vietnam",
+      "front_end_name": "viet nam"
+    },
+    "virgin islands (british)": {
+      "cdc_name": "british-virgin-islands",
+      "front_end_name": "virgin islands (british)"
+    },
+    "virgin islands (us)": {
+      "cdc_name": "usvirgin-islands",
+      "front_end_name": "virgin islands (us)"
+    }
+}
