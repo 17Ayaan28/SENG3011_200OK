@@ -14,28 +14,24 @@ import TravelInfo from './TravelInfo'
 import FlightRegister from './components/pages/FlightRegister'
 import NewsOutbreaks from './components/pages/NewsOutbreaks'
 import Maps from './components/pages/Maps'
-import Profile from './components/pages/Profile'
 
 function App() {
   return (
       <>
         <Router>
+        <Route path='/'/>
         {/* <Home /> */}
           <Switch> 
-            <Route path='/profile' component={Profile}/>
-
-            <Route path='/fp' component={home} /> 
-
+            
             <Route path='/fp' component={home} /> 
             <Route path='/login'  component={login} />
             <Route path='/register'  component={register} />
-            
             <Route path='/' exact component={home} />
             <Route path='/home' exact component={Home} />
             <Route path='/vaccine' exact component={Vaccine} />
             <Route path='/flights' component={FlightRegister} />
             <Route path='/maps' component={Maps} />
-            <Route path='/travelInfo' component={TravelInfo} />
+            <Route path='/travelInfo?country=:country' component={TravelInfo} />
             <Route path='/vaccination-history' component={vaccine_history} />
             <Route path='/airport-staff-flight-details' component={AirportStaffFlight} />
             <Route path='/mu7366passenger-details' component={AirportStaffPassengerDetails} />
