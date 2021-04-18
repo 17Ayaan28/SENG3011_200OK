@@ -64,7 +64,7 @@ function Navbar() {
                             </Link>                                
                         </li>
                     </ul>
-                    <Button variant="primary" type="submit"><Link to="/profile" style={{ textDecoration: 'none', color: 'black' }}>Profile</Link></Button>
+                    <Button variant="primary"><Link to="/profile" style={{ textDecoration: 'none', color: 'black' }}>Profile</Link></Button>
                     {button && <Button buttonStyle='btn--outline'>LOG OUT</Button>}
                 </div>
             </nav>

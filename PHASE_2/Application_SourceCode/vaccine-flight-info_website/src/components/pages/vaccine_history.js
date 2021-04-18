@@ -12,11 +12,13 @@ function vaccine_history() {
         <>
         <Navbar />
 		<br></br>
-		<h1>Diseases the user is vaccinated against:</h1>
+		<h1>Vaccination History</h1>
 		<br></br>
 		<div className="margin-90">
+		<div className="margin-90">
+
 			<Table striped bordered hover>
-			  <thead>
+			  <thead class="table-dark">
 			    <tr>
 			      <th>#</th>
 			      <th>Disease Name</th>
@@ -40,9 +42,8 @@ function vaccine_history() {
 			  </tbody>
 			</Table>
 			<br></br>
-			<h2 id="add_vaccine_head"> Add New Vaccine:</h2>
-			<br></br>
-			<br></br>
+			<div className="add_history">
+			<h3 id="add_vaccine_head"> New Record</h3>
 			<Form id="add_history_form">
 			<Form.Group controlId="formBasicEmail">
 			<Form.Label>Diseases to be vaccinated against: </Form.Label>
@@ -58,8 +59,6 @@ function vaccine_history() {
 			<h6 id="file_upload_text"></h6>
 
 			
-			<br></br>
-
 			<Form.Group controlId="">
 				<Form.Check type="checkbox" label="Share Data with Airport Staff"/>
 			</Form.Group>
@@ -73,6 +72,9 @@ function vaccine_history() {
 				We'll never share your information with anyone without your permission.
 				</Form.Text>
 			</Form>
+
+			</div>
+		</div>
 		</div>
         </>
 	);
