@@ -1,6 +1,6 @@
 import React from 'react';
 import Axios from 'axios';
-
+import cors from 'cors';
 
 class skyscanner extends React.Component {
 
@@ -27,25 +27,29 @@ class skyscanner extends React.Component {
 	}
 
 	handleSubmit(event) {
-
-		//event.preventDefault();// change
+		//console.log("hi");
+		event.preventDefault();// change
 		//https://cors-anywhere.herokuapp.com/
 		Axios.get(
 			"http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/FR/eur/en-US/PARI/NYC/2021-05-02?apiKey=prtl6749387986743898559646983194",
 			{
-				"headers": {
-					"x-rapidapi-key": "0a96377de7msh3de3078377e3f3dp141743jsncf8d8b8800ae",
-					"x-rapidapi-host": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
-				}
+				mode: 'cors',
+				method: 'get',
 			}
 		
 		).then((response)=> {
-			console.log(response);
+			//console.log(response);
+			
+			var joined = this.state.api_data.concat(response);
+			this.setState({ api_data: joined });
+
+			//console.log(this.state.api_data.length);
+
 		}, (error) => {
 			console.log(error);
 		});
-
-
+	
+		console.log(this.state.api_data.length);
 	}
 
 	render() {
