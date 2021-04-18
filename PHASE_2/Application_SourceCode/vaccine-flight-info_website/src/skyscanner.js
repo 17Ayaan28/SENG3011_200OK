@@ -1,103 +1,73 @@
-const fetch = require("node-fetch");
-
-var flight_info = {
-	flights: [],
-	carriers: [],
-	places: []
-};
+import React from 'react';
+import Axios from 'axios';
 
 
+class skyscanner extends React.Component {
 
-
-
-
-const res = fetch("http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/FR/eur/en-US/PARI/NYC/2021-05-02?apiKey=prtl6749387986743898559646983194", { "method": "GET",
-"headers": {
-	"x-rapidapi-key": "0a96377de7msh3de3078377e3f3dp141743jsncf8d8b8800ae",
-	"x-rapidapi-host": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
-}
-})
-.then(response => response.json())
-.then(function(data) {
-
-	
-	for(var i = 0; i < data.Quotes.length; i++) {
-
-		var jso = {
-			tod: "",
-			carriers: [],
-			origin: 0,
-			destination: 0
+	constructor(props) {
+		super(props)
+		this.state = {
+			origin: '',
+			destination: '',
+			tod:'',
+			api_data: []
 		}
 
-		jso.tod = data.Quotes[i].OutboundLeg.DepartureDate;
-		jso.origin = data.Quotes[i].OutboundLeg.OriginId;
-		jso.destination = data.Quotes[i].OutboundLeg.DestinationId;
-		jso.carriers = data.Quotes[i].OutboundLeg.CarrierIds
-		//console.log(typeof(data.Quotes[i].OutboundLeg.CarrierIds));
-
-		
-
-		flight_info.flights.push(jso);
-		
+		this.handleChange = this.handleChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
-	for(var j = 0; j < data.Carriers.length; j++){
-		flight_info.carriers.push(data.Carriers[j]);
+	handleChange(event) {
+
+		const { name, value } = event.target;
+
+		this.setState({
+			[name]: value
+		});
 	}
 
-	for(var k = 0; k < data.Places.length; k++){
+	handleSubmit(event) {
 
-		flight_info.places.push(data.Places[k]);
-		
-	}
-
-	for (var f = 0; f < flight_info.flights.length; f++){
-
-		for (var n = 0; n < flight_info.places.length; n++){
-
-			if(flight_info.flights[f].origin == flight_info.places[n].PlaceId){
-				flight_info.flights[f].origin = flight_info.places[n].Name;
-			}
-
-			if(flight_info.flights[f].destination == flight_info.places[n].PlaceId){
-				flight_info.flights[f].destination = flight_info.places[n].Name;
-			}
-		}
-	}
-	
-	for (var f = 0; f < flight_info.flights.length; f++){
-
-		for (var n = 0; n < flight_info.carriers.length; n++){
-
-			//for(var o = 0; f < flight_info.flights[f].carriers.length; o++){
-
-				if(flight_info.flights[f].carriers == flight_info.carriers[n].CarrierId){
-					flight_info.flights[f].carriers = flight_info.carriers[n].Name;
+		//event.preventDefault();// change
+		//https://cors-anywhere.herokuapp.com/
+		Axios.get(
+			"http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/FR/eur/en-US/PARI/NYC/2021-05-02?apiKey=prtl6749387986743898559646983194",
+			{
+				"headers": {
+					"x-rapidapi-key": "0a96377de7msh3de3078377e3f3dp141743jsncf8d8b8800ae",
+					"x-rapidapi-host": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
 				}
-	//		}
-		}
+			}
+		
+		).then((response)=> {
+			console.log(response);
+		}, (error) => {
+			console.log(error);
+		});
+
+
 	}
 
+	render() {
+		return (
+		  <form onSubmit={this.handleSubmit}>
+			<label>
+			  origin:
+			  <input name='origin' ype="text" value={this.state.origin} onChange={this.handleChange} />
+			</label>
+			<label>
+			  destination:
+			  <input name='destination' type="text" value={this.state.destination} onChange={this.handleChange} />
+			</label>
+			<label>
+			  tod:
+			  <input name='tod' type="text" value={this.state.tod} onChange={this.handleChange} />
+			</label>
+			<input type="submit" value="Submit" />
+		  </form>
+		);
+	  }
 
-	for (var t = 0; t < flight_info.flights.length; t++){
-		console.log(flight_info.flights[t]);
-	}
+}
 
-});
-
-
-//for (i = 0; i <flights.flight.length; i++){
-//	console.log(i);
-//	console.log(flights.flight[i]);
-//}
-
-
-
-
-//console.log(data);
-//})
-//.catch(err => {
-//	console.error(err);
-//});
-
+export default skyscanner;
