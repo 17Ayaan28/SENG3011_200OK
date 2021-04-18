@@ -16,6 +16,7 @@ import NewsOutbreaks from './components/pages/NewsOutbreaks'
 import Maps from './components/pages/Maps'
 import Profile from './components/pages/Profile'
 import skyscanner from './skyscanner'
+import Base64 from './base64CallBack'
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
             <Route path='/mu7366passenger-details' component={AirportStaffPassengerDetails} />
             <Route path='/uganda-news' component={NewsOutbreaks} />
             <Route path='/skyscanner' component={skyscanner} />
+            <Route path='/convert' component={Base64} />
           </Switch>
         </Router>
       </>
