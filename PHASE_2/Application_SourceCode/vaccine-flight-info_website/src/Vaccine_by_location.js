@@ -40,7 +40,7 @@ class Vaccine extends React.Component {
       }
       console.log(country_name)
       this.props.history.push({
-        pathname: '/travelInfo?country=' + country_name,
+        pathname: '/travelInfo/' + country_name,
         display_country_name: this.state.country['name']
     });
     }

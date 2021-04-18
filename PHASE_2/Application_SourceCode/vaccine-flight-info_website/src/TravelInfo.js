@@ -56,6 +56,7 @@ class TravelInfo extends React.Component {
 
 
 	render() {
+		console.log("render");
 		return (
 			<>
 			<Navbar />

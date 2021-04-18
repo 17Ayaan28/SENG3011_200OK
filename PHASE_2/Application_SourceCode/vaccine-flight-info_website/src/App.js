@@ -31,7 +31,7 @@ function App() {
             <Route path='/vaccine' exact component={Vaccine} />
             <Route path='/flights' component={FlightRegister} />
             <Route path='/maps' component={Maps} />
-            <Route path='/travelInfo?country=:country' component={TravelInfo} />
+            <Route path='/travelInfo/:country' component={TravelInfo} />
             <Route path='/vaccination-history' component={vaccine_history} />
             <Route path='/airport-staff-flight-details' component={AirportStaffFlight} />
             <Route path='/mu7366passenger-details' component={AirportStaffPassengerDetails} />
