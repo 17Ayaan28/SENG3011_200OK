@@ -1,15 +1,16 @@
 #add_history_form {
-    position: absolute;
     left: 5%;
 }
 
 #add_vaccine_head {
-    position: absolute;
     left: 5%;
 }
 
 #file_upload_text {
-    position: absolute;
     left: 12%;
     bottom: 38%;
+}
+
+.add_history {
+    width: 40%;
 }

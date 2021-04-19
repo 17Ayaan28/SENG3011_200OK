@@ -9,6 +9,7 @@ import Navbar from '../Navbar'
 import '../../App.css'
 import DatePicker from 'react-datepicker';
 import TimePicker from 'react-time-picker';
+import './FlightRegister.css'
 
 function FlightRegister() {
   const [startDate, setStartDate] = useState(new Date());
@@ -23,7 +24,7 @@ function FlightRegister() {
     return (
       <>
       <Navbar />
-      <div className="margin-90">
+      <div className="margin-90 flight-register">
         <p>
           
         </p>

@@ -6,35 +6,75 @@ import 'react-bootstrap-country-select/dist/react-bootstrap-country-select.css';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import CountrySelect from 'react-bootstrap-country-select';
-import './Vaccine_by_location.css'
-import Navbar from './components/Navbar'
+import './Vaccine_by_location.css';
+import Navbar from './components/Navbar';
+import convert from './country_convert.json';
 
-function Vaccine() {
+class Vaccine extends React.Component {
 
-    const [ value, setValue ] = useState(null);
-    return (
-      <>
-      <Navbar />
-      <div>
-        <p id='enter'>
-          Enter the location you are travelling:
-        </p>
-        <br />
-        <Form id="form">
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label></Form.Label>
-            <CountrySelect value={value} onChange={setValue}/>
-            <Form.Text className="text-muted">
-              We'll never share your travel details with anyone else.
-            </Form.Text>
-          </Form.Group>
+    state = {
+      country: undefined
+    }
 
-          <Link to="/travelInfo"><Button variant="primary" type="submit">Search</Button></Link>
+    handleSearch = () => {
+      console.log(this.state.country['name']);
+      console.log(convert);
+      let country_name;
+      const front_end_name = this.state.country['name'].toLowerCase();
+      if(front_end_name === 'guernsey' || front_end_name === 'isle of man' || front_end_name === 'jersey') {
+        country_name = 'united-kingdom';
+      }
+      
+      if(front_end_name === 'heard island and macdonald islands') {
+        country_name = 'austrlia'
+      }
 
-        </Form>
-      </div>
-      </>
-    );
+      if(front_end_name === 'vatican city state') {
+        country_name = 'italy'
+      }
+
+      if(front_end_name in convert) {
+        country_name = convert[front_end_name]['cdc_name']
+      } else {
+        country_name = this.state.country['name'].toLowerCase()
+      }
+      console.log(country_name)
+      this.props.history.push({
+        pathname: '/travelInfo/' + country_name,
+        display_country_name: this.state.country['name']
+    });
+    }
+
+    componentDidMount() {
+      const dropdown = document.getElementById('country_input')
+      dropdown.setAttribute('autocomplete', "off")
+    }
+
+    render() {
+      return (
+        <>
+        <Navbar />
+        <div>
+          <p id='enter'>
+            Enter the location you are travelling:
+          </p>
+          <br />
+          <Form id="form">
+            <Form.Group controlId="country_input">
+              <Form.Label></Form.Label>
+              <CountrySelect value={this.state.country} onChange={e => this.setState({ country: e })} autocomplete="off"/>
+              <Form.Text className="text-muted">
+                We'll never share your travel details with anyone else.
+              </Form.Text>
+            </Form.Group>
+
+            <Button variant="primary" onClick={this.handleSearch}>Search</Button>
+
+          </Form>
+        </div>
+        </>
+      );
+    }
 
 }
 
