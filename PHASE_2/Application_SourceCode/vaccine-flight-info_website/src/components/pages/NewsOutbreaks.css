@@ -1,12 +1,12 @@
-
-
-
-.outbreaks-reports-wrapper{
-    width: 90%;
-    text-align: center;
+.outbreaks{
+    width: 80%;
 	position: relative;
     box-sizing: border-box;
     flex-flow: column;
-    align-items: center;
 	margin: 0 auto;
+    padding-top: 30px;
+}
+
+.page-title {
+    width: 100%;
 }

@@ -62,7 +62,7 @@ class TravelInfo extends React.Component {
 			<Navbar />
 			<h1 id="travel_head">Vaccinations for Travel to {this.state.country}</h1>
 			<br />
-			<Link to='/uganda-news'>
+			<Link to='/news'>
 			<Button className="newss" type='button'>Outbreaks Info and News</Button> 
 			</Link>
 

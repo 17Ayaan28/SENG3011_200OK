@@ -35,7 +35,7 @@ function App() {
             <Route path='/vaccination-history' component={vaccine_history} />
             <Route path='/airport-staff-flight-details' component={AirportStaffFlight} />
             <Route path='/mu7366passenger-details' component={AirportStaffPassengerDetails} />
-            <Route path='/uganda-news' component={NewsOutbreaks} />
+            <Route path='/news/:country' component={NewsOutbreaks} />
           </Switch>
         </Router>
       </>
