@@ -15,6 +15,8 @@ import FlightRegister from './components/pages/FlightRegister'
 import NewsOutbreaks from './components/pages/NewsOutbreaks'
 import Maps from './components/pages/Maps'
 import Profile from './components/pages/Profile'
+import skyscanner from './skyscanner'
+import Base64 from './base64CallBack'
 
 
 function App() {
@@ -35,13 +37,13 @@ function App() {
             <Route path='/vaccination-history' component={vaccine_history} />
             <Route path='/airport-staff-flight-details' component={AirportStaffFlight} />
             <Route path='/mu7366passenger-details' component={AirportStaffPassengerDetails} />
+            <Route path='/skyscanner' component={skyscanner} />
+            <Route path='/convert' component={Base64} />
             <Route path='/news/:country' component={NewsOutbreaks} />
             <Route path='/profile' component={Profile} />
             <Route path='/' exact component={home} />
             <Route path='/fp' component={home} /> 
-
-
-
+    
           </Switch>
         </Router>
       </>
