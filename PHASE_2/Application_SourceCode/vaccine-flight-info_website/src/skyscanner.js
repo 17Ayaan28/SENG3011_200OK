@@ -1,5 +1,11 @@
 import React from 'react';
 import Axios from 'axios';
+import './skyscanner.css';
+import Navbar from './components/Navbar';
+import Table from 'react-bootstrap/Table';
+
+
+
 
 class skyscanner extends React.Component {
 
@@ -13,8 +19,6 @@ class skyscanner extends React.Component {
 			carriers: [],
 			flights:[],
 			places:[]
-
-
 		}
 
 		this.handleChange = this.handleChange.bind(this);
@@ -32,7 +36,13 @@ class skyscanner extends React.Component {
 	}
 
 	handleapi_data(){
-		console.log(this.state.api_data);
+		// console.log(this.state.api_data);
+		
+		this.setState({
+			carriers: [],
+			flights:[],
+			places:[]
+		});
 
 		for(var i = 0; i < this.state.api_data.Quotes.length; i++) {
 
@@ -80,7 +90,7 @@ class skyscanner extends React.Component {
 
 			for (var n = 0; n < this.state.carriers.length; n++){
 	
-				console.log(this.state.carriers[n].Name);
+				// console.log(this.state.carriers[n].Name);
 				if(this.state.flights[f].carriers == this.state.carriers[n].CarrierId){
 					this.state.flights[f].carriers = this.state.carriers[n].Name;
 				}
@@ -88,8 +98,12 @@ class skyscanner extends React.Component {
 		}
 
 		for (var t = 0; t < this.state.flights.length; t++){
-    		console.log(this.state.flights[t]);
+    		//console.log(this.state.flights[t]);
     	}
+
+		this.setState({
+
+		});
 	}
 
 	handleSubmit(event) {
@@ -108,7 +122,6 @@ class skyscanner extends React.Component {
 			
 			//var joined = this.state.api_data.concat(response);
 			this.setState({ api_data: response.data });
-
 			this.handleapi_data();
 
 		}, (error) => {
@@ -119,35 +132,52 @@ class skyscanner extends React.Component {
 
 	render() {
 		return (
-			<>
-		  <form onSubmit={this.handleSubmit}>
-			<label>
-			  origin:
-			  <input name='origin' ype="text" value={this.state.origin} onChange={this.handleChange} />
-			</label>
-			<label>
-			  destination:
-			  <input name='destination' type="text" value={this.state.destination} onChange={this.handleChange} />
-			</label>
-			<label>
-			  tod:
-			  <input name='tod' type="text" value={this.state.tod} onChange={this.handleChange} />
-			</label>
-			<input type="submit" value="Submit" />
-		  </form>
-			<tbody>
-				{this.state.flights.map(flight => (
-					<tr>
-						<td>{flight['tod']}</td>
-						<td>{flight['origin']}</td>
-						<td>{flight['destination']}</td>
-						<td>{flight['carriers']}</td>
-					</tr>
-				))}
-			</tbody>
-			</>
+			<div>
+				<Navbar />
+				<div className="scanner-container">
+					<form onSubmit={this.handleSubmit}>
+						<div class="row">
+							<div class="col">
+								<input class='form-control' placeholder="origin" name='origin' ype="text" value={this.state.origin} onChange={this.handleChange} />
+							</div>
+							<div class="col">
+								<input class='form-control' placeholder="destination" name='destination' type="text" value={this.state.destination} onChange={this.handleChange} />
+							</div>
+							<div class="col">
+								<input class='form-control' placeholder="date of departure" name='tod' type="text" value={this.state.tod} onChange={this.handleChange} />
+							</div>
+							<div class="col-1">
+								<button type="submit" class="btn btn-primary">Search</button>
+							</div>
+						</div>
+					</form>
+
+					<div className="flight-table">
+						<Table striped bordered hover>
+							<thead>
+								<tr>
+								<th>Date</th>
+								<th>Origin</th>
+								<th>Destination</th>
+								<th>Carriers</th>
+								</tr>
+							</thead>
+							<tbody>
+								{this.state.flights.map(flight => (
+								<tr>
+									<td>{flight['tod']}</td>
+									<td>{flight['origin']}</td>
+									<td>{flight['destination']}</td>
+									<td>{flight['carriers']}</td>
+								</tr>
+								))}
+							</tbody>
+						</Table>
+					</div>
+				</div>
+			</div>
 		);
-	  }
+	}
 
 }
 
