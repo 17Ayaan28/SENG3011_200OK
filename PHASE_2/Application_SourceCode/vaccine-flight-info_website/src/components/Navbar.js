@@ -1,10 +1,136 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, Component} from 'react'
 import { Link } from 'react-router-dom';
 import { Button } from './Button';
-import './Navbar.css'
+import './Navbar.css';
+//import LogOutButton from './LogOutButton';
+import { withRouter } from 'react-router-dom';
+import { withFirebase } from './Firebase';
+import { compose } from 'recompose';
+//import { AuthUserContext } from '../Session';
 
+class NavbarBase extends Component {
+    constructor(props) {
+		super(props);
+        
+        this.state = {
+            click: false,
+            button: true
+        }
+	}
 
-function Navbar() {
+    handleClick = () => {
+        this.setState({ click: !this.state.click });
+    }
+
+    closeMobileMenu = () => {
+        this.setState({ click: false });
+    }
+
+    showButton = () => {
+        if (window.innerWidth <= 960) {
+            this.setState({ button: false });
+        } else {
+            this.setState({ button: true });
+        }
+    }
+
+    handleLogOut = () => {
+        this.setState({ click: false });
+        this.props.firebase.doSignOut()
+        .then(() => {
+            console.log('logged out!');
+            this.props.history.push('/');
+        })
+        .catch(error => {
+            console.log('fking error when logging out');
+            console.log(error);
+            this.setState({ error });
+        });
+    }
+
+    componentDidMount() {
+        console.log('---------------')
+        console.log(this.props)
+        if(this.props.firebase.auth.currentUser !== null) {
+            console.log(this.props.firebase.auth.currentUser.uid);
+            const uid = this.props.firebase.auth.currentUser.uid
+            const user_role_ref = this.props.firebase.db.ref(`users/${uid}/role`);
+            let role;
+            user_role_ref.on('value', (snapshot) => {
+                role = snapshot.val();
+                if(role === "USER") {
+                    document.getElementById('staff_visible_only').style.display = 'none'
+                    const user_components = document.getElementsByClassName('user_visible_only')
+                    for (let c of user_components) {
+                        c.style.display = 'inline';
+                    }
+                } else {
+                    document.getElementById('staff_visible_only').style.display = 'inline';
+                    const user_components = document.getElementsByClassName('user_visible_only');
+                    for (let c of user_components) {
+                        c.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        window.addEventListener('resize', this.showButton);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.showButton);
+    }
+
+    render() {
+        return (
+            <>
+            <nav className='navbar'>
+                <div className="navbar-container">
+                    <Link to="/home" className='navbar-logo' onClick={this.closeMobileMenu}>
+                        DESTINATED   
+                        <i className="fab fa-avianex"></i>
+                    </Link>
+                    <div className="menu-icon" onClick={this.handleClick}>
+                        <i className={this.state.click ? 'fas fa-times' : 'fas fa-bars'}></i>
+                    </div>
+                    <ul className={this.state.click ? 'nav-menu active' : 'nav-menu'}>
+                        
+                        <li className="nav-item" className="user_visible_only">
+                            <Link to='/vaccine' className="nav-links" onClick={this.closeMobileMenu}>
+                               Vaccines
+                            </Link>
+                        </li>
+                        <li className="nav-item" className="user_visible_only">
+                            <Link to='/vaccination-history' className="nav-links" onClick={this.closeMobileMenu}>
+                               Vaccination History
+                            </Link>
+                        </li>
+                        <li className="nav-item" className="user_visible_only">
+                            <Link to='/flights' className="nav-links" onClick={this.closeMobileMenu}>
+                               Register Flights
+                            </Link>
+                        </li>
+                        <li className="nav-item" id='staff_visible_only'>
+                            <Link to='/airport-staff-flight-details' className="nav-links" onClick={this.closeMobileMenu}>
+                               Flight Details(Admin)
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to='/' className="nav-links-mobile" onClick={this.handleLogOut}>
+                               Log out
+                            </Link>                                
+                        </li>
+                    </ul>
+                    <Button variant="primary" type="submit"><Link to="/profile" style={{ textDecoration: 'none', color: 'black' }}>Profile</Link></Button>
+                    {this.state.button && <Button buttonStyle='btn--outline' onClick={this.handleLogOut}>LOG OUT</Button>}
+                </div>
+            </nav>
+            </>
+        );
+    }
+}
+/*
+function Navbar(props) {
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
 
@@ -24,7 +150,8 @@ function Navbar() {
       }, []);
 
     window.addEventListener('resize', showButton);
-    
+    console.log('hhhh')
+    console.log(this.props);
     return (
             <>
             <nav className='navbar'>
@@ -60,7 +187,6 @@ function Navbar() {
                         </li>
                         <li className="nav-item">
                             <Link to='/fp' className="nav-links-mobile" onClick={closeMobileMenu}>
-                               Log out
                             </Link>                                
                         </li>
                     </ul>
@@ -70,5 +196,13 @@ function Navbar() {
             </>
     );
 }
+
+//class Log
+*/
+const Navbar = compose(
+	withRouter,
+	withFirebase,
+)(NavbarBase);
+
 
 export default Navbar;

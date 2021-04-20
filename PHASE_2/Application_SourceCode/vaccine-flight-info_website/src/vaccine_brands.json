@@ -1,0 +1,18 @@
+{
+    "Cholera": "Dukoral, Shanchol, Vaxchora",
+    "Hepatitis A": "Avaxim, Biovac-A, Epaxal, Havrix, Twinrix, VAQTA",
+    "Hepatitis B":"Comvax, ComBE Five, Easyfive TT, Elovac B, Engerix-B, Genevac B, Pediarix, Pentabio, Pentavac PFS, Quinvaxem, Recombivax HB, Sci-B-Vac, Shan-5, Shanvac B, Twinrix",
+    "Hepatitis E": "Hecolin",
+    "Measles": "MMR II, Priorix, Priorix Tetra, ProQuad, Tresivac, Trimovax",
+    "Rabies":"Abhayrab, Imovax, RabAvert, Rabipur, Rabivax, Speeda, Verovab",
+    "Typhoid":"Typhim Vi, Typherix, Ty21a",
+    "Yellow Fever":"Stamaril, YF-VAX",
+    "Japanese Encephalitis":"Encevac, Imojev, Ixiaro, Jeev, Jenvac, Jespect, JEvax",
+    "Polio":"Ipol, Kinrix, Pediacel, Pediarix, Pentacel, Quadracel",
+    "Malaria":"RTS,S",
+    "Routine vaccines": "Chickenpox (Varicella): Priorix Tetra, ProQuad, Varilrix, Varivax, Zostavax\n\nFlu (influenza): Agriflu, Fluarix, Flubio, FluLaval, FluMist, Fluvirin, Fluzone, Influvac, Vaxigrip\n\nMeasles-Mumps-Rubella (MMR): MMR II, Priorix, ProQuad, Tresivac, Trimovax\n\nPolio: Ipol, Kinrix, Pediacel, Pediarix, Pentacel, Quadracel",
+    "Ebola":"Ervebo, Mvabea, Zabdeno",
+    "Smallpox":"ACAM2000, Dryvax, Imvanex",
+    "Anthrax":"BioThrax",
+    "Q fever": "Q-Vax"
+}
