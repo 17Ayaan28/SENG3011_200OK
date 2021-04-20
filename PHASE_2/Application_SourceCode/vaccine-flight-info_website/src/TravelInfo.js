@@ -73,6 +73,7 @@ class TravelInfo extends React.Component {
 				<button className="btn btn-primary" type='button'>Maps</button> 
 				</Link>
 			</div>
+
 			
 		<div className="vaccine-table">
 			

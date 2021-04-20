@@ -19,17 +19,17 @@
 }
 
 .date-logo {
-    color: #000;
-    justify-self: start;
-    margin-left: 20px;
-    cursor: pointer;
-    text-decoration: none;
-    font-size: 2rem;
-    display: flex;
-    align-items: center;
-  }
+  color: #000;
+  justify-self: start;
+  margin-left: 20px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+}
   
-  .fa-arrow-alt-circle-right {
-    margin-left: 0.6rem;
-    font-size: 2.23rem;
-  }
+.fa-arrow-alt-circle-right {
+  margin-left: 0.6rem;
+  font-size: 2.23rem;
+}

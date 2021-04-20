@@ -9,6 +9,7 @@ import Table from 'react-bootstrap/Table';
 
 class skyscanner extends React.Component {
 
+
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -19,11 +20,13 @@ class skyscanner extends React.Component {
 			carriers: [],
 			flights:[],
 			places:[]
+
 		}
 
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleapi_data = this.handleapi_data.bind(this);
+
 	}
 
 	handleChange(event) {
@@ -106,12 +109,14 @@ class skyscanner extends React.Component {
 		});
 	}
 
+
 	handleSubmit(event) {
 		//console.log("hi");
 		event.preventDefault();// change
 		//https://cors-anywhere.herokuapp.com/
 		Axios.get(
 			"http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/FR/eur/en-US/" + this.state.origin + "/" + this.state.destination + "/" + this.state.tod + "?apiKey=prtl6749387986743898559646983194",
+
 			{
 				mode: 'cors',
 				method: 'get',
@@ -124,10 +129,12 @@ class skyscanner extends React.Component {
 			this.setState({ api_data: response.data });
 			this.handleapi_data();
 
+
 		}, (error) => {
 			console.log(error);
 		});
 	
+
 	}
 
 	render() {

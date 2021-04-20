@@ -10,10 +10,20 @@ import './Vaccine_by_location.css';
 import Navbar from './components/Navbar';
 import convert from './country_convert.json';
 
-class Vaccine extends React.Component {
+import { withRouter } from 'react-router-dom';
+import { withFirebase } from './components/Firebase';
+import { compose } from 'recompose';
 
-    state = {
-      country: undefined
+
+class VaccineBase extends React.Component {
+
+    constructor(props) {
+        super(props);
+    
+        this.state = {
+          country: undefined
+        }
+
     }
 
     handleSearch = () => {
@@ -41,11 +51,17 @@ class Vaccine extends React.Component {
       console.log(country_name)
       this.props.history.push({
         pathname: '/travelInfo/' + country_name,
+
         display_country_name: this.state.country['name']
     });
     }
 
     componentDidMount() {
+
+      if(this.props.firebase.auth.currentUser === null) {
+        this.props.history.push('/')
+      }
+
       const dropdown = document.getElementById('country_input')
       dropdown.setAttribute('autocomplete', "off")
     }
@@ -77,5 +93,11 @@ class Vaccine extends React.Component {
     }
 
 }
+
+
+const Vaccine = compose(
+	  withRouter,
+	  withFirebase,
+)(VaccineBase);
 
 export default Vaccine;
