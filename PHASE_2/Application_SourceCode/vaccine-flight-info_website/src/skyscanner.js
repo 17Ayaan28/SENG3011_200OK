@@ -7,7 +7,7 @@ import Table from 'react-bootstrap/Table';
 
 
 
-class skyscanner extends React.Component {
+class Skyscanner extends React.Component {
 
 
 	constructor(props) {
@@ -188,4 +188,4 @@ class skyscanner extends React.Component {
 
 }
 
-export default skyscanner;
+export default Skyscanner;

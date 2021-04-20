@@ -48,6 +48,11 @@ class NavbarBase extends Component {
         });
     }
 
+    handleProfile = () => {
+        console.log("hi")
+        window.location.href="/profile"
+    }
+
     componentDidMount() {
         console.log('---------------')
         console.log(this.props)
@@ -121,7 +126,7 @@ class NavbarBase extends Component {
                             </Link>                                
                         </li>
                     </ul>
-                    <Button variant="primary" type="submit"><Link to="/profile" style={{ textDecoration: 'none', color: 'black' }}>Profile</Link></Button>
+                    <Button variant="primary" type="submit" onClick={this.handleProfile}>Profile</Button>
                     {this.state.button && <Button buttonStyle='btn--outline' onClick={this.handleLogOut}>LOG OUT</Button>}
                 </div>
             </nav>

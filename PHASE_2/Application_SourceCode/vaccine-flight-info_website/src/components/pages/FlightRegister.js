@@ -39,9 +39,8 @@ function FlightRegister() {
           <Form.Group controlId="formBasicPassword">
             <Form.Label id="date-right">Date of Depature</Form.Label>
             <DatePicker className="datepicker_mobile"
-            selected={startDate}
-            onChange={date => setStartDate(date)}
-            customInput={<ExampleCustomInput />}
+            onChange={onChange}
+            value={value}
             />
           </Form.Group>
           <Form.Group controlId="formBasicCheckbox">

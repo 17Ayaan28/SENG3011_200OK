@@ -69,8 +69,8 @@ class TravelInfo extends React.Component {
 				<button className="btn btn-primary" type='button'>Outbreak News</button> 
 				</Link>
 
-				<Link className = "topbtn" to='/maps'>
-				<button className="btn btn-primary" type='button'>Maps</button> 
+				<Link className = "topbtn" to={'/restriction/' + this.props.match.params.country}>
+				<button className="btn btn-primary" type='button'>Restriction</button> 
 				</Link>
 			</div>
 

@@ -40,7 +40,7 @@ class NewsOutbreaks extends React.Component {
         return(
         <div>
         <Navbar />
-        <h2 className="outbreaks">Recent News</h2>
+        <h2 className="outbreaks out-title">Recent News</h2>
         <div className="outbreaks card-columns">
             {this.state.news.map(news => (
                 <div className="cardContainer">

@@ -15,8 +15,9 @@ import FlightRegister from './components/pages/FlightRegister'
 import NewsOutbreaks from './components/pages/NewsOutbreaks'
 import Maps from './components/pages/Maps'
 import Profile from './components/pages/Profile'
-import skyscanner from './skyscanner'
+import Skyscanner from './skyscanner'
 import Base64 from './base64CallBack'
+import Restriction from './restriction'
 
 import { withAuthentication } from './components/Session';
 
@@ -30,8 +31,8 @@ function App() {
         {/* <Home /> */}
           <Switch> 
             
-            <Route path='/login'  component={login} />
-            <Route path='/register'  component={register} />
+            <Route path='/login'  component={LogInPage} />
+            <Route path='/register'  component={RegisterPage} />
 
             <Route path='/home' exact component={Home} />
             <Route path='/vaccine' exact component={Vaccine} />
@@ -39,15 +40,16 @@ function App() {
             <Route path='/maps' component={Maps} />
 
             <Route path='/travelInfo/:country' component={TravelInfo} />
-            <Route path='/vaccination-history' component={vaccine_history} />
+            <Route path='/vaccination-history' component={Vaccine_history} />
             <Route path='/airport-staff-flight-details' component={AirportStaffFlight} />
             <Route path='/mu7366passenger-details' component={AirportStaffPassengerDetails} />
-            <Route path='/skyscanner' component={skyscanner} />
+            <Route path='/skyscanner' component={Skyscanner} />
             <Route path='/convert' component={Base64} />
             <Route path='/news/:country' component={NewsOutbreaks} />
             <Route path='/profile' component={Profile} />
-            <Route path='/' exact component={home} />
-            <Route path='/fp' component={home} /> 
+            <Route path='/restriction/:country' component={Restriction} />
+            <Route path='/' exact component={LandingPage} />
+            <Route path='/fp' component={Home} /> 
           </Switch>
         </Router>
       </>

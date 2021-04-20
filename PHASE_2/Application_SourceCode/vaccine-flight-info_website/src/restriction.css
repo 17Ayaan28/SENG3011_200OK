@@ -1,13 +1,12 @@
-.outbreaks{
+.restriction{
     width: 100%;
 	position: relative;
     box-sizing: border-box;
     flex-flow: column;
 	margin: 0 auto;
     padding: 1% 10%;
-    background-color:rgb(212, 214, 218);
 }
 
-.out-title{
+.res-title{
     padding-top: 40px;
 }
