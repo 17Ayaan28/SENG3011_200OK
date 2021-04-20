@@ -256,6 +256,6 @@ class Vaccine_history_base extends React.Component {
 const Vaccine_history = compose(
 	withRouter,
 	withFirebase,
-)(Vaccine_history_base);;
+)(Vaccine_history_base);
 
 export default Vaccine_history;
