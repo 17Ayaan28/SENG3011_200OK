@@ -25,8 +25,8 @@ export default function Register() {
 			alert('Please enter an email address.');
 			return;
 		}
-		if (passwordRef.current.value.length.length < 4) {
-			alert('Please enter a password.');
+		if (passwordRef.current.value.length.length < 6) {
+			alert('A password need to be at least 6-digit long.');
 			return;
 		}
         try {
@@ -36,7 +36,7 @@ export default function Register() {
 			alert('Congraduations, You have now Signed in')
 			history.push('/fp')
         } catch {
-            setError('Failed to sign up')
+            setError('Failed to sign up, Please check if the email is valid')
         }
         setLoading(false)
     }

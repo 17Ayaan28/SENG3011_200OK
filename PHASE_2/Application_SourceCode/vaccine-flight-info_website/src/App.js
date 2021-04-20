@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './components/pages/Home';
 import home from './home';
 import Login from './Login';
+import ForgotPassword from './ForgotPassword';
 import Register from './Register';
 import vaccine_history from './components/pages/vaccine_history';
 import AirportStaffFlight from './components/pages/AirportStaffFlight';
@@ -32,7 +33,7 @@ function App() {
             <Route path='/fp' component={Home} /> 
             <Route path='/login'  component={Login} />
             <Route path='/register'  component={Register} />
-            
+            <Route path='/reset'  component={ForgotPassword} />
             <Route path='/' exact component={home} />
             <Route path='/home' exact component={home} />
             <Route path='/vaccine' exact component={Vaccine} />

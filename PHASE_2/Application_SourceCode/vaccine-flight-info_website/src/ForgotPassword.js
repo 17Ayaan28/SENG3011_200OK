@@ -1,4 +1,4 @@
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import React, { useRef, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -7,13 +7,12 @@ import './Login.css'
 import Alert from 'react-bootstrap/Alert'
 import { useAuth } from './contexts/AuthContext'
 
-export default function Login() {
+export default function ForgotPassword() {
     const emailRef = useRef()
-    const passwordRef = useRef()
-    const { login, currentUser } = useAuth()
+    const { resetPassword } = useAuth()
     const [error, setError] = useState('')
+    const [message, setMessage] = useState('')
     const [loading, setLoading] = useState(false)
-	const history = useHistory()
 
     async function handleSubmit(e) {
         e.preventDefault()
@@ -21,18 +20,14 @@ export default function Login() {
 			alert('Please enter your email address.');
 			return;
 		}
-		if (passwordRef.current.value.length.length < 4) {
-			alert('Please enter a password.');
-			return;
-		}
         try {
             setError('')
+            setMessage('')
             setLoading(true)
-            await login(emailRef.current.value, passwordRef.current.value)
-			alert('Successfully Logged in')
-			history.push('/fp')
+            await resetPassword(emailRef.current.value)
+            setMessage("Please check your inbox for the reset link")
         } catch {
-            setError('Failed to log in, Please check the password and email your entered')
+            setError('Failed to send the reset link, Please check if the email is correct')
         }
         setLoading(false)
     }
@@ -42,6 +37,7 @@ export default function Login() {
 			<h1 id="tit">Destinated</h1>
 			<div id="form_container">
 				{error && <Alert variant="danger">{error}</Alert>}
+                {message && <Alert variant="success">{message}</Alert>}
 				<Form onSubmit={handleSubmit} id="login_form">
 
 		          <Form.Group controlId="formBasicEmail">
@@ -49,24 +45,15 @@ export default function Login() {
 		            <Form.Control type="email" ref={emailRef} placeholder="Email" required />
 		          </Form.Group>
 
-		          <Form.Group controlId="formBasicPassword">
-		            <Form.Label>Password:</Form.Label>
-		            <Form.Control type="password" ref={passwordRef} placeholder="Password" required />
-		          </Form.Group>
-
 		          <Button variant="warning" type="submit">
-		            Log In
+		            Reset Password
 		          </Button>
 		          <br/>
-			        <Form.Text className="text-muted">
-			          We'll never share your information with anyone without your permission.
-			        </Form.Text>
-				<div className = "w-100 text-center mt-2">
-					<Link to="/reset">Forgot Password?</Link>
-				</div>
-				<div className="w-100 text-center mt-2">
-               		Need an account? <Link to="/register"> Sign Up </Link>
-            	</div>  
+			        <div className="w-100 text-center mt-3">
+
+                        <Link to="/login"> Login </Link>
+                    </div>
+
 		        </Form>
 	        </div>
 
@@ -77,7 +64,4 @@ export default function Login() {
 
 	);
 }
-
-
-
 
