@@ -68,27 +68,23 @@ class VaccineBase extends React.Component {
 
     render() {
       return (
-        <>
+        <div className="container-div">
         <Navbar />
-        <div>
-          <p id='enter'>
-            Enter the location you are travelling:
-          </p>
-          <br />
-          <Form id="form">
-            <Form.Group controlId="country_input">
-              <Form.Label></Form.Label>
-              <CountrySelect value={this.state.country} onChange={e => this.setState({ country: e })} autocomplete="off"/>
-              <Form.Text className="text-muted">
-                We'll never share your travel details with anyone else.
-              </Form.Text>
-            </Form.Group>
-
-            <Button variant="primary" onClick={this.handleSearch}>Search</Button>
-
-          </Form>
+        <div className="search-page">
+          <div className="search-label">
+          <h2>Enter Your Destination</h2>
+          </div>
+          <div>
+            <Form>
+              <Form.Group controlId="country_input">
+                <Form.Label></Form.Label>
+                <CountrySelect value={this.state.country} onChange={e => this.setState({ country: e })} autocomplete="off"/>
+              </Form.Group>
+              <Button className="search-btn" variant="primary" onClick={this.handleSearch}>Search</Button>
+            </Form>
+          </div>
         </div>
-        </>
+        </div>
       );
     }
 
