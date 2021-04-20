@@ -31,18 +31,10 @@
     margin: 0 auto !important;
 }
 
-.newss, .mapss{
-	font-size: 15px;
-	font-family: "Geneva, Verdana, sans-serif";
-	text-align: center;
-	position: relative;
-    box-sizing: border-box;
-    flex-flow: column;
-    align-items: center;
-	margin: 2% auto;
-	margin-left: 2%;
-	margin-right: 2%;
+.topbtn{
+	margin-right: 5px;
 }
+
 .outbreaksInfo{
 	position: relative;
 }
@@ -50,3 +42,8 @@
 td {
 	white-space: pre-line;
 }
+
+.vaccine-table {
+	margin-top: 10px;
+}
+

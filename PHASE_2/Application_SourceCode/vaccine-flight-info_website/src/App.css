@@ -32,10 +32,8 @@
   font-size: 100px;
 }
 
-.loggin{
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  color: #fff;
-  font-size: 100px;
+
+#time-right, #date-right{
+  margin-right: 1%;
+  padding: 2px;
 }

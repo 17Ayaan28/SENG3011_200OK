@@ -9,6 +9,7 @@ import CountrySelect from 'react-bootstrap-country-select';
 import './Vaccine_by_location.css';
 import Navbar from './components/Navbar';
 import convert from './country_convert.json';
+
 import { withRouter } from 'react-router-dom';
 import { withFirebase } from './components/Firebase';
 import { compose } from 'recompose';
@@ -22,6 +23,7 @@ class VaccineBase extends React.Component {
         this.state = {
           country: undefined
         }
+
     }
 
     handleSearch = () => {
@@ -48,7 +50,8 @@ class VaccineBase extends React.Component {
       }
       console.log(country_name)
       this.props.history.push({
-        pathname: '/travelInfo?country=' + country_name,
+        pathname: '/travelInfo/' + country_name,
+
         display_country_name: this.state.country['name']
     });
     }
@@ -58,6 +61,7 @@ class VaccineBase extends React.Component {
       if(this.props.firebase.auth.currentUser === null) {
         this.props.history.push('/')
       }
+
       const dropdown = document.getElementById('country_input')
       dropdown.setAttribute('autocomplete', "off")
     }
@@ -89,6 +93,7 @@ class VaccineBase extends React.Component {
     }
 
 }
+
 
 const Vaccine = compose(
 	  withRouter,

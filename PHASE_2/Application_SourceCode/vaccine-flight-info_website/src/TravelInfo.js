@@ -56,18 +56,24 @@ class TravelInfo extends React.Component {
 
 
 	render() {
+		console.log("render");
+				console.log(this.state.country);
+
 		return (
 			<>
 			<Navbar />
-			<h1 id="travel_head">Vaccinations for Travel to {this.state.country}</h1>
-			<br />
-			<Link to='/uganda-news'>
-			<Button className="newss" type='button'>Outbreaks Info and News</Button> 
-			</Link>
+			<div className="margin-90">
+				<h1 id="travel_head">Vaccinations for Travel to {this.props.match.params.country}</h1>
+				<br />
+				<Link className = "topbtn" to={'/news/' + this.props.match.params.country}>
+				<button className="btn btn-primary" type='button'>Outbreak News</button> 
+				</Link>
 
-			<Link to='/maps'>
-			<Button className="mapss" type='button'>Maps</Button> 
-			</Link>
+				<Link className = "topbtn" to='/maps'>
+				<button className="btn btn-primary" type='button'>Maps</button> 
+				</Link>
+			</div>
+
 			
 		<div className="vaccine-table">
 			

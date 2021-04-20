@@ -190,6 +190,7 @@ function Navbar(props) {
                             </Link>                                
                         </li>
                     </ul>
+                    <Link to="/profile" style={{ textDecoration: 'none', color: 'black' }}><Button variant="primary">Profile</Button></Link>
                     {button && <Button buttonStyle='btn--outline'>LOG OUT</Button>}
                 </div>
             </nav>

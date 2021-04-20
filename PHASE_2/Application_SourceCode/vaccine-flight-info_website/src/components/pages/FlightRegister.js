@@ -1,11 +1,13 @@
 
 import {Link} from "react-router-dom";
-import React, { useState }from 'react'
+import React, { useState, forwardRef } from 'react'
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-country-select/dist/react-bootstrap-country-select.css';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Navbar from '../Navbar'
+
 import DatePicker from 'react-date-picker';
 import TimePicker from 'react-time-picker';
 
@@ -15,7 +17,7 @@ function FlightRegister() {
     return (
       <>
       <Navbar />
-      <div className="margin-90">
+      <div className="margin-90 flight-register">
         <p>
           
         </p>
@@ -35,15 +37,17 @@ function FlightRegister() {
           </Form.Group>
 
           <Form.Group controlId="formBasicPassword">
-            <Form.Label>Date of Depature</Form.Label>
-            <DatePicker
-                onChange={onChange}
-                value={value}
+            <Form.Label id="date-right">Date of Depature</Form.Label>
+            <DatePicker className="datepicker_mobile"
+            selected={startDate}
+            onChange={date => setStartDate(date)}
+            customInput={<ExampleCustomInput />}
             />
           </Form.Group>
           <Form.Group controlId="formBasicCheckbox">
-            <Form.Label>Time of Depature</Form.Label>
-            <TimePicker
+            <Form.Label id="time-right">Time of Depature</Form.Label>
+            <TimePicker className="timepicker-mobile"
+
                 onChange={Change}
                 value={value1}
             />
