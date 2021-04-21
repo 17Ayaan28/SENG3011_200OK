@@ -12,6 +12,7 @@
     "bootstrap": "^4.6.0",
     "firebase": "^8.4.1",
     "react": "^17.0.2",
+    "react-autosuggest": "^10.1.0",
     "react-bootstrap": "^1.5.2",
     "react-bootstrap-country-select": "^0.7.12",
     "react-calendar": "^3.3.1",
