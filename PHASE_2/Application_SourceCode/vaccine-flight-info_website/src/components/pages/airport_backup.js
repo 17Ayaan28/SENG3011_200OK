@@ -35,37 +35,41 @@ class AirportStaffFlightBase extends React.Component {
         console.log(search_date)
         const flights_ref = this.props.firebase.db.ref(`flights`);
 		flights_ref.on('value', (snapshot) => {
+            console.log('##############')
+            console.log(snapshot.val())
+            //let flight = {}
+            //flight['flight_number']
+            //this.setState({ flights: snapshot.val() })
+            
             snapshot.forEach((userSnapshot) => {
-                //console.log('first')
                 console.log(userSnapshot.key)
-                let keys = []
+                //let f = userSnapshot.val()
+                //let date = f.departure_time
+                //date = date.split(' ')[0]
+                //if(search_date === date) {
+                //    console.log('hihi')
+                //    flights.push(f);
+                //    this.setState({ flights: flights })
+                //}
+                //console.log('first')'
+                /*
                 userSnapshot.forEach((passenger) => {
-                    //const id = passenger.key;
-                    
+                    const id = passenger.key;
                     const data = passenger.val();
                     //console.log('second')
-                    console.log('search date ', search_date)
-                    console.log('flight date ', data.departure_time)
+                    //console.log('search date ', search_date)
+                    //console.log('flight date ', data.departure)
                     let date = data.departure_time
                     date = date.split(' ')[0]
                     if(search_date === date) {
-                        keys.push(passenger.key)
-                        //console.log('hihi')
-                        //flights.push(data);
-                        //console.log(flights)
+                        console.log('hihi')
+                        flights.push(data);
+                        this.setState({ flights: flights })
                     }
-                    
                 })
-                //console.log(keys)
-                if(keys.length > 0) {
-                    const record = userSnapshot.val()[keys[0]]
-                    console.log(record)
-                    flights.push(record)
-                }
+                */
             });
-        })
-        console.log(flights)
-        this.setState({ flights: flights })
+		})
     }
 
     handleDateChange = (new_date) => {
@@ -90,30 +94,26 @@ class AirportStaffFlightBase extends React.Component {
                         let keys = []
                         userSnapshot.forEach((passenger) => {
                             //const id = passenger.key;
-                            
+                            keys.push(passenger.key)
+                            /*
                             const data = passenger.val();
                             //console.log('second')
-                            console.log('search date ', search_date)
-                            console.log('flight date ', data.departure_time)
+                            //console.log('search date ', search_date)
+                            //console.log('flight date ', data.departure)
                             let date = data.departure_time
                             date = date.split(' ')[0]
                             if(search_date === date) {
-                                keys.push(passenger.key)
-                                //console.log('hihi')
-                                //flights.push(data);
-                                //console.log(flights)
+                                console.log('hihi')
+                                flights.push(data);
+                                console.log(flights)
                             }
-                            
+                            */
                         })
                         //console.log(keys)
-                        if(keys.length > 0) {
-                            const record = userSnapshot.val()[keys[0]]
-                            console.log(record)
-                            flights.push(record)
-                        }
+                        const record = userSnapshot.val()[keys[0]]
+                        console.log(record)
                     });
                 })
-                console.log(flights)
                 this.setState({ flights: flights })
             })
         }
@@ -121,12 +121,9 @@ class AirportStaffFlightBase extends React.Component {
 
     handleFlightDetails = (e) => {
         //console.log(e.target.innerText)
-        console.log(e.target)
         const id = e.target.parentNode.id
         const flight = this.state.flights[id]
-        console.log('$$$$$$$$$$$$')
         console.log(flight)
-        console.log('$$$$$$$$$$$$')
 
         //const a1 = flight.origin.replace(' ', '-')
         //const a2 = flight.destination.replace(' ', '-')
@@ -142,34 +139,40 @@ class AirportStaffFlightBase extends React.Component {
 
     render() { 
         return (
-            <div>
+            <>
                 <Navbar />
-                <div className="staff-container">
-                    <h1 className="flightdetails">Scheduled Flights</h1>
-                    <div className="staff-search">
-                    <h4>Select Date</h4>
-                    <DatePicker
-                        onChange={this.handleDateChange}
-                        value={this.state.search_date}
-                    />
-                </div>
+                <h1 className="flightdetails">Scheduled Flights</h1>
+                <h3>Select Date</h3>
+                <DatePicker
+                    onChange={this.handleDateChange}
+                    value={this.state.search_date}
+                />
                 {this.state.flights.map((flight, index) => (
-                    <Card className='flight staff-card'>
-
+                    <Card className='flight' onDoubleClick={this.handleFlightDetails}>
                         <Card.Body id={index}>
-                            <h4 onDoubleClick={this.handleFlightDetails}>{flight.flight_number}</h4>
-                            <div onDoubleClick={this.handleFlightDetails}>{flight.origin + ' -> ' + flight.destination}</div>
-                            <div onDoubleClick={this.handleFlightDetails}>{'Departure Date & Time (local): ' + flight.departure_time}</div>
-                            <div onDoubleClick={this.handleFlightDetails}>{'Arrival Date & Time (local): ' + flight.arrival_time}</div>
+                            <h4>{flight.flight_number}</h4>
+                            <div>{flight.origin + ' -> ' + flight.destination}</div>
+                            <div>{'Departure Date & Time (local): ' + flight.departure_time}</div>
+                            <div>{'Arrival Date & Time (local): ' + flight.arrival_time}</div>
                         </Card.Body>
                      </Card>
                 ))}
-                </div>
-            </div>
+            </>
         );
     }
 
 }
+
+function getCurrentDate(separator='') {
+
+    let newDate = new Date()
+    let date = newDate.getDate();
+    let month = newDate.getMonth() + 1;
+    let year = newDate.getFullYear();
+    
+    return `${year}${separator}${month<10?`0${month}`:`${month}`}${separator}${date}`
+}
+
 
 const AirportStaffFlight = compose(
 	withRouter,

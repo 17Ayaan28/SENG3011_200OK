@@ -43,9 +43,41 @@ class Vaccine_history_base extends React.Component {
 
 	handleSubmit = () => {
 		//console.log(this.state.certificate)
-		const today = new Date()
-		console.log(today.getFullYear() + '/' + (today.getMonth() + 1)+ '/' + today.getDate());
+		//const today = new Date()
+		//console.log(today.getFullYear() + '/' + (today.getMonth() + 1)+ '/' + today.getDate());
 		//const certificate = document.getElementById('certificate');
+
+
+		let d = this.state.date
+        let month = String((d.getMonth() + 1));
+        const pattern = /^[1-9]$/
+        if(pattern.test(month)) {
+            month = '0' + month
+        }
+        let day = String(d.getDate());
+        if(pattern.test(day)) {
+          day = '0' + day
+        }
+
+        const year = String(d.getFullYear());
+
+        const input_date = new Date(year+'-'+month+'-'+day)
+        
+        let today = new Date()
+        const y = String(today.getFullYear())
+        let m = String((today.getMonth() + 1));
+        let dd = String(today.getDate());
+
+        if(pattern.test(m)) {
+            m = '0' + m
+        }
+
+        if(pattern.test(dd)) {
+            dd = '0' + dd
+        }
+
+        today = new Date(y+'-'+m+'-'+dd)
+
 		console.log('^^^^^^');
 		const p1 = /\.pdf$/
 		const p2 = /\.png$/
@@ -53,20 +85,25 @@ class Vaccine_history_base extends React.Component {
 		const p4 = /\.jpeg$/
 		const file_name = this.state.certificate_name
 		if(this.state.disease === '' || this.state.disease === null) {
-			this.setState({ message:'Please fill all fields!' });
-			this.setState({ show: true });
+			this.setState({ message:'Please fill all fields!' }, () => {
+				this.setState({ show: true });
+			});
 		} else if (this.state.vaccine_name === '' || this.state.vaccine_name === null) {
-			this.setState({ message:'Please fill all fields!' });
-			this.setState({ show: true });
-		} else if (this.state.date === '' || this.state.date === null || this.state.date > new Date()) {
-			this.setState({ message: 'Date must be before today' })
-			this.setState({ show: true });
+			this.setState({ message:'Please fill all fields!' }, () => {
+				this.setState({ show: true });
+			});
+		} else if (this.state.date === '' || this.state.date === null || input_date > today) {
+			this.setState({ message: 'Date must be before today' }, () => {
+				this.setState({ show: true });
+			})
 		} else if (this.state.certificate === '') {
-			this.setState({ message: "Please upload a proof document" })
-			this.setState({ show: true });
-		} else if (!p1.test(file_name) && !p2.test(file_name) && !p3.test(file_name) && p4.test(file_name)) {
-			this.setState({ message: "Unsupport file format!" })
-			this.setState({ show: true });
+			this.setState({ message: "Please upload a proof document" }, () => {
+				this.setState({ show: true });
+			})
+		} else if (!p1.test(file_name) && !p2.test(file_name) && !p3.test(file_name) && !p4.test(file_name)) {
+			this.setState({ message: "Unsupport file format!" }, () => {
+				this.setState({ show: true });
+			})
 		} else {
 
 			//console.log('inputs are correct')
@@ -84,7 +121,7 @@ class Vaccine_history_base extends React.Component {
 			const disease = this.state.disease;
 			const vaccine_name = this.state.vaccine_name;
 			const certificate = this.state.certificate;
-
+			console.log('You are logging new vaccination record')
 			const node_ref = this.props.firebase.db.ref(`v1/${uid}`).push()
 			node_ref.set({
 				disease,
@@ -94,13 +131,34 @@ class Vaccine_history_base extends React.Component {
 			})
 			.then(() => {
 				console.log('new record is logged');
+				this.setState({ message: "New record has been logged successfully!" }, () => {
+					this.setState({ show: true });
+				})
 				//this.props.history.push('/home');
-			})
-			.catch(error => {
-				console.log(error);
-				console.log('error when logging new records')
-				this.setState({ error });
-			});
+				const history = []
+				const uid = this.props.firebase.auth.currentUser.uid
+				const history_ref = this.props.firebase.db.ref(`v1/${uid}`);
+				history_ref.on('value', (snapshot) => {
+					snapshot.forEach((userSnapshot) => {
+						//console.log('^^^^^^^^^^^');
+						//console.log(userSnapshot.val())
+						//console.log('^^^^^^^^^^^');
+						const id = userSnapshot.key;
+						const userData = userSnapshot.val();
+						history.push(userData);
+					});
+
+					//console.log('#######');
+					//console.log(history);
+					//console.log('#######');
+				})
+				this.setState({ history: history });
+					})
+					.catch(error => {
+						console.log(error);
+						console.log('error when logging new records')
+						this.setState({ error });
+					});
 			// first get arrays of historys
 			/*
 			let history = []
@@ -132,6 +190,9 @@ class Vaccine_history_base extends React.Component {
 		const history_ref = this.props.firebase.db.ref(`v1/${uid}`);
 		history_ref.on('value', (snapshot) => {
 			snapshot.forEach((userSnapshot) => {
+				console.log('^^^^^^^^^^^');
+				console.log(userSnapshot.val())
+				console.log('^^^^^^^^^^^');
 				const id = userSnapshot.key;
 				const userData = userSnapshot.val();
 				history.push(userData);
@@ -139,10 +200,9 @@ class Vaccine_history_base extends React.Component {
 
 			console.log('#######');
 			console.log(history);
-
-			this.setState({ history: history });
-
+			console.log('#######');
 		})
+		this.setState({ history: history });
 	}
 
 	showCertification(certificate) {
@@ -178,7 +238,7 @@ class Vaccine_history_base extends React.Component {
 							<td>{record.disease}</td>
 							<td>{record.vaccine_name}</td>
 							<td>{record.date}</td>
-							<td><button type="button" class="btn btn-link" onClick={()=>this.showCertification(record.certificate)}>View</button></td>
+							<td><button type="button" className="btn btn-link" onClick={()=>this.showCertification(record.certificate)}>View</button></td>
 						</tr>
 					))}
 				</tbody>

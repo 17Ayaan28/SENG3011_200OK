@@ -6,6 +6,7 @@ import Navbar from '../Navbar';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import { withFirebase } from '../Firebase';
+import Firebase from '../Firebase/firebase';
 
 class HomeBase extends Component {
 
@@ -18,6 +19,9 @@ class HomeBase extends Component {
 
     componentDidMount() {
         //console.log(this.props.firebase.auth.currentUser)
+        //const firebase = new Firebase()
+        //const db = firebase.database()
+        //console.log(db)
         if(this.props.firebase.auth.currentUser === null) {
             this.props.history.push('/')
         } else {
