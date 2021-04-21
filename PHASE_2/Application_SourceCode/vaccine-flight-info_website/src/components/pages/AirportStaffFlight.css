@@ -33,3 +33,7 @@
   margin-left: 0.6rem;
   font-size: 2.23rem;
 }
+
+.flight:hover {
+  background-color: #cfcfcf;
+}
