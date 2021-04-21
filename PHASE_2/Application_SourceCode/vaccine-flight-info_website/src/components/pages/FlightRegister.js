@@ -609,80 +609,88 @@ class FlightRegisterBase extends React.Component {
             onChange: this.onDestinationChange
         };
         return (
-          <>
-          <Navbar />
+        <div>
+            <Navbar />
             <div className="flightcontainer">
                 <div className="row search-region">
-                  <div className="col-3">
-                      <p>Origin</p>
-                      <Autosuggest
-                          suggestions={this.state.origin_suggestions}
-                          onSuggestionsFetchRequested={this.onOriginSuggestionsFetchRequested}
-                          onSuggestionsClearRequested={this.onOriginSuggestionsClearRequested}
-                          getSuggestionValue={this.getOriginSuggestionValue}
-                          renderSuggestion={this.renderOriginSuggestion}
-                          inputProps={inputOriginProps}
-                      />
-                  </div>
-                  <div className="col-3">
-                      <p>Destination</p>
-                      <Autosuggest
-                          suggestions={this.state.destination_suggestions}
-                          onSuggestionsFetchRequested={this.onDestinationSuggestionsFetchRequested}
-                          onSuggestionsClearRequested={this.onDestinationSuggestionsClearRequested}
-                          getSuggestionValue={this.getDestinationSuggestionValue}
-                          renderSuggestion={this.renderDestinationSuggestion}
-                          inputProps={inputDestinationProps}
-                      />
-                  </div>
-                  <div className="col-3">
-                      <p>Date of Depature</p>
-                        <DatePicker
-                        onChange={e => this.setState({ dod: e })}
-                        value={this.state.dod}
+                    <div className="col-3">
+                        <p>Origin</p>
+                        <Autosuggest
+                            suggestions={this.state.origin_suggestions}
+                            onSuggestionsFetchRequested={this.onOriginSuggestionsFetchRequested}
+                            onSuggestionsClearRequested={this.onOriginSuggestionsClearRequested}
+                            getSuggestionValue={this.getOriginSuggestionValue}
+                            renderSuggestion={this.renderOriginSuggestion}
+                            inputProps={inputOriginProps}
                         />
-                  </div>
-                  <Button variant="warning" onClick={this.handleSearch}>Search</Button>
-              </Card.Body>
-          </Card>
-          <div>
-            <h2>Direct Flights</h2>
-            {this.state.direct_flights.map((flight, index) => (
-                <Card className='flight'>
-                    <Card.Body className='direct' id={index}>
-                        {this.state.origin + ' -> ' + this.state.look_up[flight.Arrival.AirportCode] + ' (' + flight.Arrival.AirportCode + ')' + '  ' + flight.MarketingCarrier.AirlineID + flight.MarketingCarrier.FlightNumber}
-                        <Button variant="warning" onClick={this.handleRegister}>Register</Button>
-                    </Card.Body>
-                </Card>
-            ))}
-          </div>
-          <div>
-            <h2>Transit Flights</h2>
-            {this.state.other_flights.map((flight, index) => (
-                <Card className='flight'>
-                    <Card.Body id={index} className='transit'>
-                        {this.state.origin}
-                        {flight.map(stop => 
-                            { return '  ' + stop.MarketingCarrier.AirlineID + stop.MarketingCarrier.FlightNumber + '  ' + stop.Departure.ScheduledTimeLocal.DateTime + '  ' + ' -> ' + this.state.look_up[stop.Arrival.AirportCode]  + ' (' + stop.Arrival.AirportCode + ')' + '  '}
-                            //{return this.state.look_up[stop.Depature.AirportCode]}
-                        )}
-                        <Button variant="warning" onClick={this.handleRegister}>Register</Button>
-                    </Card.Body>
-                </Card>
-            ))}
-          </div>
-          <Modal show={this.state.show} onHide={this.handleClose}>
-              <Modal.Header closeButton>
-              <Modal.Title></Modal.Title>
-              </Modal.Header>
-              <Modal.Body>{this.state.message}</Modal.Body>
-              <Modal.Footer>
-              <Button variant="secondary" onClick={this.handleClose}>
-                  Close
-              </Button>
-              </Modal.Footer>
-          </Modal>
-          </>
+                    </div>
+                    <div className="col-3">
+                        <p>Destination</p>
+                        <Autosuggest
+                            suggestions={this.state.destination_suggestions}
+                            onSuggestionsFetchRequested={this.onDestinationSuggestionsFetchRequested}
+                            onSuggestionsClearRequested={this.onDestinationSuggestionsClearRequested}
+                            getSuggestionValue={this.getDestinationSuggestionValue}
+                            renderSuggestion={this.renderDestinationSuggestion}
+                            inputProps={inputDestinationProps}
+                        />
+                    </div>
+                    <div className="col-3">
+                        <p>Date of Depature</p>
+                            <DatePicker
+                            onChange={e => this.setState({ dod: e })}
+                            value={this.state.dod}
+                            />
+                    </div>
+                    <div className="col-1 flightsearch">
+                    <Button variant="warning" onClick={this.handleSearch}>Search</Button>
+                    </div>
+                </div>
+                <div className="class-text">
+                    <h2>Direct Flights</h2>
+                    {this.state.direct_flights.map((flight, index) => (
+                        <Card className='flight'>
+                            <Card.Body className='direct' id={index}>
+                                {this.state.origin + ' -> ' + this.state.look_up[flight.Arrival.AirportCode] + ' (' + flight.Arrival.AirportCode + ')' + '  ' + flight.MarketingCarrier.AirlineID + flight.MarketingCarrier.FlightNumber}
+                                <div class="card-btn">
+                                    <Button variant="warning" onClick={this.handleRegister}>Register</Button>
+                                </div>
+                            </Card.Body>
+                        </Card>
+                    ))}
+                </div>
+                <div className="class-text">
+                    <h2>Transit Flights</h2>
+                    {this.state.other_flights.map((flight, index) => (
+                        <Card className='flight'>
+                            <Card.Body id={index} className='transit'>
+                                {this.state.origin}
+                                {flight.map(stop => 
+                                    { return '  ' + stop.MarketingCarrier.AirlineID + stop.MarketingCarrier.FlightNumber + '  ' + stop.Departure.ScheduledTimeLocal.DateTime + '  ' + ' -> ' + this.state.look_up[stop.Arrival.AirportCode]  + ' (' + stop.Arrival.AirportCode + ')' + '  '}
+                                    //{return this.state.look_up[stop.Depature.AirportCode]}
+                                )}
+                                <div class="card-btn">
+                                <Button variant="warning" onClick={this.handleRegister}>Register</Button>
+                                </div>
+                            </Card.Body>
+                        </Card>
+                    ))}
+                </div>
+             </div>
+
+            <Modal show={this.state.show} onHide={this.handleClose}>
+                <Modal.Header closeButton>
+                <Modal.Title></Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{this.state.message}</Modal.Body>
+                <Modal.Footer>
+                <Button variant="secondary" onClick={this.handleClose}>
+                    Close
+                </Button>
+                </Modal.Footer>
+            </Modal>
+
+        </div>
         );
     }
 

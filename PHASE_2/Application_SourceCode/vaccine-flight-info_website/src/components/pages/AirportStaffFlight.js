@@ -116,14 +116,17 @@ class AirportStaffFlightBase extends React.Component {
         return (
             <div>
                 <Navbar />
-                <h1 className="flightdetails">Scheduled Flights</h1>
-                <h3>Select Date</h3>
-                <DatePicker
-                    onChange={this.handleDateChange}
-                    value={this.state.search_date}
-                />
+                <div className="staff-container">
+                    <h1 className="flightdetails">Scheduled Flights</h1>
+                    <div className="staff-search">
+                    <h4>Select Date</h4>
+                    <DatePicker
+                        onChange={this.handleDateChange}
+                        value={this.state.search_date}
+                    />
+                </div>
                 {this.state.flights.map((flight, index) => (
-                    <Card className='flight' onDoubleClick={this.handleFlightDetails}>
+                    <Card className='flight staff-card' onDoubleClick={this.handleFlightDetails}>
                         <Card.Body id={index}>
                             <h4>{flight.flight_number}</h4>
                             <div>{flight.origin + ' -> ' + flight.destination}</div>
@@ -132,7 +135,8 @@ class AirportStaffFlightBase extends React.Component {
                         </Card.Body>
                      </Card>
                 ))}
-            </>
+                </div>
+            </div>
         );
     }
 

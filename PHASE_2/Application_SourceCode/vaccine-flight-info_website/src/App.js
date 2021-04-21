@@ -16,6 +16,7 @@ import Profile from './components/pages/Profile'
 import Skyscanner from './skyscanner'
 import Base64 from './base64CallBack'
 import Restriction from './restriction'
+import FlightRegister from './components/pages/FlightRegister'
 
 import { withAuthentication } from './components/Session';
 
