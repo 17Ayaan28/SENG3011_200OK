@@ -114,7 +114,7 @@ class AirportStaffFlightBase extends React.Component {
 
     render() { 
         return (
-            <>
+            <div>
                 <Navbar />
                 <h1 className="flightdetails">Scheduled Flights</h1>
                 <h3>Select Date</h3>
