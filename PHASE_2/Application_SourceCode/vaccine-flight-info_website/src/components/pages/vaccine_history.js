@@ -32,8 +32,6 @@ class Vaccine_history_base extends React.Component {
 	}
 
 
-
-
 	handleFile = () => {
 		const certificate = document.getElementById('certificate').files[0];
 

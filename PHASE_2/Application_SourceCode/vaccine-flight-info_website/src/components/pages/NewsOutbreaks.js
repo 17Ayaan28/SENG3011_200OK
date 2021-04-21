@@ -45,9 +45,9 @@ class NewsOutbreaks extends React.Component {
             {this.state.news.map(news => (
                 <div className="cardContainer">
                     <div class="card border-dark mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title">{news['title']}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">{news['date_of_publication']}</h6>
+                        <div class="card-body" id="newsBody">
+                            <h5 class="card-title" id="news-title">{news['title']}</h5> 
+                            <h6 class="card-subtitle mb-2 text-muted">{news['date_of_publication'].replace("T", "  ")}</h6> <br />
                             <p class="card-text">                       
                                 <ReadMoreReact text={news['maintext']}
                                     min={100}

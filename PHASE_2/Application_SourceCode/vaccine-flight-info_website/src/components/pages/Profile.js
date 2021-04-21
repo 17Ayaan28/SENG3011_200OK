@@ -20,8 +20,8 @@ function Profile() {
                         <img src='/images/avatar.jpg' className="profile-avatar"></img>
                         <div className="profile-info">
                             <div className="profile-text">
-                                <div className="profile-name">Ayaan</div>
-                                <div className="profile-identity">Phone: 0412123456</div>
+                                <div className="profile-name">Full Name</div>
+                                <div className="profile-identity">xyz@gmail.com</div>
                                 <div className="profile-follower">Passport: E1234567</div>
                             </div>
                         </div> 

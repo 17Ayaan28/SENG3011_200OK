@@ -1,6 +1,5 @@
 import React from 'react'
 import './App.css';
-import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './components/pages/Home';
 import LandingPage from './home';
@@ -11,7 +10,6 @@ import AirportStaffFlight from './components/pages/AirportStaffFlight';
 import AirportStaffPassengerDetails from './components/pages/AirportStaffPassengerDetails';
 import Vaccine from './Vaccine_by_location'
 import TravelInfo from './TravelInfo'
-import FlightRegister from './components/pages/FlightRegister'
 import NewsOutbreaks from './components/pages/NewsOutbreaks'
 import Maps from './components/pages/Maps'
 import Profile from './components/pages/Profile'
