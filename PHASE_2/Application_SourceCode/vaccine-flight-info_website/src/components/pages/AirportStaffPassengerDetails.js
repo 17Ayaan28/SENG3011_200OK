@@ -148,7 +148,7 @@ class FlightDetailsBase extends React.Component {
                     <Card className="pas-card">
                         <Card.Body>
                         {p}
-                        <div>{"Vaccination History: " + this.state.historys[index]}</div>
+                        <div>{"Vaccination History: " + unique(this.state.historys)[index]}</div>
                         </Card.Body>
                     </Card>
                 ))}
