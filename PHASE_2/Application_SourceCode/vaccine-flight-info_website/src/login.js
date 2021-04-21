@@ -43,6 +43,7 @@ class LogInFormBase extends Component {
 			.then(() => {
 				console.log('logged in!');
 				this.setState({ ...INITIAL_STATE });
+				localStorage.setItem("firebase", this.props.firebase)
 				this.props.history.push('/home');
 			})
 			.catch(error => {

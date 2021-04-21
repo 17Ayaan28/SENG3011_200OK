@@ -10,3 +10,7 @@
 .res-title{
     padding-top: 40px;
 }
+
+.card-title {
+    text-transform: capitalize;
+}

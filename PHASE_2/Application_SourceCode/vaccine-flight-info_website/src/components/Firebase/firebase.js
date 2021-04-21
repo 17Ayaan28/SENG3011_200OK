@@ -28,6 +28,14 @@ class Firebase {
     doPasswordUpdate = password => this.auth.currentUser.updatePassword(password);
 
     user = uid => this.db.ref(`users/${uid}`);
+
+    database = () => {
+        return this.db;
+    }
+
+    auth = () => {
+        return this.auth;
+    }
 }
    
 export default Firebase;

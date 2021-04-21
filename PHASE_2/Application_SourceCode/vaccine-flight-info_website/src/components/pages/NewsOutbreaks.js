@@ -18,6 +18,23 @@ class NewsOutbreaks extends React.Component {
 		const country = this.props.match.params.country;
 		console.log(country)
 		this.setState({ country: this.props.location.display_country_name })
+        /*
+        const options = {
+            method: 'GET',
+			url: 'https://events4fe.herokuapp.com/articles?start_date=2017-01-01T10%3A12%3A20&end_date=2021-10-10T10%3A22%3A30&country='+ country + "&limit=9",
+            params: {country: country, limit: 9},
+            headers: {
+                'Access-Control-Allow-Origin': 'http://localhost:3000'
+            }
+        };
+
+        Axios.request(options)
+        .then(
+            res => {
+                console.log('yes')
+            }
+        )
+        */
 
 		Axios.get(
 			'https://events4fe.herokuapp.com/articles?start_date=2017-01-01T10%3A12%3A20&end_date=2021-10-10T10%3A22%3A30&country='+ country + "&limit=9",
@@ -25,7 +42,8 @@ class NewsOutbreaks extends React.Component {
 				mode: 'cors',
 				method: 'get',
 				country: country,
-                limit: 9
+                limit: 9,
+                'Access-Control-Allow-Origin': 'http://localhost:3000'
 			}
 		
 		).then(

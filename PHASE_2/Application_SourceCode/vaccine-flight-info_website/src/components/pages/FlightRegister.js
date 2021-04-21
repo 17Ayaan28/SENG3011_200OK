@@ -12,6 +12,7 @@ import './FlightRegister.css';
 import { withRouter } from 'react-router-dom';
 import { withFirebase } from '../Firebase';
 import { compose } from 'recompose';
+import code_to_name from '../../country_code.json';
 import './DatePicker.css'
 
 class FlightRegisterBase extends React.Component {
@@ -32,7 +33,8 @@ class FlightRegisterBase extends React.Component {
             value: '',
             other_flights: [],
             direct_flights: [],
-            look_up: {}
+            look_up: {},
+            look_up_code: {}
         };
     }
 
@@ -46,6 +48,7 @@ class FlightRegisterBase extends React.Component {
         const inputValue = value.trim().toLowerCase();
         console.log(inputValue)
         if(inputValue && inputValue.length >= 3) {
+            
             const options = {
                 method: 'GET',
                 url: 'https://aerodatabox.p.rapidapi.com/airports/search/term',
@@ -55,7 +58,21 @@ class FlightRegisterBase extends React.Component {
                   'x-rapidapi-host': 'aerodatabox.p.rapidapi.com'
                 }
             };
-
+            
+            //https://www.air-port-codes.com/api/v1/autocomplete?term=albania&limit=5
+            // "Not a valid API Key/referrer domain combination. Please ensure you have added 'localhost:3000' to your AIR-PORT-CODES domain setting in your account and ensure you are using the proper API Key."
+            /*
+            const options = {
+                method: 'POST',
+                url: 'https://www.air-port-codes.com/api/v1/autocomplete',
+                params: {term: inputValue, limit: '20'},
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json',
+                  'APC-Auth': '49932c28b0'
+                }
+              }
+            */
             let response = await Axios.request(options);
             console.log(response)
             let data = await response.data.items
@@ -247,9 +264,11 @@ class FlightRegisterBase extends React.Component {
 
                     let requests = []
                     let direct_requests = []
-                    console.log('Direct', direct_flights_array)
+                    //console.log('Direct', direct_flights_array)
                     this.setState({ other_flights: other_flights_array })
                     this.setState({ direct_flights: direct_flights_array })
+                    //console.log(direct_flights_array)
+                    //console.log(other_flights_array)
                     for (let flight of direct_flights_array) {
                         if(!(this.state.look_up.hasOwnProperty(flight.Arrival.AirportCode))) {
                             const o = {
@@ -263,6 +282,18 @@ class FlightRegisterBase extends React.Component {
 
                             direct_requests.push(Axios.request(o))
                         }
+                        if(!(this.state.look_up.hasOwnProperty(flight.Departure.AirportCode))) {
+                          const o = {
+                              method: 'GET',
+                              url: 'https://aerodatabox.p.rapidapi.com/airports/iata/' + flight.Departure.AirportCode,
+                              headers: {
+                                'x-rapidapi-key': '2cf1a4a141msh66321b55ff7c5bfp13bc41jsn9f941faf9485',
+                                'x-rapidapi-host': 'aerodatabox.p.rapidapi.com'
+                              }
+                          };
+
+                          direct_requests.push(Axios.request(o))
+                        }
                     }
                     for (let flight of other_flights_array) {
                         for (let stop of flight) {
@@ -270,7 +301,7 @@ class FlightRegisterBase extends React.Component {
                             //console.log(stop.Arrival.AirportCode)
                             //console.log(this.state.look_up)
                             if(!(this.state.look_up.hasOwnProperty(stop.Arrival.AirportCode))) {
-                                console.log('hi')
+                                //console.log('hi')
                                 const o = {
                                     method: 'GET',
                                     url: 'https://aerodatabox.p.rapidapi.com/airports/iata/' + stop.Arrival.AirportCode,
@@ -282,6 +313,20 @@ class FlightRegisterBase extends React.Component {
 
                                 requests.push(Axios.request(o))
                             }
+                            if(!(this.state.look_up.hasOwnProperty(stop.Departure.AirportCode))) {
+                                //console.log('hi')
+                                const o = {
+                                    method: 'GET',
+                                    url: 'https://aerodatabox.p.rapidapi.com/airports/iata/' + stop.Departure.AirportCode,
+                                    headers: {
+                                      'x-rapidapi-key': '2cf1a4a141msh66321b55ff7c5bfp13bc41jsn9f941faf9485',
+                                      'x-rapidapi-host': 'aerodatabox.p.rapidapi.com'
+                                    }
+                                };
+
+                                requests.push(Axios.request(o))
+                            }
+                            
                         }
                     }
 
@@ -290,14 +335,18 @@ class FlightRegisterBase extends React.Component {
                         Axios.spread((...responses) => {
                             for (let response of responses) {
                                 console.log(response)
-                                let table = this.state.look_up
-                                table[response.data['iata']] = response.data['fullName']
-                                this.setState({ look_up: table })
-                                console.log('^^^^^^^^^^^^^')
-                                console.log(table)
+                                let table1 = this.state.look_up
+                                let table2 = this.state.look_up_code
+                                table1[response.data['iata']] = response.data['fullName']
+                                table2[response.data['iata']] = response.data['country']['code']
+                                this.setState({ look_up: table1 })
+                                this.setState({ look_up_code: table2 })
+                                //console.log('^^^^^^^^^^^^^')
+                                //console.log(table)
                             }
                         })
                     ).catch(errors => {
+                        console.log(errors)
                         console.log('fk fk fk')
                     });
                     
@@ -307,11 +356,14 @@ class FlightRegisterBase extends React.Component {
                         Axios.spread((...responses) => {
                             for (let response of responses) {
                                 console.log(response)
-                                let table = this.state.look_up
-                                table[response.data['iata']] = response.data['fullName']
-                                this.setState({ look_up: table })
-                                console.log('^^^^^^^^^^^^^')
-                                console.log(table)
+                                let table1 = this.state.look_up
+                                let table2 = this.state.look_up_code
+                                table1[response.data['iata']] = response.data['fullName']
+                                table2[response.data['iata']] = response.data['country']['code']
+                                this.setState({ look_up: table1 })
+                                this.setState({ look_up_code: table2 })
+                                //console.log('^^^^^^^^^^^^^')
+                                //console.log(table)
                             }
                         })
                     ).catch(errors => {
@@ -328,10 +380,193 @@ class FlightRegisterBase extends React.Component {
 
     handleRegister = (event) => {
         const uid = this.props.firebase.auth.currentUser.uid
+        const id = event.target.parentNode.id
+        const className = event.target.parentNode.className
         let content = event.target.parentNode.textContent
         content = content.slice(0, content.length - 8)
-        console.log(content)
-        
+        const content_array = content.split('->')
+        let array = []
+        for (let c of content_array) {
+            array.push(c.trim())
+        }
+        console.log(array)
+        console.log(id);
+        console.log(className)
+
+        if(className === "transit card-body") {
+            console.log(this.state.other_flights[parseInt(id)])
+            const stop_array = this.state.other_flights[parseInt(id)]
+            
+            for (let stop of stop_array) {
+              const index = stop_array.indexOf(stop)
+              console.log(index)
+              if(index < (stop_array.length - 1)) {
+                  //let d = stop.Departure.ScheduledTimeLocal.DateTime;
+                  //d = d.split('T')[0];
+                  const flight_number = stop.MarketingCarrier.AirlineID + stop.MarketingCarrier.FlightNumber
+                  const origin = array[index].split('(')[0].trim()
+                  const destination = array[index + 1].split('(')[0].trim()
+                  let airport_code = array[index + 1].split('(')[1]
+                  airport_code = airport_code.split(')')[0]
+                  const destination_country_code = this.state.look_up_code[airport_code]
+                  //console.log(destination_country_code)
+                  const destination_country_name = code_to_name[destination_country_code]['cdc_name']
+
+                  let origin_airport_code = array[0].split('(')[1]
+                  origin_airport_code = origin_airport_code.split(')')[0]
+                  const origin_country_code = this.state.look_up_code[origin_airport_code]
+                  //console.log(destination_country_code)
+                  const origin_country_name = code_to_name[origin_country_code]['cdc_name']
+
+                  let departure_time = stop.Departure.ScheduledTimeLocal.DateTime.split('T')
+                  departure_time = departure_time.join(' ')
+
+                  let arrival_time = stop.Arrival.ScheduledTimeLocal.DateTime.split('T')
+                  arrival_time = arrival_time.join(' ')
+                  console.log('origin ', origin)
+                  console.log('destination ', destination)
+                  console.log('flight number ', flight_number)
+                  console.log('departure_time ', departure_time)
+                  console.log('arrival time ', arrival_time)
+                  
+                  const node_ref = this.props.firebase.db.ref(`flights/${flight_number}`).push()
+                  node_ref.set({
+                      passenger_id: uid,
+                      flight_number: flight_number,
+                      origin: origin,
+                      destination: destination,
+                      destination_country: destination_country_name,
+                      origin_country: origin_country_name,
+                      departure_time: departure_time,
+                      arrival_time: arrival_time,
+                      status: 'transit'
+                  })
+                  .then(() => {
+                    console.log('new flight registration is logged');
+                    //this.props.history.push('/home');
+                  })
+                  .catch(error => {
+                    console.log(error);
+                    console.log('error when logging new flight registration')
+                    this.setState({ error });
+                  });
+                  
+                  // transit
+              } else {
+                  console.log('#@@@@@@@')
+                  const flight_number = stop.MarketingCarrier.AirlineID + stop.MarketingCarrier.FlightNumber
+                  const origin = array[index].split('(')[0].trim()
+                  const destination = array[index + 1].split('(')[0].trim()
+
+                  let airport_code = array[index + 1].split('(')[1]
+                  airport_code = airport_code.split(')')[0]
+                  const destination_country_code = this.state.look_up_code[airport_code]
+                  //console.log(destination_country_code)
+                  const destination_country_name = code_to_name[destination_country_code]['cdc_name']
+
+                  let origin_airport_code = array[0].split('(')[1]
+                  origin_airport_code = origin_airport_code.split(')')[0]
+                  const origin_country_code = this.state.look_up_code[origin_airport_code]
+                  //console.log(destination_country_code)
+                  const origin_country_name = code_to_name[origin_country_code]['cdc_name']
+                  console.log('%%%%%%%%%%')
+                  console.log(origin_airport_code)
+                  console.log(origin_country_name)
+
+                  
+                  let departure_time = stop.Departure.ScheduledTimeLocal.DateTime.split('T')
+                  departure_time = departure_time.join(' ')
+
+                  let arrival_time = stop.Arrival.ScheduledTimeLocal.DateTime.split('T')
+                  arrival_time = arrival_time.join(' ')
+                  console.log('origin ', origin)
+                  console.log('destination ', destination)
+                  console.log('flight number ', flight_number)
+                  console.log('departure_time ', departure_time)
+                  console.log('arrival time ', arrival_time)
+
+                  const node_ref = this.props.firebase.db.ref(`flights/${flight_number}`).push()
+                  node_ref.set({
+                      passenger_id: uid,
+                      flight_number: flight_number,
+                      origin: origin,
+                      destination: destination,
+                      destination_country: destination_country_name,
+                      origin_country: origin_country_name,
+                      departure_time: departure_time,
+                      arrival_time: arrival_time,
+                      status: 'other'
+                  })
+                  .then(() => {
+                      console.log('new flight registration is logged');
+                      //this.props.history.push('/home');
+                  })
+                  .catch(error => {
+                      console.log(error);
+                      console.log('error when logging new flight registration')
+                      this.setState({ error });
+                  });
+              }
+              
+            }
+            
+        } else {
+            // direct flights
+            const flight = this.state.direct_flights[parseInt(id)]
+            console.log(this.state.direct_flights[parseInt(id)])
+            const flight_number = flight.MarketingCarrier.AirlineID + flight.MarketingCarrier.FlightNumber
+            const origin = array[0].split('(')[0].trim()
+            const destination = array[1].split('(')[0].trim()
+
+            let origin_airport_code = array[0].split('(')[1]
+            origin_airport_code = origin_airport_code.split(')')[0]
+            const origin_country_code = this.state.look_up_code[origin_airport_code]
+            //console.log(destination_country_code)
+            const origin_country_name = code_to_name[origin_country_code]['cdc_name']
+
+
+            let airport_code = array[1].split('(')[1]
+            airport_code = airport_code.split(')')[0]
+            const destination_country_code = this.state.look_up_code[airport_code]
+            //console.log(destination_country_code)
+            const destination_country_name = code_to_name[destination_country_code]['cdc_name']
+
+            
+            let departure_time = flight.Departure.ScheduledTimeLocal.DateTime.split('T')
+            departure_time = departure_time.join(' ')
+
+            let arrival_time = flight.Arrival.ScheduledTimeLocal.DateTime.split('T')
+            arrival_time = arrival_time.join(' ')
+            console.log('origin ', origin)
+            console.log('destination ', destination)
+            console.log('flight number ', flight_number)
+            console.log('departure_time ', departure_time)
+            console.log('arrival time ', arrival_time)
+
+
+            const node_ref = this.props.firebase.db.ref(`flights/${flight_number}`).push()
+            node_ref.set({
+                passenger_id: uid,
+                flight_number: flight_number,
+                origin: origin,
+                destination: destination,
+                destination_country: destination_country_name,
+                origin_country: origin_country_name,
+                departure_time: departure_time,
+                arrival_time: arrival_time,
+                status: 'other'
+            })
+            .then(() => {
+                console.log('new flight registration is logged');
+                //this.props.history.push('/home');
+            })
+            .catch(error => {
+                console.log(error);
+                console.log('error when logging new flight registration')
+                this.setState({ error });
+            });
+        }
+        /*
         let month = String((this.state.dod.getMonth() + 1));
         const pattern = /^[1-9]$/
         if(pattern.test(month)) {
@@ -354,6 +589,7 @@ class FlightRegisterBase extends React.Component {
           console.log('error when logging new flight registration')
           this.setState({ error });
         });
+        */
         
 
         
@@ -406,53 +642,47 @@ class FlightRegisterBase extends React.Component {
                         value={this.state.dod}
                         />
                   </div>
-                    <div className="col-1  flightsearch">
-                    <Button variant="warning" size="lg" onClick={this.handleSearch}>Search</Button>
-                    </div>
-                </div>
-            <div className="class-text">
-                <h2>Direct Flights</h2>
-                {this.state.direct_flights.map(flight => (
-                    <Card className='flight'>
-                        <Card.Body>
-                            {this.state.origin + ' -> ' + this.state.look_up[flight.Arrival.AirportCode] + ' (' + flight.Arrival.AirportCode + ')' + '  ' + flight.MarketingCarrier.AirlineID + flight.MarketingCarrier.FlightNumber}
-                            <div class="card-btn">
-                                <Button  variant="warning" onClick={this.handleRegister}>Register</Button>
-                            </div>
-                        </Card.Body>
-                    </Card>
-                ))}
-            </div>
-            <div className="class-text">
-                <h2>Transit Flights</h2>
-                {this.state.other_flights.map(flight => (
-                    <Card className='flight'>
-                        <Card.Body>
-                            {this.state.origin}
-                            {flight.map(stop => 
-                                { return '  ' + stop.MarketingCarrier.AirlineID + stop.MarketingCarrier.FlightNumber + ' -> ' + this.state.look_up[stop.Arrival.AirportCode]  + ' (' + stop.Arrival.AirportCode + ')' + '  '} 
-                            )}
-                            <div class="card-btn">
-                                <Button variant="warning" onClick={this.handleRegister}>Register</Button>
-                            </div>
-
-                        </Card.Body>
-                    </Card>
-                ))}
-            </div>
-        </div>
-        <Modal show={this.state.show} onHide={this.handleClose}>
-            <Modal.Header closeButton>
-            <Modal.Title></Modal.Title>
-            </Modal.Header>
-            <Modal.Body>{this.state.message}</Modal.Body>
-            <Modal.Footer>
-            <Button variant="secondary" onClick={this.handleClose}>
-                Close
-            </Button>
-            </Modal.Footer>
-        </Modal>
-        </>
+                  <Button variant="warning" onClick={this.handleSearch}>Search</Button>
+              </Card.Body>
+          </Card>
+          <div>
+            <h2>Direct Flights</h2>
+            {this.state.direct_flights.map((flight, index) => (
+                <Card className='flight'>
+                    <Card.Body className='direct' id={index}>
+                        {this.state.origin + ' -> ' + this.state.look_up[flight.Arrival.AirportCode] + ' (' + flight.Arrival.AirportCode + ')' + '  ' + flight.MarketingCarrier.AirlineID + flight.MarketingCarrier.FlightNumber}
+                        <Button variant="warning" onClick={this.handleRegister}>Register</Button>
+                    </Card.Body>
+                </Card>
+            ))}
+          </div>
+          <div>
+            <h2>Transit Flights</h2>
+            {this.state.other_flights.map((flight, index) => (
+                <Card className='flight'>
+                    <Card.Body id={index} className='transit'>
+                        {this.state.origin}
+                        {flight.map(stop => 
+                            { return '  ' + stop.MarketingCarrier.AirlineID + stop.MarketingCarrier.FlightNumber + '  ' + stop.Departure.ScheduledTimeLocal.DateTime + '  ' + ' -> ' + this.state.look_up[stop.Arrival.AirportCode]  + ' (' + stop.Arrival.AirportCode + ')' + '  '}
+                            //{return this.state.look_up[stop.Depature.AirportCode]}
+                        )}
+                        <Button variant="warning" onClick={this.handleRegister}>Register</Button>
+                    </Card.Body>
+                </Card>
+            ))}
+          </div>
+          <Modal show={this.state.show} onHide={this.handleClose}>
+              <Modal.Header closeButton>
+              <Modal.Title></Modal.Title>
+              </Modal.Header>
+              <Modal.Body>{this.state.message}</Modal.Body>
+              <Modal.Footer>
+              <Button variant="secondary" onClick={this.handleClose}>
+                  Close
+              </Button>
+              </Modal.Footer>
+          </Modal>
+          </>
         );
     }
 

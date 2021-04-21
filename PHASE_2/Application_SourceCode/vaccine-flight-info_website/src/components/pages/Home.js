@@ -17,8 +17,7 @@ class HomeBase extends Component {
 	}
 
     componentDidMount() {
-        console.log('$$$$$$');
-        console.log(this.props.firebase.auth.currentUser)
+        //console.log(this.props.firebase.auth.currentUser)
         if(this.props.firebase.auth.currentUser === null) {
             this.props.history.push('/')
         } else {
