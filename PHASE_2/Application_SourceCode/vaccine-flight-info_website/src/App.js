@@ -44,8 +44,10 @@ function App() {
             <Route path='/airport-staff-flight-details' component={AirportStaffFlight} />
             <Route path='/mu7366passenger-details' component={AirportStaffPassengerDetails} />
             {/*<Route path='/flights' component={FlightRegister} />
-            <Route path='/skyscanner' component={Skyscanner} />*/}
+            <Route path='/skyscanner' component={Skyscanner} />
             <Route path='/flights' component={Skyscanner} />
+            */}
+            <Route path='/flights' component={FlightRegister} />
             <Route path='/convert' component={Base64} />
             <Route path='/news/:country' component={NewsOutbreaks} />
             <Route path='/profile' component={Profile} />
