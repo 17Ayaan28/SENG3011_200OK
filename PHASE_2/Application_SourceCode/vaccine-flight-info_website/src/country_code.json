@@ -1,0 +1,960 @@
+{
+    "AS": {
+      "cdc_name": "american-samoa",
+      "front_end_name": "american samoa"
+    },
+    "AG": {
+      "cdc_name": "antigua-and-barbuda",
+      "front_end_name": "antigua and barbuda"
+    },
+    "BS": {
+      "cdc_name": "the-bahamas",
+      "front_end_name": "bahamas"
+    },
+    "BO": {
+      "cdc_name": "bolivia",
+      "front_end_name": "bolivia, plurinational state of"
+    },
+    "bonaire, saint eustatius and saba": {
+      "cdc_name": "bonaire",
+      "front_end_name": "bonaire, saint eustatius and saba"
+    },
+    "BA": {
+      "cdc_name": "bosnia-and-herzegovina",
+      "front_end_name": "bosnia & herzegovina"
+    },
+    "IO": {
+      "cdc_name": "british-indian-ocean-territory",
+      "front_end_name": "british indian ocean territory"
+    },
+    "BN": {
+      "cdc_name": "brunei",
+      "front_end_name": "brunei darussalam"
+    },
+    "BF": {
+      "cdc_name": "burkina-faso",
+      "front_end_name": "burkina faso"
+    },
+    "CV": {
+      "cdc_name": "cape-verde",
+      "front_end_name": "cabo verde"
+    },
+    "KY": {
+      "cdc_name": "cayman-islands",
+      "front_end_name": "cayman islands"
+    },
+    "CF": {
+      "cdc_name": "central-african-republic",
+      "front_end_name": "central african republic"
+    },
+    "CX": {
+      "cdc_name": "christmas-island",
+      "front_end_name": "christmas island"
+    },
+    "CC": {
+      "cdc_name": "cocos-islands",
+      "front_end_name": "cocos (keeling) islands"
+    },
+    "CK": {
+      "cdc_name": "cook-islands",
+      "front_end_name": "cook islands"
+    },
+    "CR": {
+      "cdc_name": "costa-rica",
+      "front_end_name": "costa rica"
+    },
+    "CZ": {
+      "cdc_name": "czech-republic",
+      "front_end_name": "czech republic"
+    },
+    "CI": {
+      "cdc_name": "ivory-coast",
+      "front_end_name": "côte d'ivoire"
+    },
+    "CD": {
+      "cdc_name": "democratic-republic-of-congo",
+      "front_end_name": "democratic republic of congo"
+    },
+    "DO": {
+      "cdc_name": "dominican-republic",
+      "front_end_name": "dominican republic"
+    },
+    "SV": {
+      "cdc_name": "el-salvador",
+      "front_end_name": "el salvador"
+    },
+    "GQ": {
+      "cdc_name": "equatorial-guinea",
+      "front_end_name": "equatorial guinea"
+    },
+    "FK": {
+      "cdc_name": "falkland-islands",
+      "front_end_name": "falkland islands"
+    },
+    "FO": {
+      "cdc_name": "faroe-islands",
+      "front_end_name": "faroe islands"
+    },
+    "GF": {
+      "cdc_name": "french-guiana",
+      "front_end_name": "french guiana"
+    },
+    "PF": {
+      "cdc_name": "french-polynesia",
+      "front_end_name": "french polynesia"
+    },
+    "GM": {
+      "cdc_name": "the-gambia",
+      "front_end_name": "gambia"
+    },
+    "HK": {
+      "cdc_name": "hong-kong-sar",
+      "front_end_name": "hong kong"
+    },
+    "IR": {
+      "cdc_name": "iran",
+      "front_end_name": "iran, islamic republic of"
+    },
+    "KP": {
+      "cdc_name": "north-korea",
+      "front_end_name": "korea, democratic people's republic of"
+    },
+    "KR": {
+      "cdc_name": "south-korea",
+      "front_end_name": "korea, republic of"
+    },
+    "LA": {
+      "cdc_name": "laos",
+      "front_end_name": "lao people's democratic republic"
+    },
+    "MO": {
+      "cdc_name": "macau-sar",
+      "front_end_name": "macau"
+    },
+    "MK": {
+      "cdc_name": "north-macedonia",
+      "front_end_name": "macedonia, the former yugoslav republic of"
+    },
+    "MH": {
+      "cdc_name": "marshall-islands",
+      "front_end_name": "marshall islands"
+    },
+    "FM": {
+      "cdc_name": "micronesia",
+      "front_end_name": "micronesia, federated states of"
+    },
+    "MM": {
+      "cdc_name": "burma",
+      "front_end_name": "myanmar"
+    },
+    "NC": {
+      "cdc_name": "new-caledonia",
+      "front_end_name": "new caledonia"
+    },
+    "NZ": {
+      "cdc_name": "new-zealand",
+      "front_end_name": "new zealand"
+    },
+    "NF": {
+      "cdc_name": "norfolk-island",
+      "front_end_name": "norfolk island"
+    },
+    "MP": {
+      "cdc_name": "northern-mariana-islands",
+      "front_end_name": "northern mariana islands"
+    },
+    "PG": {
+      "cdc_name": "papua-new-guinea",
+      "front_end_name": "papua new guinea"
+    },
+    "PN": {
+      "cdc_name": "pitcairn-islands",
+      "front_end_name": "pitcairn"
+    },
+    "PR": {
+      "cdc_name": "puerto-rico",
+      "front_end_name": "puerto rico"
+    },
+    "CG": {
+      "cdc_name": "congo",
+      "front_end_name": "republic of congo"
+    },
+    "RU": {
+      "cdc_name": "russia",
+      "front_end_name": "russian federation"
+    },
+    "BL": {
+      "cdc_name": "saint-barthelemy",
+      "front_end_name": "saint barthélemy"
+    },
+    "SH": {
+      "cdc_name": "saint-helena",
+      "front_end_name": "saint helena, ascension and tristan da cunha"
+    },
+    "KN": {
+      "cdc_name": "st-kitts-and-nevis",
+      "front_end_name": "saint kitts and nevis"
+    },
+    "LC": {
+      "cdc_name": "saint-lucia",
+      "front_end_name": "saint lucia"
+    },
+    "MF": {
+      "cdc_name": "saint-martin",
+      "front_end_name": "saint martin"
+    },
+    "PM": {
+      "cdc_name": "saint-pierre-and-miquelon",
+      "front_end_name": "saint pierre and miquelon"
+    },
+    "VC": {
+      "cdc_name": "saint-vincent-and-the-grenadines",
+      "front_end_name": "saint vincent and the grenadines"
+    },
+    "SM": {
+      "cdc_name": "san-marino",
+      "front_end_name": "san marino"
+    },
+    "ST": {
+      "cdc_name": "sao-tome-and-principe",
+      "front_end_name": "sao tome and principe"
+    },
+    "SA": {
+      "cdc_name": "saudi-arabia",
+      "front_end_name": "saudi arabia"
+    },
+    "SL": {
+      "cdc_name": "sierra-leone",
+      "front_end_name": "sierra leone"
+    },
+    "SX": {
+      "cdc_name": "sint-maarten",
+      "front_end_name": "sint maarten"
+    },
+    "SB": {
+      "cdc_name": "solomon-islands",
+      "front_end_name": "solomon islands"
+    },
+    "ZA": {
+      "cdc_name": "south-africa",
+      "front_end_name": "south africa"
+    },
+    "GS": {
+      "cdc_name": "south-georgia-south-sandwich-islands",
+      "front_end_name": "south georgia and the south sandwich islands"
+    },
+    "SS": {
+      "cdc_name": "south-sudan",
+      "front_end_name": "south sudan"
+    },
+    "LK": {
+      "cdc_name": "sri-lanka",
+      "front_end_name": "sri lanka"
+    },
+    "SZ": {
+      "cdc_name": "eswatini",
+      "front_end_name": "swaziland"
+    },
+    "SY": {
+      "cdc_name": "syria",
+      "front_end_name": "syrian arab republic"
+    },
+    "TL": {
+      "cdc_name": "east-timor",
+      "front_end_name": "timor-leste, democratic republic of"
+    },
+    "TT": {
+      "cdc_name": "trinidad-and-tobago",
+      "front_end_name": "trinidad and tobago"
+    },
+    "TC": {
+      "cdc_name": "turks-and-caicos",
+      "front_end_name": "turks and caicos islands"
+    },
+    "AE": {
+      "cdc_name": "united-arab-emirates",
+      "front_end_name": "united arab emirates"
+    },
+    "GB": {
+      "cdc_name": "united-kingdom",
+      "front_end_name": "united kingdom"
+    },
+    "US": {
+      "cdc_name": "united-states",
+      "front_end_name": "united states"
+    },
+    "VE": {
+      "cdc_name": "venezuela",
+      "front_end_name": "venezuela, bolivarian republic of"
+    },
+    "VN": {
+      "cdc_name": "vietnam",
+      "front_end_name": "viet nam"
+    },
+    "VG": {
+      "cdc_name": "british-virgin-islands",
+      "front_end_name": "virgin islands (british)"
+    },
+    "VI": {
+      "cdc_name": "usvirgin-islands",
+      "front_end_name": "virgin islands (us)"
+    },
+
+    "AF": {
+        "cdc_name": "afghanistan",
+        "front_end_name": "viet nam"
+    },
+    "AL": {
+        "cdc_name": "albania",
+        "front_end_name": "viet nam"
+    },
+    "DZ": {
+        "cdc_name": "algeria",
+        "front_end_name": "viet nam"
+      },
+      "AD": {
+        "cdc_name": "andorra",
+        "front_end_name": "viet nam"
+      },
+      "AO": {
+        "cdc_name": "angola",
+        "front_end_name": "viet nam"
+      },
+
+      "AI": {
+        "cdc_name": "anguilla",
+        "front_end_name": "viet nam"
+      },
+      "AQ": {
+        "cdc_name": "antarctica",
+        "front_end_name": "viet nam"
+      },
+      "AR": {
+        "cdc_name": "argentina",
+        "front_end_name": "viet nam"
+      },
+      "AM": {
+        "cdc_name": "armenia",
+        "front_end_name": "viet nam"
+      },
+      "AW": {
+        "cdc_name": "aruba",
+        "front_end_name": "viet nam"
+      },
+      "AU": {
+        "cdc_name": "australia",
+        "front_end_name": "viet nam"
+      },
+      "AT": {
+        "cdc_name": "austria",
+        "front_end_name": "viet nam"
+      },
+      "AZ": {
+        "cdc_name": "azerbaijan",
+        "front_end_name": "viet nam"
+      },
+      "BH": {
+        "cdc_name": "bahrain",
+        "front_end_name": "viet nam"
+      },
+      "BD": {
+        "cdc_name": "bangladesh",
+        "front_end_name": "viet nam"
+      },
+      "BB": {
+        "cdc_name": "barbados",
+        "front_end_name": "viet nam"
+      },
+      "BY": {
+        "cdc_name": "belarus",
+        "front_end_name": "viet nam"
+      },
+      "BE": {
+        "cdc_name": "belgium",
+        "front_end_name": "viet nam"
+      },
+      "BZ": {
+        "cdc_name": "belize",
+        "front_end_name": "viet nam"
+      },
+      "BJ": {
+        "cdc_name": "benin",
+        "front_end_name": "viet nam"
+      },
+      "BM": {
+        "cdc_name": "bermuda",
+        "front_end_name": "viet nam"
+      },
+      "BT": {
+        "cdc_name": "bhutan",
+        "front_end_name": "viet nam"
+      },
+      "BW": {
+        "cdc_name": "botswana",
+        "front_end_name": "viet nam"
+      },
+      "BR": {
+        "cdc_name": "brazil",
+        "front_end_name": "viet nam"
+      },
+      "BG": {
+        "cdc_name": "bulgaria",
+        "front_end_name": "viet nam"
+      },
+      "BI": {
+        "cdc_name": "burundi",
+        "front_end_name": "viet nam"
+      },
+      "KH": {
+        "cdc_name": "cambodia",
+        "front_end_name": "viet nam"
+      },
+      "CM": {
+        "cdc_name": "cameroon",
+        "front_end_name": "viet nam"
+      },
+      "CA": {
+        "cdc_name": "canada",
+        "front_end_name": "viet nam"
+      },
+      "TD": {
+        "cdc_name": "chad",
+        "front_end_name": "viet nam"
+      },
+      "CL": {
+        "cdc_name": "chile",
+        "front_end_name": "viet nam"
+      },
+      "CN": {
+        "cdc_name": "china",
+        "front_end_name": "viet nam"
+      },
+      "CO": {
+        "cdc_name": "colombia",
+        "front_end_name": "viet nam"
+      },
+      "KM": {
+        "cdc_name": "comoros",
+        "front_end_name": "viet nam"
+      },
+      "HR": {
+        "cdc_name": "croatia",
+        "front_end_name": "viet nam"
+      },
+      "CU": {
+        "cdc_name": "cuba",
+        "front_end_name": "viet nam"
+      },
+      "CW": {
+        "cdc_name": "curaçao",
+        "front_end_name": "viet nam"
+      },
+      "CY": {
+        "cdc_name": "cyprus",
+        "front_end_name": "viet nam"
+      },
+      "DK": {
+        "cdc_name": "denmark",
+        "front_end_name": "viet nam"
+      },
+      "DJ": {
+        "cdc_name": "djibouti",
+        "front_end_name": "viet nam"
+      },
+      "DM": {
+        "cdc_name": "dominica",
+        "front_end_name": "viet nam"
+      },
+      "EC": {
+        "cdc_name": "ecuador",
+        "front_end_name": "viet nam"
+      },
+      "EG": {
+        "cdc_name": "egypt",
+        "front_end_name": "viet nam"
+      },
+      "ER": {
+        "cdc_name": "eritrea",
+        "front_end_name": "viet nam"
+      },
+      "EE": {
+        "cdc_name": "estonia",
+        "front_end_name": "viet nam"
+      },
+      "ET": {
+        "cdc_name": "ethiopia",
+        "front_end_name": "viet nam"
+      },
+      "FJ": {
+        "cdc_name": "fiji",
+        "front_end_name": "viet nam"
+      },
+      "FI": {
+        "cdc_name": "finland",
+        "front_end_name": "viet nam"
+      },
+      "FR": {
+        "cdc_name": "france",
+        "front_end_name": "viet nam"
+      },
+      "GA": {
+        "cdc_name": "gabon",
+        "front_end_name": "viet nam"
+      },
+      "GE": {
+        "cdc_name": "georgia",
+        "front_end_name": "viet nam"
+      },
+      "DE": {
+        "cdc_name": "germany",
+        "front_end_name": "viet nam"
+      },
+      "GH": {
+        "cdc_name": "ghana",
+        "front_end_name": "viet nam"
+      },
+      "GI": {
+        "cdc_name": "gibraltar",
+        "front_end_name": "viet nam"
+      },
+      "GR": {
+        "cdc_name": "greece",
+        "front_end_name": "viet nam"
+      },
+      "GL": {
+        "cdc_name": "greenland",
+        "front_end_name": "viet nam"
+      },
+      "GD": {
+        "cdc_name": "grenada",
+        "front_end_name": "viet nam"
+      },
+      "GP": {
+        "cdc_name": "guadeloupe",
+        "front_end_name": "viet nam"
+      },
+      "GU": {
+        "cdc_name": "guam",
+        "front_end_name": "viet nam"
+      },
+      "GT": {
+        "cdc_name": "guatemala",
+        "front_end_name": "viet nam"
+      },
+      "GN": {
+        "cdc_name": "guinea",
+        "front_end_name": "viet nam"
+      },
+      "GY": {
+        "cdc_name": "guyana",
+        "front_end_name": "viet nam"
+      },
+      "GW": {
+        "cdc_name": "guinea-bissau",
+        "front_end_name": "viet nam"
+      },
+      "HT": {
+        "cdc_name": "haiti",
+        "front_end_name": "viet nam"
+      },
+      "HN": {
+        "cdc_name": "honduras",
+        "front_end_name": "viet nam"
+      },
+      "HU": {
+        "cdc_name": "hungary",
+        "front_end_name": "viet nam"
+      },
+      "IS": {
+        "cdc_name": "iceland",
+        "front_end_name": "viet nam"
+      },
+      "IN": {
+        "cdc_name": "india",
+        "front_end_name": "viet nam"
+      },
+      "ID": {
+        "cdc_name": "indonesia",
+        "front_end_name": "viet nam"
+      },
+      "IQ": {
+        "cdc_name": "iraq",
+        "front_end_name": "viet nam"
+      },
+      "IE": {
+        "cdc_name": "ireland",
+        "front_end_name": "viet nam"
+      },
+      "IL": {
+        "cdc_name": "israel",
+        "front_end_name": "viet nam"
+      },
+      "IT": {
+        "cdc_name": "italy",
+        "front_end_name": "viet nam"
+      },
+      "JM": {
+        "cdc_name": "jamacia",
+        "front_end_name": "viet nam"
+      },
+      "JP": {
+        "cdc_name": "japan",
+        "front_end_name": "viet nam"
+      },
+      "JO": {
+        "cdc_name": "jordan",
+        "front_end_name": "viet nam"
+      },
+      "KZ": {
+        "cdc_name": "kazakhstan",
+        "front_end_name": "viet nam"
+      },
+      "KE": {
+        "cdc_name": "kenya",
+        "front_end_name": "viet nam"
+      },
+      "KI": {
+        "cdc_name": "kiribati",
+        "front_end_name": "viet nam"
+      },
+      "KW": {
+        "cdc_name": "kuwait",
+        "front_end_name": "viet nam"
+      },
+      "KG": {
+        "cdc_name": "kyrgyzstan",
+        "front_end_name": "viet nam"
+      },
+      "LV": {
+        "cdc_name": "latvia",
+        "front_end_name": "viet nam"
+      },
+      "LB": {
+        "cdc_name": "lebanon",
+        "front_end_name": "viet nam"
+      },
+      "LS": {
+        "cdc_name": "lesotho",
+        "front_end_name": "viet nam"
+      },
+      "LR": {
+        "cdc_name": "liberia",
+        "front_end_name": "viet nam"
+      },
+      "LY": {
+        "cdc_name": "libya",
+        "front_end_name": "viet nam"
+      },
+      "LI": {
+        "cdc_name": "liechtenstein",
+        "front_end_name": "viet nam"
+      },
+      "LT": {
+        "cdc_name": "lithuania",
+        "front_end_name": "viet nam"
+      },
+      "LU": {
+        "cdc_name": "luxembourg",
+        "front_end_name": "viet nam"
+      },
+      "MG": {
+        "cdc_name": "madagascar",
+        "front_end_name": "viet nam"
+      },
+      "MW": {
+        "cdc_name": "malawi",
+        "front_end_name": "viet nam"
+      },
+      "MY": {
+        "cdc_name": "malaysia",
+        "front_end_name": "viet nam"
+      },
+      "MV": {
+        "cdc_name": "maldives",
+        "front_end_name": "viet nam"
+      },
+      "ML": {
+        "cdc_name": "mali",
+        "front_end_name": "viet nam"
+      },
+      "MT": {
+        "cdc_name": "malta",
+        "front_end_name": "viet nam"
+      },
+      "MQ": {
+        "cdc_name": "martinique",
+        "front_end_name": "viet nam"
+      },
+      "MR": {
+        "cdc_name": "mauritania",
+        "front_end_name": "viet nam"
+      },
+      "MU": {
+        "cdc_name": "mauritius",
+        "front_end_name": "viet nam"
+      },
+      "YT": {
+        "cdc_name": "mayotte",
+        "front_end_name": "viet nam"
+      },
+      "MX": {
+        "cdc_name": "mexico",
+        "front_end_name": "viet nam"
+      },
+      "MD": {
+        "cdc_name": "moldova",
+        "front_end_name": "viet nam"
+      },
+      "MC": {
+        "cdc_name": "monaco",
+        "front_end_name": "viet nam"
+      },
+      "MN": {
+        "cdc_name": "mongolia",
+        "front_end_name": "viet nam"
+      },
+      "ME": {
+        "cdc_name": "montenegro",
+        "front_end_name": "viet nam"
+      },
+      "MS": {
+        "cdc_name": "montserrat",
+        "front_end_name": "viet nam"
+      },
+      "MA": {
+        "cdc_name": "morocco",
+        "front_end_name": "viet nam"
+      },
+      "MZ": {
+        "cdc_name": "mozambique",
+        "front_end_name": "viet nam"
+      },
+      "NA": {
+        "cdc_name": "namibia",
+        "front_end_name": "viet nam"
+      },
+      "NR": {
+        "cdc_name": "nauru",
+        "front_end_name": "viet nam"
+      },
+      "NP": {
+        "cdc_name": "nepal",
+        "front_end_name": "viet nam"
+      },
+      "NL": {
+        "cdc_name": "netherlands",
+        "front_end_name": "viet nam"
+      },
+      "NI": {
+        "cdc_name": "nicaragua",
+        "front_end_name": "viet nam"
+      },
+      "NE": {
+        "cdc_name": "niger",
+        "front_end_name": "viet nam"
+      },
+      "NG": {
+        "cdc_name": "nigeria",
+        "front_end_name": "viet nam"
+      },
+      "NU": {
+        "cdc_name": "niue",
+        "front_end_name": "viet nam"
+      },
+      "NO": {
+        "cdc_name": "norway",
+        "front_end_name": "viet nam"
+      },
+      "OM": {
+        "cdc_name": "oman",
+        "front_end_name": "viet nam"
+      },
+      "PK": {
+        "cdc_name": "pakistan",
+        "front_end_name": "viet nam"
+      },
+      "PW": {
+        "cdc_name": "palau",
+        "front_end_name": "viet nam"
+      },
+      "PA": {
+        "cdc_name": "panama",
+        "front_end_name": "viet nam"
+      },
+
+
+      "PY": {
+        "cdc_name": "paraguay",
+        "front_end_name": "viet nam"
+      },
+      "PE": {
+        "cdc_name": "peru",
+        "front_end_name": "viet nam"
+      },
+       "PH": {
+        "cdc_name": "philippines",
+        "front_end_name": "viet nam"
+      },
+      "PL": {
+        "cdc_name": "poland",
+        "front_end_name": "viet nam"
+      },
+      "PT": {
+        "cdc_name": "portugal",
+        "front_end_name": "viet nam"
+      },
+      "QA": {
+        "cdc_name": "qatar",
+        "front_end_name": "viet nam"
+      },
+      "RO": {
+        "cdc_name": "romania",
+        "front_end_name": "viet nam"
+      },
+      "RW": {
+        "cdc_name": "rwanda",
+        "front_end_name": "viet nam"
+      },
+      "RE": {
+        "cdc_name": "reunion",
+        "front_end_name": "viet nam"
+      },
+      "viet nam": {
+        "cdc_name": "saba",
+        "front_end_name": "viet nam"
+      },
+      "WS": {
+        "cdc_name": "samoa",
+        "front_end_name": "viet nam"
+      },
+      "SN": {
+        "cdc_name": "senegal",
+        "front_end_name": "viet nam"
+      },
+      "RS": {
+        "cdc_name": "serbia",
+        "front_end_name": "viet nam"
+      },
+      "SC": {
+        "cdc_name": "seychelles",
+        "front_end_name": "viet nam"
+      },
+      "SG": {
+        "cdc_name": "singapore",
+        "front_end_name": "viet nam"
+      },
+      "SK": {
+        "cdc_name": "slovakia",
+        "front_end_name": "viet nam"
+      },
+      "SI": {
+        "cdc_name": "slovenia",
+        "front_end_name": "viet nam"
+      },
+
+
+      "SO": {
+        "cdc_name": "somalia",
+        "front_end_name": "viet nam"
+      },
+      "ES": {
+        "cdc_name": "spain",
+        "front_end_name": "viet nam"
+      },
+      "SD": {
+        "cdc_name": "sudan",
+        "front_end_name": "viet nam"
+      },
+      "SR": {
+        "cdc_name": "suriname",
+        "front_end_name": "viet nam"
+      },
+      "SE": {
+        "cdc_name": "sweden",
+        "front_end_name": "viet nam"
+      },
+      "CH": {
+        "cdc_name": "switzerland",
+        "front_end_name": "viet nam"
+      },
+      "TW": {
+        "cdc_name": "taiwan",
+        "front_end_name": "viet nam"
+      },
+      "TJ": {
+        "cdc_name": "tajikistan",
+        "front_end_name": "viet nam"
+      },
+      "TZ": {
+        "cdc_name": "tanzania",
+        "front_end_name": "viet nam"
+      },
+      "TH": {
+        "cdc_name": "thailand",
+        "front_end_name": "viet nam"
+      },
+      "TG": {
+        "cdc_name": "togo",
+        "front_end_name": "viet nam"
+      },
+      "TK": {
+        "cdc_name": "tokelau",
+        "front_end_name": "viet nam"
+      },
+      "TO": {
+        "cdc_name": "tonga",
+        "front_end_name": "viet nam"
+      },
+      "TN": {
+        "cdc_name": "tunisia",
+        "front_end_name": "viet nam"
+      },
+      "TR": {
+        "cdc_name": "turkey",
+        "front_end_name": "viet nam"
+      },
+      "TM": {
+        "cdc_name": "turkmenistan",
+        "front_end_name": "viet nam"
+      },
+      "TV": {
+        "cdc_name": "tuvalu",
+        "front_end_name": "viet nam"
+      },
+
+
+      "UG": {
+        "cdc_name": "uganda",
+        "front_end_name": "viet nam"
+      },
+      "UA": {
+        "cdc_name": "ukraine",
+        "front_end_name": "viet nam"
+      },
+      "UY": {
+        "cdc_name": "uruguay",
+        "front_end_name": "viet nam"
+      },
+      "UZ": {
+        "cdc_name": "uzbekistan",
+        "front_end_name": "viet nam"
+      },
+
+      "VU": {
+        "cdc_name": "vanuatu",
+        "front_end_name": "viet nam"
+      },
+      "YE": {
+        "cdc_name": "yemen",
+        "front_end_name": "viet nam"
+      },
+      "ZM": {
+        "cdc_name": "zambia",
+        "front_end_name": "viet nam"
+      },
+      "ZW": {
+        "cdc_name": "zimbabwe",
+        "front_end_name": "viet nam"
+      }
+}
+
