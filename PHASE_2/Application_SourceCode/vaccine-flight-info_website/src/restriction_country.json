@@ -827,103 +827,103 @@
     },
 
     "australia": {
-        "name": "austrslia",
-        "region": "europe"
+        "name": "australia",
+        "region": "oceania"
     },
     "cocos (keeling) islands": {
         "name": "cocos-keeling-islands",
-        "region": "europe"
+        "region": "oceania"
     },
     "cook islands": {
         "name": "cook-islands",
-        "region": "europe"
+        "region": "oceania"
     },
     "fiji": {
         "name": "fiji",
-        "region": "europe"
+        "region": "oceania"
     },
     "french polynesia": {
         "name": "french-polynesia",
-        "region": "europe"
+        "region": "oceania"
     },
     "guam": {
         "name": "guam",
-        "region": "europe"
+        "region": "oceania"
     },
     "kiribati": {
         "name": "kiribati",
-        "region": "europe"
+        "region": "oceania"
     },
     "marshall islands": {
         "name": "marshall-islands",
-        "region": "europe"
+        "region": "oceania"
     },
     "micronesia, federated states of": {
         "name": "micronesia",
-        "region": "europe"
+        "region": "oceania"
     },
     "nauru": {
         "name": "nauru",
-        "region": "europe"
+        "region": "oceania"
     },
     "new caledonia": {
         "name": "new-caledonia",
-        "region": "europe"
+        "region": "oceania"
     },
     "cew zealand": {
         "name": "new-zealand",
-        "region": "europe"
+        "region": "oceania"
     },
     "niue": {
         "name": "niue",
-        "region": "europe"
+        "region": "oceania"
     },
     "norfolk island": {
         "name": "norfolk-island",
-        "region": "europe"
+        "region": "oceania"
     },
     "northern mariana islands": {
         "name": "northern-mariana-islands",
-        "region": "europe"
+        "region": "oceania"
     },
     "palau": {
         "name": "palau",
-        "region": "europe"
+        "region": "oceania"
     },
     "papua new guinea": {
         "name": "papua-new-guinea",
-        "region": "europe"
+        "region": "oceania"
     },
     "pitcairn": {
         "name": "pitcairn",
-        "region": "europe"
+        "region": "oceania"
     },
     "samoa": {
         "name": "samoa",
-        "region": "europe"
+        "region": "oceania"
     },
     "solomon islands": {
         "name": "solomon-islands",
-        "region": "europe"
+        "region": "oceania"
     },
     "tokelau": {
         "name": "tokelau",
-        "region": "europe"
+        "region": "oceania"
     },
     "tonga": {
         "name": "tonga",
-        "region": "europe"
+        "region": "oceania"
     },
     "tuvalu": {
         "name": "tuvalu",
-        "region": "europe"
+        "region": "oceania"
     },
     "vanuatu": {
         "name": "vanuatu",
-        "region": "europe"
+        "region": "oceania"
     },
     "wallis and futuna": {
         "name": "wallis-and-futuna-islands",
-        "region": "europe"
+        "region": "oceania"
     }
 }
