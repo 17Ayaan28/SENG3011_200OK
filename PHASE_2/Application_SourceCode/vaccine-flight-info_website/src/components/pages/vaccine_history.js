@@ -31,6 +31,9 @@ class Vaccine_history_base extends React.Component {
 		};
 	}
 
+
+
+
 	handleFile = () => {
 		const certificate = document.getElementById('certificate').files[0];
 
@@ -144,6 +147,11 @@ class Vaccine_history_base extends React.Component {
 		})
 	}
 
+	showCertification(certificate) {
+		var newWindow = window.open("_blank");
+		newWindow.document.write("<img src=" + certificate + " height='' weight='' alt='' />")
+	}
+
 
 	render() {
 		return (
@@ -172,7 +180,7 @@ class Vaccine_history_base extends React.Component {
 							<td>{record.disease}</td>
 							<td>{record.vaccine_name}</td>
 							<td>{record.date}</td>
-							<td>{record.certificate}</td>
+							<td><button type="button" class="btn btn-link" onClick={()=>this.showCertification(record.certificate)}>View</button></td>
 						</tr>
 					))}
 				</tbody>

@@ -9,6 +9,7 @@ import CountrySelect from 'react-bootstrap-country-select';
 import './Vaccine_by_location.css';
 import Navbar from './components/Navbar';
 import convert from './country_convert.json';
+
 import { withRouter } from 'react-router-dom';
 import { withFirebase } from './components/Firebase';
 import { compose } from 'recompose';
@@ -22,6 +23,7 @@ class VaccineBase extends React.Component {
         this.state = {
           country: undefined
         }
+
     }
 
     handleSearch = () => {
@@ -48,7 +50,8 @@ class VaccineBase extends React.Component {
       }
       console.log(country_name)
       this.props.history.push({
-        pathname: '/travelInfo?country=' + country_name,
+        pathname: '/travelInfo/' + country_name,
+
         display_country_name: this.state.country['name']
     });
     }
@@ -58,37 +61,35 @@ class VaccineBase extends React.Component {
       if(this.props.firebase.auth.currentUser === null) {
         this.props.history.push('/')
       }
+
       const dropdown = document.getElementById('country_input')
       dropdown.setAttribute('autocomplete', "off")
     }
 
     render() {
       return (
-        <>
+        <div className="container-div">
         <Navbar />
-        <div>
-          <p id='enter'>
-            Enter the location you are travelling:
-          </p>
-          <br />
-          <Form id="form">
-            <Form.Group controlId="country_input">
-              <Form.Label></Form.Label>
-              <CountrySelect value={this.state.country} onChange={e => this.setState({ country: e })} autocomplete="off"/>
-              <Form.Text className="text-muted">
-                We'll never share your travel details with anyone else.
-              </Form.Text>
-            </Form.Group>
-
-            <Button variant="primary" onClick={this.handleSearch}>Search</Button>
-
-          </Form>
+        <div className="search-page">
+          <div className="search-label">
+          <h2>Enter Your Destination</h2>
+          </div>
+          <div>
+            <Form>
+              <Form.Group controlId="country_input">
+                <Form.Label></Form.Label>
+                <CountrySelect value={this.state.country} onChange={e => this.setState({ country: e })} autocomplete="off"/>
+              </Form.Group>
+              <Button className="search-btn" variant="primary" onClick={this.handleSearch}>Search</Button>
+            </Form>
+          </div>
         </div>
-        </>
+        </div>
       );
     }
 
 }
+
 
 const Vaccine = compose(
 	  withRouter,

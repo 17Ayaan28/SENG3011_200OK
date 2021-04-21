@@ -14,8 +14,13 @@ import TravelInfo from './TravelInfo'
 import FlightRegister from './components/pages/FlightRegister'
 import NewsOutbreaks from './components/pages/NewsOutbreaks'
 import Maps from './components/pages/Maps'
-import Skyscanner from './skyscanner';
+import Profile from './components/pages/Profile'
+import Skyscanner from './skyscanner'
+import Base64 from './base64CallBack'
+import Restriction from './restriction'
+
 import { withAuthentication } from './components/Session';
+
 
 
 function App() {
@@ -25,19 +30,28 @@ function App() {
         <Route path='/'/>
         {/* <Home /> */}
           <Switch> 
+            
             <Route path='/login'  component={LogInPage} />
             <Route path='/register'  component={RegisterPage} />
-            <Route path='/' exact component={LandingPage} />
+
             <Route path='/home' exact component={Home} />
             <Route path='/vaccine' exact component={Vaccine} />
-            <Route path='/flights' component={FlightRegister} />
+            
             <Route path='/maps' component={Maps} />
-            <Route path='/travelInfo?country=:country' component={TravelInfo} />
+
+            <Route path='/travelInfo/:country' component={TravelInfo} />
             <Route path='/vaccination-history' component={Vaccine_history} />
             <Route path='/airport-staff-flight-details' component={AirportStaffFlight} />
             <Route path='/mu7366passenger-details' component={AirportStaffPassengerDetails} />
-            <Route path='/uganda-news' component={NewsOutbreaks} />
-            <Route path='/skyscanner' component={Skyscanner} />
+            {/*<Route path='/flights' component={FlightRegister} />
+            <Route path='/skyscanner' component={Skyscanner} />*/}
+            <Route path='/flights' component={Skyscanner} />
+            <Route path='/convert' component={Base64} />
+            <Route path='/news/:country' component={NewsOutbreaks} />
+            <Route path='/profile' component={Profile} />
+            <Route path='/restriction/:country' component={Restriction} />
+            <Route path='/' exact component={LandingPage} />
+            <Route path='/fp' component={Home} /> 
           </Switch>
         </Router>
       </>

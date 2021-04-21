@@ -32,6 +32,7 @@ const RegisterPage = () => (
 		<h1 id="thiss">Destinated</h1>
 		<div id="form_container">
 			<RegisterForm />
+
 		</div>
 		<Link to="/"><Button id="backtohome" variant="warning" type="submit">Back to home</Button></Link>
 	</div>
