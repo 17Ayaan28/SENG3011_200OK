@@ -23,7 +23,6 @@
     max-width: 1250px;
     width: 90%;
     margin: 0 auto;
-
 }
 
 .margin-90{
@@ -32,7 +31,8 @@
 }
 
 .topbtn{
-	margin-right: 5px;
+    display: inline-block;
+    margin-left: 20px;
 }
 
 .outbreaksInfo{

@@ -702,7 +702,9 @@ class FlightRegisterBase extends React.Component {
                     <Card className='flight'>
                         <Card.Body className='direct' id={index}>
                             {this.state.origin + ' -> ' + this.state.look_up[flight.Arrival.AirportCode] + ' (' + flight.Arrival.AirportCode + ')' + '  ' + flight.MarketingCarrier.AirlineID + flight.MarketingCarrier.FlightNumber}
+                            <div className="card-btn">
                             <Button variant="warning" onClick={this.handleRegister}>Register</Button>
+                            </div>
                         </Card.Body>
                     </Card>
                 ))}

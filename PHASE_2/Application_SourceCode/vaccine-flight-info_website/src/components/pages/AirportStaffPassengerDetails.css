@@ -1,3 +1,12 @@
 #vaccines {
     display: none
 }
+
+.passenger-container{
+    width: 80%;
+    margin: 10px;
+}
+
+.pas-card{
+    margin: 20px;
+}
