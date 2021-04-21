@@ -108,3 +108,11 @@
 .follow-text {
     display: block;
 }
+
+#user {
+    display: none;
+}
+
+#staff {
+    display: none;
+}

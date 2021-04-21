@@ -7,65 +7,78 @@ import Table from 'react-bootstrap/Table';
 import Navbar from '../Navbar'
 import './vaccine_history.css'
 import './Profile.css'
+import { withRouter } from 'react-router-dom';
+import { withFirebase } from '../Firebase';
+import { compose } from 'recompose';
+import { Card } from 'react-bootstrap';
 
-function Profile() {
+class ProfileBase extends React.Component {
+
+    constructor(props) {
+        super(props);
+      
+        this.state = {
+            first_name: '',
+            last_name: '',
+            email: '',
+            info: '',
+        }
+    };
+
+    componentDidMount() {
+        //console.log(this.props)
+        const uid = this.props.firebase.auth.currentUser.uid
+        const user_ref = this.props.firebase.db.ref(`users/${uid}`)
+        user_ref.on('value', (snapshot) => {
+            //console.log(snapshot.val())
+            const userData = snapshot.val()
+            if(userData.role === 'user') {
+                const e = document.getElementById('user');
+                e.style.display = 'block'
+            } else {
+                const e = document.getElementById('staff')
+                e.style.display = 'block'
+            }
+            this.setState({ role: userData.role })
+            this.setState({ first_name: userData.first_name })
+            this.setState({ last_name: userData.last_name })
+            this.setState({ email: userData.email })
+            this.setState({ info: userData.credential })
+        })
+    }
+    
+
+    render() {
 	return (
         <>
         <Navbar />
 		<br></br>
 		<br></br>
-        <div class="container">
-            <div class="row">
+        <div className="container">
+            <div className="row">
                 <div className="col margin-90">
                         <img src='/images/avatar.jpg' className="profile-avatar"></img>
                         <div className="profile-info">
                             <div className="profile-text">
-                                <div className="profile-name">Ayaan</div>
-                                <div className="profile-identity">Phone: 0412123456</div>
-                                <div className="profile-follower">Passport: E1234567</div>
+                                <div className="profile-name">{this.state.first_name + ', ' + this.state.last_name}</div>
+                                <br />
+                                <div className="profile-identity">Email: {this.state.email}</div>
+                                <div className="profile-follower" id='user'>Passport: {this.state.info}</div>
+                                <br />
+                                <div className="profile-follower" id='staff'>Employee ID: {this.state.info}</div>
                             </div>
                         </div> 
-                </div>
-                <div class="col-8">
-                    <h2>Vaccine History</h2>
-                    <Table striped bordered hover>
-                        <thead>
-                            <tr>
-                            <th>#</th>
-                            <th>Vaccine Name</th>
-                            <th>Proof Document</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                            <td>1</td>
-                            <td>Dukoral</td>
-                            <td><a href="https://i.pinimg.com/originals/83/f1/67/83f167f885204677b2a61dc8ece029bd.jpg">Medical Certificate</a></td>
-                            </tr>
-                            <tr>
-                            <td>2</td>
-                            <td>Dukoral</td>
-                            <td><a href="https://i.pinimg.com/originals/83/f1/67/83f167f885204677b2a61dc8ece029bd.jpg">Medical Certificate</a></td>
-                            </tr>
-                            <tr>
-                            <td>3</td>
-                            <td>Dukoral</td>
-                            <td><a href="https://i.pinimg.com/originals/83/f1/67/83f167f885204677b2a61dc8ece029bd.jpg">Medical Certificate</a></td>
-                            </tr>
-                            <tr>
-                            <td>4</td>
-                            <td>Avaxim</td>
-                            <td><a href="https://i.pinimg.com/originals/83/f1/67/83f167f885204677b2a61dc8ece029bd.jpg">Medical Certificate</a></td>
-                            </tr>
-                        </tbody>
-                    </Table>
-                    <Button variant="primary" type="submit">Upload New Record</Button>
-
                 </div>
             </div>
         </div>
         </>
 	);
+    }
 }
+
+const Profile = compose(
+	withRouter,
+	withFirebase,
+)(ProfileBase);
 
 export default Profile;
