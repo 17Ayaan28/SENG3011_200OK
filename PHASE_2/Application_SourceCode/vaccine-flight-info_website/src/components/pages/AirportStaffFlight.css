@@ -1,39 +1,55 @@
 .currentDate {
-    text-align: center;
-    font-family: "Geneva, Verdana, sans-serif";
-    background-color: #fee;
-    position: relative;
-    box-sizing: border-box;
-    border: 1px solid #333;
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    max-width: 250px;
-    width: 40%;
-    font-size: 29px;
-    margin: 0 auto;
+  text-align: center;
+  font-family: "Geneva, Verdana, sans-serif";
+  background-color: #fee;
+  position: relative;
+  box-sizing: border-box;
+  border: 1px solid #333;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  max-width: 250px;
+  width: 40%;
+  font-size: 29px;
+  margin: 0 auto;
+}
+.staff-card {
+margin: 0 auto;
+margin-top: 20px;
+width: 60%
 }
 
+.staff-container {
+margin: 5%;
+text-align: center;
+}
+.staff-search {
+margin-top: 20px;
+}
 .datepicker {
-    font-size: 28px;
+  font-size: 28px;
 }
 
 .date-logo {
-  color: #000;
-  justify-self: start;
-  margin-left: 20px;
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 2rem;
-  display: flex;
-  align-items: center;
+color: #000;
+justify-self: start;
+margin-left: 20px;
+cursor: pointer;
+text-decoration: none;
+font-size: 2rem;
+display: flex;
+align-items: center;
 }
-  
+
 .fa-arrow-alt-circle-right {
-  margin-left: 0.6rem;
-  font-size: 2.23rem;
+margin-left: 0.6rem;
+font-size: 2.23rem;
 }
 
 .flight:hover {
-  background-color: #cfcfcf;
+background-color: #cfcfcf;
+}
+
+h4 {
+  margin: 0px
 }

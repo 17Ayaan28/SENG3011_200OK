@@ -20,7 +20,7 @@ class FlightRegisterBase extends React.Component {
         super(props);
       
         this.state = {
-            dod: '',
+            dod: new Date(),
             origin: '',
             destination: '',
             show: false,
@@ -186,16 +186,54 @@ class FlightRegisterBase extends React.Component {
     };
 
     handleSearch = () => {
+        console.log(this.state.dod)
+        console.log(new Date())
+        let d = this.state.dod
+        let month = String((d.getMonth() + 1));
+        const pattern = /^[1-9]$/
+        if(pattern.test(month)) {
+            month = '0' + month
+        }
+        let day = String(d.getDate());
+        if(pattern.test(day)) {
+          day = '0' + day
+        }
+
+        const year = String(d.getFullYear());
+
+        const input_date = new Date(year+'-'+month+'-'+day)
+        
+        let today = new Date()
+        const y = String(today.getFullYear())
+        let m = String((today.getMonth() + 1));
+        let dd = String(today.getDate());
+
+        if(pattern.test(m)) {
+            m = '0' + m
+        }
+
+        if(pattern.test(dd)) {
+            dd = '0' + dd
+        }
+
+        today = new Date(y+'-'+m+'-'+dd)
+
+
+
 
         if(this.state.origin === '' || this.state.origin === null) {
-            this.setState({ show:true })
-            this.setState({ message: "Please enter your origin!" });
+            this.setState({ message: "Please enter your origin!" }, () => {
+              this.setState({ show:true })
+            });
+            //this.setState({ message: "Please enter your origin!" });
         } else if(this.state.destination === '' || this.state.destination === null) {
-            this.setState({ show:true })
-            this.setState({ message: "Please enter your destination!" }); 
-        } else if(this.state.dod === '' || this.state.dod === null || this.state.dod < new Date()) {
-            this.setState({ show: true})
-            this.setState({ message: "Invalid date of depature!" })
+            this.setState({ message: "Please enter your destination!" }, () => {
+              this.setState({ show:true })
+            }); 
+        } else if(this.state.dod === '' || this.state.dod === null || input_date < today) {
+            this.setState({ message: "Invalid date of depature!" }, ()=>{
+              this.setState({ show: true})
+            })
         } else {
             let origin_iata = this.state.origin.split('(')[1];
             let destination_iata = this.state.destination.split('(')[1];
@@ -443,6 +481,8 @@ class FlightRegisterBase extends React.Component {
                   .then(() => {
                     console.log('new flight registration is logged');
                     //this.props.history.push('/home');
+                    //this.setState({ show: true })
+                    //this.setState({ message: "You have registered for " + flight_number + ' successfully!' })
                   })
                   .catch(error => {
                     console.log(error);
@@ -498,6 +538,9 @@ class FlightRegisterBase extends React.Component {
                   })
                   .then(() => {
                       console.log('new flight registration is logged');
+                      this.setState({ message: "You have registered for the flight successfully!" }, () => {
+                        this.setState({ show: true })
+                      })
                       //this.props.history.push('/home');
                   })
                   .catch(error => {
@@ -557,6 +600,9 @@ class FlightRegisterBase extends React.Component {
             })
             .then(() => {
                 console.log('new flight registration is logged');
+                this.setState({ message: "You have registered for " + flight_number + ' successfully!'}, () => {
+                  this.setState({ show: true })
+                });
                 //this.props.history.push('/home');
             })
             .catch(error => {
