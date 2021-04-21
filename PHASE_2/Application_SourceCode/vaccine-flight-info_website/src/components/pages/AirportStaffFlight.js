@@ -88,22 +88,26 @@ class AirportStaffFlightBase extends React.Component {
 
     render() { 
         return (
-            <>
+            <div>
                 <Navbar />
-                <h1 className="flightdetails">Scheduled Flights</h1>
-                <h3>Select Date</h3>
-                <DatePicker
-                    onChange={this.handleDateChange}
-                    value={this.state.search_date}
-                />
-                {this.state.flights.map(flight => (
-                    <Card>
-                        <Card.Body>
-                            {flight.flight_content}
-                        </Card.Body>
-                     </Card>
-                ))}
-            </>
+                <div className="staff-container">
+                    <h1 className="flightdetails">Scheduled Flights</h1>
+                    <div className="staff-search">
+                    <h4>Select Date</h4>
+                    <DatePicker
+                        onChange={this.handleDateChange}
+                        value={this.state.search_date}
+                    />
+                    </div>
+                    {this.state.flights.map(flight => (
+                        <Card className="staff-card">
+                            <Card.Body>
+                                {flight.flight_content}
+                            </Card.Body>
+                        </Card>
+                    ))}
+                </div>
+            </div>
         );
     }
 
