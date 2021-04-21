@@ -6,7 +6,12 @@
     border: 1px solid #aaa;
     border-radius: 4px;
     -webkit-appearance: none;
-  }
+}
+
+#card_body{
+    display: inline;
+    margin: 10px;
+}
 
 .flightcontainer {
     margin: 5%;

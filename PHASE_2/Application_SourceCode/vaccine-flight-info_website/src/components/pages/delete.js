@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-country-select/dist/react-bootstrap-country-select.css';
 import Button from 'react-bootstrap/Button';
 import Navbar from '../Navbar'
-import DatePicker from 'react-date-picker/dist/entry.nostyle';
+import DatePicker from 'react-date-picker';
 import Card from 'react-bootstrap/Card';
 import Modal from 'react-bootstrap/Modal';
 import Axios from "axios";
@@ -13,7 +13,6 @@ import { withRouter } from 'react-router-dom';
 import { withFirebase } from '../Firebase';
 import { compose } from 'recompose';
 import code_to_name from '../../country_code.json';
-import './DatePicker.css'
 
 class FlightRegisterBase extends React.Component {
 
@@ -609,79 +608,68 @@ class FlightRegisterBase extends React.Component {
             onChange: this.onDestinationChange
         };
         return (
-        <>
-        <Navbar />
-        <div className="flightcontainer">
-            <Card>
-                <Card.Body id='card_body'>
-                    <div>
-                        <p>Origin</p>
-                        <Autosuggest
+          <>
+          <Navbar />
+          <Card>
+              <Card.Body id='card_body'>
+                  <div>
+                      <p>Origin</p>
+                      <Autosuggest
                           suggestions={this.state.origin_suggestions}
                           onSuggestionsFetchRequested={this.onOriginSuggestionsFetchRequested}
                           onSuggestionsClearRequested={this.onOriginSuggestionsClearRequested}
                           getSuggestionValue={this.getOriginSuggestionValue}
                           renderSuggestion={this.renderOriginSuggestion}
                           inputProps={inputOriginProps}
-                        />
-                    </div>
-                    <div>
-                        <p>Destination</p>
-                        <Autosuggest
+                      />
+                  </div>
+                  <div>
+                      <p>Destination</p>
+                      <Autosuggest
                           suggestions={this.state.destination_suggestions}
                           onSuggestionsFetchRequested={this.onDestinationSuggestionsFetchRequested}
                           onSuggestionsClearRequested={this.onDestinationSuggestionsClearRequested}
                           getSuggestionValue={this.getDestinationSuggestionValue}
                           renderSuggestion={this.renderDestinationSuggestion}
                           inputProps={inputDestinationProps}
-                        />
-                    </div>
-                    <div>
-                        <p>Date of Depature</p>
-                        <DatePicker
+                      />
+                  </div>
+                  <div>
+                      <p>Date of Depature</p>
+                      <DatePicker
                         onChange={e => this.setState({ dod: e })}
                         value={this.state.dod}
-                        />
-                    </div>
-                    <div className="card-btn">
-                        <Button variant="warning" onClick={this.handleSearch}>Search</Button>
-                    </div>
-                </Card.Body>
-            </Card>
-            <div>
-                <div className="class-text">
-                    <h2>Direct Flights</h2>
-                </div>
-                {this.state.direct_flights.map((flight, index) => (
-                    <Card className='flight'>
-                        <Card.Body className='direct' id={index}>
-                            {this.state.origin + ' -> ' + this.state.look_up[flight.Arrival.AirportCode] + ' (' + flight.Arrival.AirportCode + ')' + '  ' + flight.MarketingCarrier.AirlineID + flight.MarketingCarrier.FlightNumber}
-                            <Button variant="warning" onClick={this.handleRegister}>Register</Button>
-                        </Card.Body>
-                    </Card>
-                ))}
-            </div>
-            <div>
-                <div className="class-text">
-                    <h2>Transit Flights</h2>
-                </div>
-                {this.state.other_flights.map((flight, index) => (
-                    <Card className='flight'>
-                        <Card.Body id={index} className='transit'>
-                            {this.state.origin}
-                            {flight.map(stop => 
-                                { return '  ' + stop.MarketingCarrier.AirlineID + stop.MarketingCarrier.FlightNumber + '  ' + stop.Departure.ScheduledTimeLocal.DateTime + '  ' + ' -> ' + this.state.look_up[stop.Arrival.AirportCode]  + ' (' + stop.Arrival.AirportCode + ')' + '  '}
-                                //{return this.state.look_up[stop.Depature.AirportCode]}
-                            )}
-                            <div className="card-btn">
-                                <Button variant="warning" onClick={this.handleRegister}>Register</Button>
-                            </div>
-                        </Card.Body>
-                    </Card>
-                ))}
-            </div>
-        </div>
-
+                      />
+                  </div>
+                  <Button variant="warning" onClick={this.handleSearch}>Search</Button>
+              </Card.Body>
+          </Card>
+          <div>
+            <h2>Direct Flights</h2>
+            {this.state.direct_flights.map((flight, index) => (
+                <Card className='flight'>
+                    <Card.Body className='direct' id={index}>
+                        {this.state.origin + ' -> ' + this.state.look_up[flight.Arrival.AirportCode] + ' (' + flight.Arrival.AirportCode + ')' + '  ' + flight.MarketingCarrier.AirlineID + flight.MarketingCarrier.FlightNumber}
+                        <Button variant="warning" onClick={this.handleRegister}>Register</Button>
+                    </Card.Body>
+                </Card>
+            ))}
+          </div>
+          <div>
+            <h2>Transit Flights</h2>
+            {this.state.other_flights.map((flight, index) => (
+                <Card className='flight'>
+                    <Card.Body id={index} className='transit'>
+                        {this.state.origin}
+                        {flight.map(stop => 
+                            { return '  ' + stop.MarketingCarrier.AirlineID + stop.MarketingCarrier.FlightNumber + '  ' + stop.Departure.ScheduledTimeLocal.DateTime + '  ' + ' -> ' + this.state.look_up[stop.Arrival.AirportCode]  + ' (' + stop.Arrival.AirportCode + ')' + '  '}
+                            //{return this.state.look_up[stop.Depature.AirportCode]}
+                        )}
+                        <Button variant="warning" onClick={this.handleRegister}>Register</Button>
+                    </Card.Body>
+                </Card>
+            ))}
+          </div>
           <Modal show={this.state.show} onHide={this.handleClose}>
               <Modal.Header closeButton>
               <Modal.Title></Modal.Title>
@@ -693,7 +681,7 @@ class FlightRegisterBase extends React.Component {
               </Button>
               </Modal.Footer>
           </Modal>
-    </>
+          </>
         );
     }
 
