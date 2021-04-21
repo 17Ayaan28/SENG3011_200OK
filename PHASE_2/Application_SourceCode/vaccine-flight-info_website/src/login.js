@@ -7,6 +7,11 @@ import './login.css';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import { withFirebase } from './components/Firebase';
+import store from './reducers/store';
+import { connect } from 'react-redux';
+import Firebase from './components/Firebase/firebase'
+//import add_firebase from './reducers/reducer';
+
 
 const LogInPage = () => (
 	<div id="bg">
@@ -35,15 +40,40 @@ class LogInFormBase extends Component {
 		this.state = { ...INITIAL_STATE };
 	}
 
-	onSubmit = event => {
+	onSubmit = async(event) => {
 		const { email, password } = this.state;
-		console.log(this.props)
-		this.props.firebase
-			.doSignInWithEmailAndPassword(email, password)
+		//console.log(this.props)
+		Firebase.doSignInWithEmailAndPassword(email, password)
 			.then(() => {
 				console.log('logged in!');
 				this.setState({ ...INITIAL_STATE });
-				localStorage.setItem("firebase", this.props.firebase)
+				//this.props.add(this.props.firebase)
+				localStorage.setItem("user", this.props.firebase.auth.currentUser.uid)
+				/*
+				const user_role_ref = Firebase.database().ref(`users/${this.props.firebase.auth.currentUser.uid}/role`);
+				let role;
+				user_role_ref.on('value', (snapshot) => {
+					role = snapshot.val();
+					localStorage.setItem('role', role)
+					//console.log('role')
+					
+					if(role === "USER") {
+						document.getElementById('staff_visible_only').style.display = 'none'
+						const user_components = document.getElementsByClassName('user_visible_only')
+						for (let c of user_components) {
+							c.style.display = 'inline';
+						}
+					} else {
+						document.getElementById('staff_visible_only').style.display = 'inline';
+						const user_components = document.getElementsByClassName('user_visible_only');
+						for (let c of user_components) {
+							c.style.display = 'none';
+						}
+					}
+					
+				});
+				*/
+				//localStorage.setItem('role', )
 				this.props.history.push('/home');
 			})
 			.catch(error => {
@@ -89,6 +119,21 @@ class LogInFormBase extends Component {
 			</Form>
 				
 		);
+	}
+}
+
+function add_f(firebase) {
+	return {
+		type: 'LOG_IN',
+		payload: firebase
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+	  add: (firebase) => {
+		dispatch(add_f(firebase))
+	  }
 	}
 }
 

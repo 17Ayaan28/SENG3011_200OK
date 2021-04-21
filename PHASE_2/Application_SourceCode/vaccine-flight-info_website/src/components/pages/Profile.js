@@ -11,6 +11,7 @@ import { withRouter } from 'react-router-dom';
 import { withFirebase } from '../Firebase';
 import { compose } from 'recompose';
 import { Card } from 'react-bootstrap';
+import Firebase from '../Firebase/firebase'
 
 class ProfileBase extends React.Component {
 
@@ -27,8 +28,11 @@ class ProfileBase extends React.Component {
 
     componentDidMount() {
         //console.log(this.props)
-        const uid = this.props.firebase.auth.currentUser.uid
-        const user_ref = this.props.firebase.db.ref(`users/${uid}`)
+        const currentUser = localStorage.getItem('user')
+        if(!currentUser) {
+            this.props.history.push('/')
+        }
+        const user_ref = Firebase.database().ref(`users/${currentUser}`)
         user_ref.on('value', (snapshot) => {
             //console.log(snapshot.val())
             const userData = snapshot.val()
@@ -61,10 +65,8 @@ class ProfileBase extends React.Component {
                         <div className="profile-info">
                             <div className="profile-text">
                                 <div className="profile-name">{this.state.first_name + ', ' + this.state.last_name}</div>
-                                <br />
                                 <div className="profile-identity">Email: {this.state.email}</div>
                                 <div className="profile-follower" id='user'>Passport: {this.state.info}</div>
-                                <br />
                                 <div className="profile-follower" id='staff'>Employee ID: {this.state.info}</div>
                             </div>
                         </div> 

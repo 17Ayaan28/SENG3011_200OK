@@ -6,6 +6,7 @@ import './Navbar.css';
 import { withRouter } from 'react-router-dom';
 import { withFirebase } from './Firebase';
 import { compose } from 'recompose';
+import Firebase from './Firebase/firebase'
 //import { AuthUserContext } from '../Session';
 
 class NavbarBase extends Component {
@@ -36,16 +37,30 @@ class NavbarBase extends Component {
 
     handleLogOut = () => {
         this.setState({ click: false });
-        this.props.firebase.doSignOut()
-        .then(() => {
-            console.log('logged out!');
-            this.props.history.push('/');
-        })
-        .catch(error => {
-            console.log('fking error when logging out');
-            console.log(error);
-            this.setState({ error });
-        });
+        if(localStorage.getItem('user')) {
+            this.props.firebase.doSignOut()
+            .then(() => {
+                console.log('logged out!');
+                this.props.history.push('/');
+            })
+            .catch(error => {
+                console.log('fking error when logging out');
+                console.log(error);
+                this.setState({ error });
+            });
+        } else {
+            Firebase.database().doSignOut()
+            .then(() => {
+                console.log('logged out!');
+                this.props.history.push('/');
+            })
+            .catch(error => {
+                console.log('fking error when logging out');
+                console.log(error);
+                this.setState({ error });
+            });
+        }
+        localStorage.removeItem('user')
     }
 
     handleProfile = () => {
@@ -54,12 +69,53 @@ class NavbarBase extends Component {
     }
 
     componentDidMount() {
-        console.log('---------------')
-        console.log(this.props)
-        if(this.props.firebase.auth.currentUser !== null) {
-            console.log(this.props.firebase.auth.currentUser.uid);
-            const uid = this.props.firebase.auth.currentUser.uid
-            const user_role_ref = this.props.firebase.db.ref(`users/${uid}/role`);
+        const currentUser = localStorage.getItem('user')
+        if(!currentUser) {
+            this.props.history.push('/')
+        }
+        if(!localStorage.getItem('role')) {
+            const user_role_ref = Firebase.database().ref(`users/${currentUser}/role`);
+            let role;
+            user_role_ref.on('value', (snapshot) => {
+                role = snapshot.val();
+                localStorage.setItem('role', role)
+                if(role === "USER") {
+                    document.getElementById('staff_visible_only').style.display = 'none'
+                    const user_components = document.getElementsByClassName('user_visible_only')
+                    for (let c of user_components) {
+                        c.style.display = 'inline';
+                    }
+                } else {
+                    document.getElementById('staff_visible_only').style.display = 'inline';
+                    const user_components = document.getElementsByClassName('user_visible_only');
+                    for (let c of user_components) {
+                        c.style.display = 'none';
+                    }
+                }
+            });
+        } else {
+            const role = localStorage.getItem('role')
+            if(role === "USER") {
+                document.getElementById('staff_visible_only').style.display = 'none'
+                const user_components = document.getElementsByClassName('user_visible_only')
+                for (let c of user_components) {
+                    c.style.display = 'inline';
+                }
+            } else {
+                document.getElementById('staff_visible_only').style.display = 'inline';
+                const user_components = document.getElementsByClassName('user_visible_only');
+                for (let c of user_components) {
+                    c.style.display = 'none';
+                }
+            }
+        }
+        //if(!localStorage.getItem('user')) 
+        
+            //console.log(this.props.firebase.auth.currentUser.uid);
+            /*
+            const uid = localStorage.getItem('user')
+            console.log(Firebase)
+            const user_role_ref = Firebase.database().ref(`users/${uid}/role`);
             let role;
             user_role_ref.on('value', (snapshot) => {
                 role = snapshot.val();
@@ -77,7 +133,8 @@ class NavbarBase extends Component {
                     }
                 }
             });
-        }
+            */
+        //const role = localStorage.getItem('role')
 
         window.addEventListener('resize', this.showButton);
     }
@@ -100,24 +157,24 @@ class NavbarBase extends Component {
                     </div>
                     <ul className={this.state.click ? 'nav-menu active' : 'nav-menu'}>
                         
-                        <li className="nav-item" className="user_visible_only">
+                        <li className="nav-item n" className="user_visible_only">
                             <Link to='/vaccine' className="nav-links" onClick={this.closeMobileMenu}>
                                Vaccines
                             </Link>
                         </li>
-                        <li className="nav-item" className="user_visible_only">
+                        <li className="nav-item n" className="user_visible_only">
                             <Link to='/vaccination-history' className="nav-links" onClick={this.closeMobileMenu}>
                                Vaccination History
                             </Link>
                         </li>
-                        <li className="nav-item" className="user_visible_only">
+                        <li className="nav-item n" className="user_visible_only">
                             <Link to='/flights' className="nav-links" onClick={this.closeMobileMenu}>
                                Register Flights
                             </Link>
                         </li>
-                        <li className="nav-item" id='staff_visible_only'>
+                        <li className="nav-item n" id='staff_visible_only'>
                             <Link to='/airport-staff-flight-details' className="nav-links" onClick={this.closeMobileMenu}>
-                               Flight Details(Admin)
+                               Flight Details
                             </Link>
                         </li>
                         <li className="nav-item">

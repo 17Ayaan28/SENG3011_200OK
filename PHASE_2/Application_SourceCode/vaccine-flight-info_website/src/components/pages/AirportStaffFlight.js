@@ -8,6 +8,7 @@ import { withRouter } from 'react-router-dom';
 import { withFirebase } from '../Firebase';
 import { compose } from 'recompose';
 import { Card } from 'react-bootstrap';
+import Firebase from '../Firebase/firebase'
 
 class AirportStaffFlightBase extends React.Component {
     
@@ -21,8 +22,12 @@ class AirportStaffFlightBase extends React.Component {
     };
 
     componentDidMount() {
+        const currentUser = localStorage.getItem('user')
+        if(!currentUser) {
+            this.props.history.push('/')
+        }
         const flights = []
-		const uid = this.props.firebase.auth.currentUser.uid
+		const uid = localStorage.getItem('user')
 
         let search_date = this.state.search_date;
         let month = String((search_date.getMonth() + 1));
@@ -33,7 +38,7 @@ class AirportStaffFlightBase extends React.Component {
         }
         search_date = search_date.getFullYear() + '-' + month + '-' + search_date.getDate();
         console.log(search_date)
-        const flights_ref = this.props.firebase.db.ref(`flights`);
+        const flights_ref = Firebase.database().ref(`flights`);
 		flights_ref.on('value', (snapshot) => {
             snapshot.forEach((userSnapshot) => {
                 //console.log('first')
@@ -63,16 +68,16 @@ class AirportStaffFlightBase extends React.Component {
                     flights.push(record)
                 }
             });
+            console.log(flights)
+            this.setState({ flights: flights })
         })
-        console.log(flights)
-        this.setState({ flights: flights })
     }
 
     handleDateChange = (new_date) => {
         if(new_date !== null) {
             this.setState({ search_date: new_date }, () => {
                 const flights = []
-                const uid = this.props.firebase.auth.currentUser.uid
+                const uid = localStorage.getItem('user')
 
                 let search_date = this.state.search_date;
                 let month = String((search_date.getMonth() + 1));
@@ -82,7 +87,7 @@ class AirportStaffFlightBase extends React.Component {
                     month = '0' + month
                 }
                 search_date = search_date.getFullYear() + '-' + month + '-' + search_date.getDate();
-                const flights_ref = this.props.firebase.db.ref(`flights`);
+                const flights_ref = Firebase.database().ref(`flights`);
                 flights_ref.on('value', (snapshot) => {
                     snapshot.forEach((userSnapshot) => {
                         //console.log('first')

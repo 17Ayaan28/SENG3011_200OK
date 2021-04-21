@@ -9,7 +9,7 @@ const config = {
     "storageBucket": "seng3011-306108.appspot.com"
 }
 
-class Firebase {
+class FirebaseBase {
     constructor() {
         app.initializeApp(config);
    
@@ -37,5 +37,8 @@ class Firebase {
         return this.auth;
     }
 }
-   
+
+const Firebase = new FirebaseBase()
+
 export default Firebase;
+export {FirebaseBase}

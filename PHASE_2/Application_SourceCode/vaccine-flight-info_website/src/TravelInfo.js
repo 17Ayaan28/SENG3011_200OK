@@ -20,6 +20,10 @@ class TravelInfo extends React.Component {
 	}
 
 	componentDidMount() {
+		const currentUser = localStorage.getItem('user')
+        if(!currentUser) {
+            this.props.history.push('/')
+        }
 		console.log('1');
 		const country = this.props.match.params.country;
 		console.log(country)

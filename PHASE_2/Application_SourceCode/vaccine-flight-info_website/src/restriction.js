@@ -16,6 +16,10 @@ class Restriction extends React.Component {
 	}
 
     componentDidMount() {
+        const currentUser = localStorage.getItem('user')
+        if(!currentUser) {
+            this.props.history.push('/')
+        }
 		const country = this.props.match.params.country;
 		//console.log(country)
         //console.log(typeof(country_convert))

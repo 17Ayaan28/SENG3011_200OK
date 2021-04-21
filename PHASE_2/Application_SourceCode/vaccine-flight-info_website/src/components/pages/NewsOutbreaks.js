@@ -15,6 +15,10 @@ class NewsOutbreaks extends React.Component {
 	}
 
     componentDidMount() {
+        const currentUser = localStorage.getItem('user')
+        if(!currentUser) {
+            this.props.history.push('/')
+        } 
 		const country = this.props.match.params.country;
 		console.log(country)
 		this.setState({ country: this.props.location.display_country_name })
