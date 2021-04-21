@@ -11,3 +11,13 @@
 .out-title{
     padding-top: 40px;
 }
+
+#newsBody {
+    text-align: center;
+}
+
+#news-title {
+    color: #34b;
+    font-weight: 900;
+    font-size: 24px;
+}

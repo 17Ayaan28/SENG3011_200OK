@@ -1,6 +1,4 @@
 .react-autosuggest__input {
-    width: 240px;
-    height: 30px;
     padding: 10px 20px;
     font-family: "Open Sans", sans-serif;
     font-weight: 300;
@@ -8,7 +6,31 @@
     border: 1px solid #aaa;
     border-radius: 4px;
     -webkit-appearance: none;
-  }
+}
+
+#card_body{
+    display: inline;
+    margin: 10px;
+}
+
+.flightcontainer {
+    margin: 5%;
+}
+.search-region {
+    margin: 0 auto;
+    margin-bottom: 50px;
+}
+.class-text {
+    margin: 10px;
+}
+
+.card-btn {
+    margin-top:20px;
+}
+
+.flightsearch {
+    padding-top: 3%;
+}
   
 .react-autosuggest__input--focused {
     outline: none;
@@ -29,9 +51,7 @@
 
 .react-autosuggest__suggestions-container--open {
     display: block;
-    position: absolute;
-    top: 51px;
-    width: 280px;
+    margin-top: 2px;
     border: 1px solid #aaa;
     background-color: #fff;
     font-family: "Open Sans", sans-serif;
@@ -85,11 +105,8 @@
     display: flex;
 }   
 
-#card_body {
-    align-items: center;
-    padding: auto;
-}
-
 .flight {
-    margin: 30px;
+    width: 80%;
+    margin-bottom: 10px;
 }
+  

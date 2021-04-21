@@ -185,7 +185,7 @@ class RegisterFormBase extends Component {
 			</Form.Group>
 			<Form.Group controlId="formBasicCheckbox">
 				<Form.Check id="staff" disabled={disableCheckStaff} type="checkbox" onChange={this.handleStaff}
-				label="I am an airport stuff"/>
+				label="I am an airport staff"/>
 			</Form.Group>
 			<Form.Group id='passport_number'>
 				<Form.Label>Passport Number:</Form.Label>

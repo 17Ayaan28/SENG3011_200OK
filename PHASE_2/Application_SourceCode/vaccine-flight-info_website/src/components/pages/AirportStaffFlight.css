@@ -18,13 +18,24 @@ margin: 0 auto;
 margin-top: 20px;
 width: 60%
 }
+.staff-card {
+  margin: 0 auto;
+  margin-top: 20px;
+  width: 60%
+}
 
 .staff-container {
-margin: 5%;
-text-align: center;
+  margin: 5%;
+  text-align: center;
+}
+
+.staff-search {
+  margin-top: 20px;
+  margin: 5%;
+  text-align: center;
 }
 .staff-search {
-margin-top: 20px;
+  margin-top: 20px;
 }
 .datepicker {
   font-size: 28px;

@@ -155,6 +155,7 @@ class AirportStaffFlightBase extends React.Component {
                 </div>
                 {this.state.flights.map((flight, index) => (
                     <Card className='flight staff-card'>
+
                         <Card.Body id={index}>
                             <h4 onDoubleClick={this.handleFlightDetails}>{flight.flight_number}</h4>
                             <div onDoubleClick={this.handleFlightDetails}>{flight.origin + ' -> ' + flight.destination}</div>
