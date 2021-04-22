@@ -5,12 +5,12 @@
 
 #travel_head {
 	position: relative;
-	margin-top: 2%;
 	font-size: 30px;
+    padding-top: 30px;
+    color: rgb(4, 41, 73);
 }
 
 #travel_table {
-	position: absolute;
 	top: 25%;
 }
 
@@ -24,6 +24,7 @@
     max-width: 1250px;
     width: 90%;
     margin: 0 auto;
+    background-color: aliceblue;
 }
 
 .margin-90{
@@ -45,7 +46,7 @@ td {
 }
 
 .vaccine-table {
-    width: 70%;
+    width: 90%;
 	margin-top: 10px;
 }
 
