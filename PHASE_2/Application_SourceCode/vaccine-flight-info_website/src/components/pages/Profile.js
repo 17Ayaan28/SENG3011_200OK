@@ -37,7 +37,7 @@ class ProfileBase extends React.Component {
             //console.log(snapshot.val())
             const userData = snapshot.val()
 	    if(userData) {
-		    if(userData.role === 'user') {
+		    if(userData.role === 'USER') {
 			const e = document.getElementById('user');
 			e.style.display = 'block'
 		    } else {
