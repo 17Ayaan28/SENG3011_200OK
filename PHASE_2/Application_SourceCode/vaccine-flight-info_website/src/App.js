@@ -26,17 +26,13 @@ function App() {
   return (
       <>
         <Router>
-        <Route path='/'/>
         {/* <Home /> */}
           <Switch> 
-            
             <Route path='/login'  component={LogInPage} />
             <Route path='/register'  component={RegisterPage} />
 
             <Route path='/home' exact component={Home} />
             <Route path='/vaccine' exact component={Vaccine} />
-            
-            <Route path='/maps' component={Maps} />
 
             <Route path='/travelInfo/:country' component={TravelInfo} />
             <Route path='/vaccination-history' component={Vaccine_history} />
@@ -45,7 +41,6 @@ function App() {
             {/*<Route path='/flights' component={FlightRegister} />
             <Route path='/skyscanner' component={Skyscanner} />*/}
             <Route path='/flights' component={FlightRegister} />
-            <Route path='/convert' component={Base64} />
             <Route path='/news/:country' component={NewsOutbreaks} />
             <Route path='/profile' component={Profile} />
             <Route path='/restriction/:country' component={Restriction} />

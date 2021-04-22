@@ -80,13 +80,19 @@ class NavbarBase extends Component {
                 role = snapshot.val();
                 localStorage.setItem('role', role)
                 if(role === "USER") {
-                    document.getElementById('staff_visible_only').style.display = 'none'
+                    const e = document.getElementById('staff_visible_only')
+                    if(e) {
+                        e.style.display = 'none'
+                    }
                     const user_components = document.getElementsByClassName('user_visible_only')
                     for (let c of user_components) {
                         c.style.display = 'inline';
                     }
                 } else {
-                    document.getElementById('staff_visible_only').style.display = 'inline';
+                    const e = document.getElementById('staff_visible_only');
+                    if(e) {
+                        e.style.display = 'inline';
+                    }
                     const user_components = document.getElementsByClassName('user_visible_only');
                     for (let c of user_components) {
                         c.style.display = 'none';
@@ -96,13 +102,19 @@ class NavbarBase extends Component {
         } else {
             const role = localStorage.getItem('role')
             if(role === "USER") {
-                document.getElementById('staff_visible_only').style.display = 'none'
+                const e = document.getElementById('staff_visible_only');
+                if(e) {
+                    e.style.display = 'none'
+                }
                 const user_components = document.getElementsByClassName('user_visible_only')
                 for (let c of user_components) {
                     c.style.display = 'inline';
                 }
             } else {
-                document.getElementById('staff_visible_only').style.display = 'inline';
+                const e = document.getElementById('staff_visible_only')
+                if(e) {
+                    e.style.display = 'inline';
+                }
                 const user_components = document.getElementsByClassName('user_visible_only');
                 for (let c of user_components) {
                     c.style.display = 'none';

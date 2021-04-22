@@ -16,6 +16,9 @@ import code_to_name from '../../country_code.json';
 import './DatePicker.css'
 import Firebase from '../Firebase/firebase'
 
+function unique (arr) {
+  return Array.from(new Set(arr))
+}
 
 class FlightRegisterBase extends React.Component {
 
@@ -263,33 +266,13 @@ class FlightRegisterBase extends React.Component {
                     'Authorization': 'Bearer r6tvfxkxp5m73p7cyx9wzpt5'
                 }
             }
-            /*
-            const url2 = 'https://api.lufthansa.com/v1/operations/schedules/' + origin_iata + '/' + destination_iata + '/' + date + '?directFlights=0&limit=100'
-            const options2 = {
-                method: 'GET',
-                url: url2,
-                headers: {
-                    'Accept': 'application/json',
-                    'Authorization': 'Bearer y3fw5tjj7twtjyh8wg7nfghz'
-                }
-            }
-            const request1 = Axios.request(options1)
-            const request2 = Axios.request(options2)
-            
-            Axios.all([request1, request2])
-            .then(
-                Axios.spread((...responses) => {
-                    const direct_flights = responses[0]
-                    const other_flights = responses[0]
-                    console.log(direct_flights)
-                    console.log('123')
-                })
-            )
-            */
+    
             Axios.request(options)
             .then(
                 res => {
                     console.log('hehehehe');
+                    let direct_array = []
+                    let other_array = []
                     //console.log(res.data.ScheduleResource.Schedule);
                     const schedules = res.data.ScheduleResource.Schedule;
                     let direct_flights_array = []
@@ -311,28 +294,13 @@ class FlightRegisterBase extends React.Component {
                     //console.log(other_flights_array)
                     for (let flight of direct_flights_array) {
                         if(!(this.state.look_up.hasOwnProperty(flight.Arrival.AirportCode))) {
-                            const o = {
-                                method: 'GET',
-                                url: 'https://aerodatabox.p.rapidapi.com/airports/iata/' + flight.Arrival.AirportCode,
-                                headers: {
-                                  'x-rapidapi-key': '2cf1a4a141msh66321b55ff7c5bfp13bc41jsn9f941faf9485',
-                                  'x-rapidapi-host': 'aerodatabox.p.rapidapi.com'
-                                }
-                            };
-
-                            direct_requests.push(Axios.request(o))
+                            direct_array.push(flight.Arrival.AirportCode)
+                            //direct_requests.push(Axios.request(o))
                         }
                         if(!(this.state.look_up.hasOwnProperty(flight.Departure.AirportCode))) {
-                          const o = {
-                              method: 'GET',
-                              url: 'https://aerodatabox.p.rapidapi.com/airports/iata/' + flight.Departure.AirportCode,
-                              headers: {
-                                'x-rapidapi-key': '2cf1a4a141msh66321b55ff7c5bfp13bc41jsn9f941faf9485',
-                                'x-rapidapi-host': 'aerodatabox.p.rapidapi.com'
-                              }
-                          };
+                            direct_array.push(flight.Departure.AirportCode)
 
-                          direct_requests.push(Axios.request(o))
+                            //direct_requests.push(Axios.request(o))
                         }
                     }
                     for (let flight of other_flights_array) {
@@ -342,32 +310,46 @@ class FlightRegisterBase extends React.Component {
                             //console.log(this.state.look_up)
                             if(!(this.state.look_up.hasOwnProperty(stop.Arrival.AirportCode))) {
                                 //console.log('hi')
-                                const o = {
-                                    method: 'GET',
-                                    url: 'https://aerodatabox.p.rapidapi.com/airports/iata/' + stop.Arrival.AirportCode,
-                                    headers: {
-                                      'x-rapidapi-key': '2cf1a4a141msh66321b55ff7c5bfp13bc41jsn9f941faf9485',
-                                      'x-rapidapi-host': 'aerodatabox.p.rapidapi.com'
-                                    }
-                                };
-
-                                requests.push(Axios.request(o))
+                                other_array.push(stop.Arrival.AirportCode)
+                                //requests.push(Axios.request(o))
                             }
                             if(!(this.state.look_up.hasOwnProperty(stop.Departure.AirportCode))) {
                                 //console.log('hi')
-                                const o = {
-                                    method: 'GET',
-                                    url: 'https://aerodatabox.p.rapidapi.com/airports/iata/' + stop.Departure.AirportCode,
-                                    headers: {
-                                      'x-rapidapi-key': '2cf1a4a141msh66321b55ff7c5bfp13bc41jsn9f941faf9485',
-                                      'x-rapidapi-host': 'aerodatabox.p.rapidapi.com'
-                                    }
-                                };
-
-                                requests.push(Axios.request(o))
+                                
+                                other_array.push(stop.Departure.AirportCode)
+                                //requests.push(Axios.request(o))
                             }
                             
                         }
+                    }
+
+                    direct_array = unique(direct_array)
+                    other_array = unique(other_array)
+  
+                    for (let code of direct_array) {
+                        const o = {
+                            method: 'GET',
+                            url: 'https://aerodatabox.p.rapidapi.com/airports/iata/' + code,
+                            headers: {
+                              'x-rapidapi-key': '13f01b6e68msh9b62bb9162e56d2p148578jsn9b4ca891e37c',
+                              'x-rapidapi-host': 'aerodatabox.p.rapidapi.com'
+                            }
+                        };
+
+                        direct_requests.push(Axios.request(o))
+                    }
+
+                    for (let code of other_array) {
+                        const o = {
+                            method: 'GET',
+                            url: 'https://aerodatabox.p.rapidapi.com/airports/iata/' + code,
+                            headers: {
+                              'x-rapidapi-key': '13f01b6e68msh9b62bb9162e56d2p148578jsn9b4ca891e37c',
+                              'x-rapidapi-host': 'aerodatabox.p.rapidapi.com'
+                            }
+                        };
+
+                        requests.push(Axios.request(o))
                     }
 
                     Axios.all(requests)
@@ -421,6 +403,9 @@ class FlightRegisterBase extends React.Component {
     handleRegister = (event) => {
         const uid = localStorage.getItem('user')
         const id = event.target.parentNode.id
+        console.log(id)
+        console.log(event.target)
+        console.log(event.target.parentNode)
         const className = event.target.parentNode.className
         let content = event.target.parentNode.textContent
         content = content.slice(0, content.length - 8)
@@ -557,6 +542,8 @@ class FlightRegisterBase extends React.Component {
             
         } else {
             // direct flights
+            console.log(id)
+            console.log(this.state.direct_flights)
             const flight = this.state.direct_flights[parseInt(id)]
             console.log(this.state.direct_flights[parseInt(id)])
             const flight_number = flight.MarketingCarrier.AirlineID + flight.MarketingCarrier.FlightNumber
@@ -565,6 +552,10 @@ class FlightRegisterBase extends React.Component {
 
             let origin_airport_code = array[0].split('(')[1]
             origin_airport_code = origin_airport_code.split(')')[0]
+            console.log('###########')
+            console.log(this.state.look_up_code)
+            console.log(origin_airport_code)
+            console.log('###########')
             const origin_country_code = this.state.look_up_code[origin_airport_code]
             //console.log(destination_country_code)
             const origin_country_name = code_to_name[origin_country_code]['cdc_name']
@@ -664,92 +655,90 @@ class FlightRegisterBase extends React.Component {
             onChange: this.onDestinationChange
         };
         return (
-    <div>
-        <Navbar />
-        <div className="flightcontainer">
-            <Card>
-                <Card.Body id='card_body'>
-                    <div>
-                        <p>Origin</p>
-                        <Autosuggest
-                          suggestions={this.state.origin_suggestions}
-                          onSuggestionsFetchRequested={this.onOriginSuggestionsFetchRequested}
-                          onSuggestionsClearRequested={this.onOriginSuggestionsClearRequested}
-                          getSuggestionValue={this.getOriginSuggestionValue}
-                          renderSuggestion={this.renderOriginSuggestion}
-                          inputProps={inputOriginProps}
-                        />
-                    </div>
-                    <div>
-                        <p>Destination</p>
-                        <Autosuggest
-                          suggestions={this.state.destination_suggestions}
-                          onSuggestionsFetchRequested={this.onDestinationSuggestionsFetchRequested}
-                          onSuggestionsClearRequested={this.onDestinationSuggestionsClearRequested}
-                          getSuggestionValue={this.getDestinationSuggestionValue}
-                          renderSuggestion={this.renderDestinationSuggestion}
-                          inputProps={inputDestinationProps}
-                        />
-                    </div>
-                    <div>
-                        <p>Date of Depature</p>
-                        <DatePicker
-                        onChange={e => this.setState({ dod: e })}
-                        value={this.state.dod}
-                      />
-                  </div>
-                  <div className="card-btn">
-                  <Button variant="warning" onClick={this.handleSearch}>Search</Button>
-                  </div>
-              </Card.Body>
-            </Card>
-            <div>
-            <div className="card-text">
-                <h2>Direct Flights</h2>
-            </div>
-            {this.state.direct_flights.map((flight, index) => (
-                <Card className='flight' key={index}>
-                    <Card.Body className='direct' id={index}>
-                        {this.state.origin + ' -> ' + this.state.look_up[flight.Arrival.AirportCode] + ' (' + flight.Arrival.AirportCode + ')' + '  ' + flight.MarketingCarrier.AirlineID + flight.MarketingCarrier.FlightNumber}
+          <div>
+              <Navbar />
+              <div className="flightcontainer">
+                  <Card>
+                      <Card.Body id='card_body'>
+                          <div>
+                              <p>Origin</p>
+                              <Autosuggest
+                                suggestions={this.state.origin_suggestions}
+                                onSuggestionsFetchRequested={this.onOriginSuggestionsFetchRequested}
+                                onSuggestionsClearRequested={this.onOriginSuggestionsClearRequested}
+                                getSuggestionValue={this.getOriginSuggestionValue}
+                                renderSuggestion={this.renderOriginSuggestion}
+                                inputProps={inputOriginProps}
+                              />
+                          </div>
+                          <div>
+                              <p>Destination</p>
+                              <Autosuggest
+                                suggestions={this.state.destination_suggestions}
+                                onSuggestionsFetchRequested={this.onDestinationSuggestionsFetchRequested}
+                                onSuggestionsClearRequested={this.onDestinationSuggestionsClearRequested}
+                                getSuggestionValue={this.getDestinationSuggestionValue}
+                                renderSuggestion={this.renderDestinationSuggestion}
+                                inputProps={inputDestinationProps}
+                              />
+                          </div>
+                          <div>
+                              <p>Date of Depature</p>
+                              <DatePicker
+                              onChange={e => this.setState({ dod: e })}
+                              value={this.state.dod}
+                            />
+                        </div>
                         <div className="card-btn">
-                        <Button variant="warning" onClick={this.handleRegister}>Register</Button>
+                        <Button variant="warning" onClick={this.handleSearch}>Search</Button>
                         </div>
                     </Card.Body>
-                </Card>
-            ))}
+                  </Card>
+                  <div>
+                  <div className="card-text">
+                      <h2>Direct Flights</h2>
+                  </div>
+                  {this.state.direct_flights.map((flight, index) => (
+                      <Card className='flight' key={index}>
+                          <Card.Body className='direct' id={index}>
+                              {this.state.origin + ' -> ' + this.state.look_up[flight.Arrival.AirportCode] + ' (' + flight.Arrival.AirportCode + ')' + '  ' + flight.MarketingCarrier.AirlineID + flight.MarketingCarrier.FlightNumber}
+      
+                              <Button variant="warning" onClick={this.handleRegister} className="card-btn">Register</Button>
+                              
+                          </Card.Body>
+                      </Card>
+                  ))}
+                </div>
+                <div>
+                  <div className="card-text">
+                      <h2>Transit Flights</h2>
+                  </div>
+                  {this.state.other_flights.map((flight, index) => (
+                      <Card className='flight' key={index}>
+                          <Card.Body id={index} className='transit'>
+                              {this.state.origin}
+                              {flight.map(stop => 
+                                  { return '  ' + stop.MarketingCarrier.AirlineID + stop.MarketingCarrier.FlightNumber + '  ' + stop.Departure.ScheduledTimeLocal.DateTime + '  ' + ' -> ' + this.state.look_up[stop.Arrival.AirportCode]  + ' (' + stop.Arrival.AirportCode + ')' + '  '}
+                                  //{return this.state.look_up[stop.Depature.AirportCode]}
+                              )}
+                              <Button variant="warning" onClick={this.handleRegister} className="card-btn">Register</Button>
+                          </Card.Body>
+                      </Card>
+                  ))}
+                </div>
+              </div>
+              <Modal show={this.state.show} onHide={this.handleClose}>
+                  <Modal.Header closeButton>
+                  <Modal.Title></Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>{this.state.message}</Modal.Body>
+                  <Modal.Footer>
+                  <Button variant="secondary" onClick={this.handleClose}>
+                      Close
+                  </Button>
+                  </Modal.Footer>
+              </Modal>
           </div>
-          <div>
-            <div className="card-text">
-                <h2>Transit Flights</h2>
-            </div>
-            {this.state.other_flights.map((flight, index) => (
-                <Card className='flight' key={index}>
-                    <Card.Body id={index} className='transit'>
-                        {this.state.origin}
-                        {flight.map(stop => 
-                            { return '  ' + stop.MarketingCarrier.AirlineID + stop.MarketingCarrier.FlightNumber + '  ' + stop.Departure.ScheduledTimeLocal.DateTime + '  ' + ' -> ' + this.state.look_up[stop.Arrival.AirportCode]  + ' (' + stop.Arrival.AirportCode + ')' + '  '}
-                            //{return this.state.look_up[stop.Depature.AirportCode]}
-                        )}
-                                          <div className="card-btn">
-                        <Button variant="warning" onClick={this.handleRegister}>Register</Button>
-                                          </div>
-                    </Card.Body>
-                </Card>
-            ))}
-          </div>
-        </div>
-        <Modal show={this.state.show} onHide={this.handleClose}>
-            <Modal.Header closeButton>
-            <Modal.Title></Modal.Title>
-            </Modal.Header>
-            <Modal.Body>{this.state.message}</Modal.Body>
-            <Modal.Footer>
-            <Button variant="secondary" onClick={this.handleClose}>
-                Close
-            </Button>
-            </Modal.Footer>
-        </Modal>
-    </div>
         );
     }
 
