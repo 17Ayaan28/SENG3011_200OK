@@ -219,8 +219,10 @@ class Vaccine_history_base extends React.Component {
 	render() {
 		return (
 			<>
+			<div id='he'>
 			<Navbar />
 			<br></br>
+			<div id='co'>
 			<h1>Vaccination History</h1>
 			<br></br>
 			<div className="margin-90">
@@ -306,6 +308,8 @@ class Vaccine_history_base extends React.Component {
 				</Form>
 
 				</div>
+			</div>
+			</div>
 			</div>
 			</div>
 			<Modal show={this.state.show} onHide={this.handleClose}>

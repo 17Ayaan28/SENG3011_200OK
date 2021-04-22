@@ -140,6 +140,7 @@ class FlightDetailsBase extends React.Component {
       return (
           <>
             <Navbar />
+            <div id='de'></div>
             <div className="passenger-container">
                 <Card id='vaccines' className="pas-card">
                     <Card.Body>
@@ -151,7 +152,7 @@ class FlightDetailsBase extends React.Component {
                 {unique(this.state.passengers).map((p, index) => (
                     <Card className="pas-card">
                         <Card.Body>
-                        {p}
+                        {"Passenger Name: " + p}
                         <div>{"Vaccination History: " + unique(this.state.historys)[index]}</div>
                         </Card.Body>
                     </Card>

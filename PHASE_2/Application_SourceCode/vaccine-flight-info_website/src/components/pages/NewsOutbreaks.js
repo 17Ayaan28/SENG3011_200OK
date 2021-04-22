@@ -60,7 +60,7 @@ class NewsOutbreaks extends React.Component {
 
 	render() {
         return(
-        <div>
+        <div id='news'>
         <Navbar />
         <h2 className="outbreaks out-title">Recent News</h2>
         <div className="outbreaks card-columns">

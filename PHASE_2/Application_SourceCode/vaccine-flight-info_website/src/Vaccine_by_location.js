@@ -58,8 +58,9 @@ class VaccineBase extends React.Component {
 
     componentDidMount() {
 
-      if(this.props.firebase.auth.currentUser === null) {
-        this.props.history.push('/')
+      const currentUser = localStorage.getItem('user')
+      if(!currentUser) {
+          this.props.history.push('/')
       }
 
       const dropdown = document.getElementById('country_input')
@@ -68,6 +69,7 @@ class VaccineBase extends React.Component {
 
     render() {
       return (
+        <div id='cover'>
         <div className="container-div">
         <Navbar />
         <div className="search-page">
@@ -83,6 +85,7 @@ class VaccineBase extends React.Component {
               <Button className="search-btn" variant="primary" onClick={this.handleSearch}>Search</Button>
             </Form>
           </div>
+        </div>
         </div>
         </div>
       );

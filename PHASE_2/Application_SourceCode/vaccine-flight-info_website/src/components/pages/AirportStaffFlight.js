@@ -147,12 +147,12 @@ class AirportStaffFlightBase extends React.Component {
 
     render() { 
         return (
-            <div>
+            <div id='f'>
                 <Navbar />
                 <div className="staff-container">
                     <h1 className="flightdetails">Scheduled Flights</h1>
                     <div className="staff-search">
-                    <h4>Select Date</h4>
+                    <h4 id='t'>Select Date</h4>
                     <DatePicker
                         onChange={this.handleDateChange}
                         value={this.state.search_date}

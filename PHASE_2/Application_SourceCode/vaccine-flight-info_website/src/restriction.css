@@ -9,8 +9,24 @@
 
 .res-title{
     padding-top: 40px;
+    color: white;
 }
 
 .card-title {
     text-transform: capitalize;
+}
+
+#cover1 {
+    height: 100%;
+	width: 100vw;
+    background-image: url('./travel2.jpeg');
+	background-repeat: no-repeat;
+ 	background-size: cover;
+}
+
+.card {
+    outline: none;
+    border-style: none !important;
+    border-radius: 10px;
+    background-color: #ededed;
 }

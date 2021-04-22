@@ -12,3 +12,11 @@
 .search-label {
 	text-align: center;
 }
+
+#cover {
+	height: 100vh;
+	width: 100vw;
+	background-image: url("./travel3.jpeg");
+	background-repeat: no-repeat;
+ 	background-size: cover;
+}

@@ -16,18 +16,6 @@ import code_to_name from '../../country_code.json';
 import './DatePicker.css'
 import Firebase from '../Firebase/firebase'
 
-function syncDelay(milliseconds){
-    var start = new Date().getTime();
-    var end=0;
-    while( (end-start) < milliseconds){
-        end = new Date().getTime();
-    }
-}
-
-function unique (arr) {
-  return Array.from(new Set(arr))
-}
-
 class FlightRegisterBase extends React.Component {
 
     constructor(props) {
@@ -60,14 +48,14 @@ class FlightRegisterBase extends React.Component {
   
         const inputValue = value.trim().toLowerCase();
         console.log(inputValue)
-        if(inputValue && inputValue.length >= 5) {
+        if(inputValue && inputValue.length >= 3) {
             
             const options = {
                 method: 'GET',
                 url: 'https://aerodatabox.p.rapidapi.com/airports/search/term',
-                params: {q: inputValue, limit: '5'},
+                params: {q: inputValue, limit: '10'},
                 headers: {
-                  'x-rapidapi-key': '5e9d5ed709mshf19dfc26bf7d57cp16d054jsn84dd9ffba92f',
+                  'x-rapidapi-key': '2cf1a4a141msh66321b55ff7c5bfp13bc41jsn9f941faf9485',
                   'x-rapidapi-host': 'aerodatabox.p.rapidapi.com'
                 }
             };
@@ -78,7 +66,7 @@ class FlightRegisterBase extends React.Component {
             const options = {
                 method: 'POST',
                 url: 'https://www.air-port-codes.com/api/v1/autocomplete',
-                params: {term: inputValue, limit: '5'},
+                params: {term: inputValue, limit: '20'},
                 headers: {
                   'Content-Type': 'application/json',
                   'Accept': 'application/json',
@@ -139,13 +127,13 @@ class FlightRegisterBase extends React.Component {
   
       const inputValue = value.trim().toLowerCase();
       console.log(inputValue)
-      if(inputValue && inputValue.length >= 5) {
+      if(inputValue && inputValue.length >= 3) {
           const options = {
               method: 'GET',
               url: 'https://aerodatabox.p.rapidapi.com/airports/search/term',
-              params: {q: inputValue, limit: '5'},
+              params: {q: inputValue, limit: '10'},
               headers: {
-                'x-rapidapi-key': '13f01b6e68msh9b62bb9162e56d2p148578jsn9b4ca891e37c',
+                'x-rapidapi-key': '2cf1a4a141msh66321b55ff7c5bfp13bc41jsn9f941faf9485',
                 'x-rapidapi-host': 'aerodatabox.p.rapidapi.com'
               }
           };
@@ -249,202 +237,192 @@ class FlightRegisterBase extends React.Component {
               this.setState({ show: true})
             })
         } else {
-            if(this.state.origin === '' || this.state.origin === '') {
-                this.setState({ message: "Please select airport names from the dropdown list" }, () => {
-                    this.setState({ show: true })
-                }) 
-            } else {
+            let origin_iata = this.state.origin.split('(')[1];
+            let destination_iata = this.state.destination.split('(')[1];
+            origin_iata = origin_iata.split(')')[0];
+            destination_iata = destination_iata.split(')')[0];
+            console.log(origin_iata);
+            console.log(destination_iata);
 
-                let origin_iata = this.state.origin.split('(')[1];
-                let destination_iata = this.state.destination.split('(')[1];
-                origin_iata = origin_iata.split(')')[0];
-                destination_iata = destination_iata.split(')')[0];
-                console.log(origin_iata);
-                console.log(destination_iata);
-
-                let month = String((this.state.dod.getMonth() + 1));
-                const pattern = /^[1-9]$/
-                if(pattern.test(month)) {
-                    month = '0' + month
+            let month = String((this.state.dod.getMonth() + 1));
+            const pattern = /^[1-9]$/
+            if(pattern.test(month)) {
+                month = '0' + month
+            }
+            // 'X-Originating-IP': '103.116.73.18'
+            // https://api.lufthansa.com/v1/operations/schedules/ZRH/FRA/2021-04-22?directFlights=1&limit=100
+            const date = this.state.dod.getFullYear() + '-' + month + '-' + this.state.dod.getDate();
+            const url = 'https://api.lufthansa.com/v1/operations/schedules/' + origin_iata + '/' + destination_iata + '/' + date + '?directFlights=0&limit=100';
+            console.log(url);
+            const options = {
+                method: 'GET',
+                url: url,
+                headers: {
+                    'Accept': 'application/json',
+                    'Authorization': 'Bearer r6tvfxkxp5m73p7cyx9wzpt5'
                 }
-                // 'X-Originating-IP': '103.116.73.18'
-                // https://api.lufthansa.com/v1/operations/schedules/ZRH/FRA/2021-04-22?directFlights=1&limit=100
-                const date = this.state.dod.getFullYear() + '-' + month + '-' + this.state.dod.getDate();
-                const url = 'https://api.lufthansa.com/v1/operations/schedules/' + origin_iata + '/' + destination_iata + '/' + date + '?directFlights=0&limit=100';
-                console.log(url);
-                const options = {
-                    method: 'GET',
-                    url: url,
-                    headers: {
-                        'Accept': 'application/json',
-                        'Authorization': 'Bearer r6tvfxkxp5m73p7cyx9wzpt5'
+            }
+            /*
+            const url2 = 'https://api.lufthansa.com/v1/operations/schedules/' + origin_iata + '/' + destination_iata + '/' + date + '?directFlights=0&limit=100'
+            const options2 = {
+                method: 'GET',
+                url: url2,
+                headers: {
+                    'Accept': 'application/json',
+                    'Authorization': 'Bearer y3fw5tjj7twtjyh8wg7nfghz'
+                }
+            }
+            const request1 = Axios.request(options1)
+            const request2 = Axios.request(options2)
+            
+            Axios.all([request1, request2])
+            .then(
+                Axios.spread((...responses) => {
+                    const direct_flights = responses[0]
+                    const other_flights = responses[0]
+                    console.log(direct_flights)
+                    console.log('123')
+                })
+            )
+            */
+            Axios.request(options)
+            .then(
+                res => {
+                    console.log('hehehehe');
+                    //console.log(res.data.ScheduleResource.Schedule);
+                    const schedules = res.data.ScheduleResource.Schedule;
+                    let direct_flights_array = []
+                    let other_flights_array = []
+                    for (let schedule of schedules) {
+                        if(schedule['Flight'].length > 1) {
+                          other_flights_array.push(schedule['Flight'])
+                        } else {
+                          direct_flights_array.push(schedule['Flight'])
+                        }
                     }
-                }
-        
-                Axios.request(options)
-                .then(
-                    res => {
-                        console.log('hehehehe');
-                        let direct_array = []
-                        let other_array = []
-                        //console.log(res.data.ScheduleResource.Schedule);
-                        const schedules = res.data.ScheduleResource.Schedule;
-                        let direct_flights_array = []
-                        let other_flights_array = []
-                        for (let schedule of schedules) {
-                            if(schedule['Flight'].length > 1) {
-                              other_flights_array.push(schedule['Flight'])
-                            } else {
-                              direct_flights_array.push(schedule['Flight'])
-                            }
-                        }
 
-                        let requests = []
-                        let direct_requests = []
-                        //console.log('Direct', direct_flights_array)
-                        this.setState({ other_flights: other_flights_array })
-                        this.setState({ direct_flights: direct_flights_array })
-                        //console.log(direct_flights_array)
-                        //console.log(other_flights_array)
-                        for (let flight of direct_flights_array) {
-                            if(!(this.state.look_up.hasOwnProperty(flight.Arrival.AirportCode))) {
-                                direct_array.push(flight.Arrival.AirportCode)
-                                //direct_requests.push(Axios.request(o))
-                            }
-                            if(!(this.state.look_up.hasOwnProperty(flight.Departure.AirportCode))) {
-                                direct_array.push(flight.Departure.AirportCode)
-
-                                //direct_requests.push(Axios.request(o))
-                            }
-                        }
-                        for (let flight of other_flights_array) {
-                            for (let stop of flight) {
-                                //console.log(stop)
-                                //console.log(stop.Arrival.AirportCode)
-                                //console.log(this.state.look_up)
-                                if(!(this.state.look_up.hasOwnProperty(stop.Arrival.AirportCode))) {
-                                    //console.log('hi')
-                                    other_array.push(stop.Arrival.AirportCode)
-                                    //requests.push(Axios.request(o))
-                                }
-                                if(!(this.state.look_up.hasOwnProperty(stop.Departure.AirportCode))) {
-                                    //console.log('hi')
-                                    
-                                    other_array.push(stop.Departure.AirportCode)
-                                    //requests.push(Axios.request(o))
-                                }
-                                
-                            }
-                        }
-
-                        direct_array = unique(direct_array)
-                        other_array = unique(other_array)
-      
-                        for (let code of direct_array) {
-                            /*
+                    let requests = []
+                    let direct_requests = []
+                    //console.log('Direct', direct_flights_array)
+                    this.setState({ other_flights: other_flights_array })
+                    this.setState({ direct_flights: direct_flights_array })
+                    //console.log(direct_flights_array)
+                    //console.log(other_flights_array)
+                    for (let flight of direct_flights_array) {
+                        if(!(this.state.look_up.hasOwnProperty(flight.Arrival.AirportCode))) {
                             const o = {
                                 method: 'GET',
-                                url: 'https://aerodatabox.p.rapidapi.com/airports/iata/' + code,
+                                url: 'https://aerodatabox.p.rapidapi.com/airports/iata/' + flight.Arrival.AirportCode,
                                 headers: {
-                                  'x-rapidapi-key': '13f01b6e68msh9b62bb9162e56d2p148578jsn9b4ca891e37c',
+                                  'x-rapidapi-key': name_api_key_2,
                                   'x-rapidapi-host': 'aerodatabox.p.rapidapi.com'
                                 }
-                            };
-                            */
-                            const o = {
-                              method: 'GET',
-                              url: 'https://airport-info.p.rapidapi.com/airport',
-                              params: {iata: code},
-                              headers: {
-                                'x-rapidapi-key': '13f01b6e68msh9b62bb9162e56d2p148578jsn9b4ca891e37c',
-                                'x-rapidapi-host': 'airport-info.p.rapidapi.com'
-                              }
                             };
 
                             direct_requests.push(Axios.request(o))
                         }
-
-                        for (let code of other_array) {
-                            /*
-                            const o = {
-                                method: 'GET',
-                                url: 'https://aerodatabox.p.rapidapi.com/airports/iata/' + code,
-                                headers: {
-                                  'x-rapidapi-key': '9abdef2831msh79570a94fb5badbp1de831jsnd17d1e83bbbe',
-                                  'x-rapidapi-host': 'aerodatabox.p.rapidapi.com'
-                                }
-                            };
-                            */
-                            const o = {
+                        if(!(this.state.look_up.hasOwnProperty(flight.Departure.AirportCode))) {
+                          const o = {
                               method: 'GET',
                               url: 'https://airport-info.p.rapidapi.com/airport',
-                              params: {iata: code},
+                              params: {iata: flight.Departure.AirportCode},
                               headers: {
-                                'x-rapidapi-key': '5e9d5ed709mshf19dfc26bf7d57cp16d054jsn84dd9ffba92f',
+                                'x-rapidapi-key': '13f01b6e68msh9b62bb9162e56d2p148578jsn9b4ca891e37c',
                                 'x-rapidapi-host': 'airport-info.p.rapidapi.com'
                               }
-                            };
+                          };
 
-                            requests.push(Axios.request(o))
+                          direct_requests.push(Axios.request(o))
                         }
-
-
-
-                        Axios.all(requests)
-                        .then(
-                            Axios.spread((...responses) => {
-                                for (let response of responses) {
-                                    //console.log(response)
-                                    let table1 = this.state.look_up
-                                    let table2 = this.state.look_up_code
-                                    table1[response.data['iata']] = response.data['name']
-                                    table2[response.data['iata']] = response.data['country_iso']
-                                    this.setState({ look_up: table1 })
-                                    this.setState({ look_up_code: table2 })
-                                    //console.log('^^^^^^^^^^^^^')
-                                    //console.log(table)
-                                }
-                            })
-                        ).catch(errors => {
-                            console.log(errors)
-                            console.log('fk fk fk')
-                        });
-                        
-
-                        Axios.all(direct_requests)
-                        .then(
-                            Axios.spread((...responses) => {
-                                for (let response of responses) {
-                                    //console.log(response)
-                                    let table1 = this.state.look_up
-                                    let table2 = this.state.look_up_code
-                                    table1[response.data['iata']] = response.data['name']
-                                    table2[response.data['iata']] = response.data['country_iso']
-                                    this.setState({ look_up: table1 })
-                                    this.setState({ look_up_code: table2 })
-                                    //console.log('^^^^^^^^^^^^^')
-                                    //console.log(table)
-                                }
-                            })
-                        ).catch(errors => {
-                            console.log('fk fk fk')
-                        });
-                        
-
-                        //console.log(other_flights)
                     }
-                );
-            }
+                    for (let flight of other_flights_array) {
+                        for (let stop of flight) {
+                            //console.log(stop)
+                            //console.log(stop.Arrival.AirportCode)
+                            //console.log(this.state.look_up)
+                            if(!(this.state.look_up.hasOwnProperty(stop.Arrival.AirportCode))) {
+                                //console.log('hi')
+                                const o = {
+                                    method: 'GET',
+                                    url: 'https://airport-info.p.rapidapi.com/airport',
+                                    params: {iata: stop.Arrival.AirportCode},
+                                    headers: {
+                                      'x-rapidapi-key': '13f01b6e68msh9b62bb9162e56d2p148578jsn9b4ca891e37c',
+                                      'x-rapidapi-host': 'airport-info.p.rapidapi.com'
+                                    }
+                                };
 
+                                requests.push(Axios.request(o))
+                            }
+                            if(!(this.state.look_up.hasOwnProperty(stop.Departure.AirportCode))) {
+                                //console.log('hi')
+                                const o = {
+                                    method: 'GET',
+                                    url: 'https://airport-info.p.rapidapi.com/airport',
+                                    params: {iata: stop.Departure.AirportCode},
+                                    headers: {
+                                      'x-rapidapi-key': '13f01b6e68msh9b62bb9162e56d2p148578jsn9b4ca891e37c',
+                                      'x-rapidapi-host': 'airport-info.p.rapidapi.com'
+                                    }
+                                };
+
+                                requests.push(Axios.request(o))
+                            }
+                            
+                        }
+                    }
+
+                    Axios.all(requests)
+                    .then(
+                        Axios.spread((...responses) => {
+                            for (let response of responses) {
+                                //console.log(response)
+                                let table1 = this.state.look_up
+                                let table2 = this.state.look_up_code
+                                table1[response.data['iata']] = response.data['name']
+                                table2[response.data['iata']] = response.data['country_iso']
+                                this.setState({ look_up: table1 })
+                                this.setState({ look_up_code: table2 })
+                                //console.log('^^^^^^^^^^^^^')
+                                //console.log(table)
+                            }
+                        })
+                    ).catch(errors => {
+                        console.log(errors)
+                        console.log('fk fk fk')
+                    });
+                    
+
+                    Axios.all(direct_requests)
+                    .then(
+                        Axios.spread((...responses) => {
+                            for (let response of responses) {
+                                //console.log(response)
+                                let table1 = this.state.look_up
+                                let table2 = this.state.look_up_code
+                                table1[response.data['iata']] = response.data['name']
+                                table2[response.data['iata']] = response.data['country_iso']
+                                this.setState({ look_up: table1 })
+                                this.setState({ look_up_code: table2 })
+                                //console.log('^^^^^^^^^^^^^')
+                                //console.log(table)
+                            }
+                        })
+                    ).catch(errors => {
+                        console.log('fk fk fk')
+                    });
+                    
+
+                    //console.log(other_flights)
+                }
+            );
+            
         }
     };
 
     handleRegister = (event) => {
         const uid = localStorage.getItem('user')
         const id = event.target.parentNode.id
-        console.log(id)
-        console.log(event.target)
-        console.log(event.target.parentNode)
         const className = event.target.parentNode.className
         let content = event.target.parentNode.textContent
         content = content.slice(0, content.length - 8)
@@ -581,8 +559,6 @@ class FlightRegisterBase extends React.Component {
             
         } else {
             // direct flights
-            console.log(id)
-            console.log(this.state.direct_flights)
             const flight = this.state.direct_flights[parseInt(id)]
             console.log(this.state.direct_flights[parseInt(id)])
             const flight_number = flight.MarketingCarrier.AirlineID + flight.MarketingCarrier.FlightNumber
@@ -591,10 +567,6 @@ class FlightRegisterBase extends React.Component {
 
             let origin_airport_code = array[0].split('(')[1]
             origin_airport_code = origin_airport_code.split(')')[0]
-            console.log('###########')
-            console.log(this.state.look_up_code)
-            console.log(origin_airport_code)
-            console.log('###########')
             const origin_country_code = this.state.look_up_code[origin_airport_code]
             //console.log(destination_country_code)
             const origin_country_name = code_to_name[origin_country_code]['cdc_name']
@@ -741,9 +713,9 @@ class FlightRegisterBase extends React.Component {
                       <Card className='flight' key={index}>
                           <Card.Body className='direct' id={index}>
                               {this.state.origin + ' -> ' + this.state.look_up[flight.Arrival.AirportCode] + ' (' + flight.Arrival.AirportCode + ')' + '  ' + flight.MarketingCarrier.AirlineID + flight.MarketingCarrier.FlightNumber}
-      
-                              <Button variant="warning" onClick={this.handleRegister} className="card-btn">Register</Button>
-                              
+                              <div className="card-btn">
+                              <Button variant="warning" onClick={this.handleRegister}>Register</Button>
+                              </div>
                           </Card.Body>
                       </Card>
                   ))}
@@ -760,7 +732,9 @@ class FlightRegisterBase extends React.Component {
                                   { return '  ' + stop.MarketingCarrier.AirlineID + stop.MarketingCarrier.FlightNumber + '  ' + stop.Departure.ScheduledTimeLocal.DateTime + '  ' + ' -> ' + this.state.look_up[stop.Arrival.AirportCode]  + ' (' + stop.Arrival.AirportCode + ')' + '  '}
                                   //{return this.state.look_up[stop.Depature.AirportCode]}
                               )}
-                              <Button variant="warning" onClick={this.handleRegister} className="card-btn">Register</Button>
+                                                <div className="card-btn">
+                              <Button variant="warning" onClick={this.handleRegister}>Register</Button>
+                                                </div>
                           </Card.Body>
                       </Card>
                   ))}

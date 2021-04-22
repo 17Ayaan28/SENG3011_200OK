@@ -75,6 +75,7 @@ class TravelInfo extends React.Component {
 		return (
 			<>
 			<Navbar />
+			<div id='tr'>
 			<div className="margin-90">
 				<h1 id="travel_head">Vaccinations for Travel to {this.state.front_end_name}</h1>
 				<br />
@@ -109,6 +110,7 @@ class TravelInfo extends React.Component {
 				))}
 			</tbody>
 			</Table>
+		</div>
 		</div>
 		</>
 		);

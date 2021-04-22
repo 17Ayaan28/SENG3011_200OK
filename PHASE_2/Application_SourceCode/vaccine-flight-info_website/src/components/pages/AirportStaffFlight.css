@@ -27,6 +27,8 @@ width: 60%
 .staff-container {
   margin: 5%;
   text-align: center;
+  margin-bottom: 0px;
+  padding-bottom: 20px
 }
 
 .staff-search {
@@ -63,4 +65,20 @@ background-color: #cfcfcf;
 
 h4 {
   margin: 0px
+}
+
+#f {
+    height: 100%;
+    width: 100vw;
+    background-image: url('../../travel6.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.flightdetails {
+    color: white;
+}
+
+#t {
+    color: white
 }

@@ -1,3 +1,4 @@
+
 #color {
 	color: red;
 }
@@ -44,6 +45,14 @@ td {
 }
 
 .vaccine-table {
+    width: 70%;
 	margin-top: 10px;
 }
 
+#tr {
+    height: 100%;
+	width: 100vw;
+    background-image: url('./travel9.jpeg');
+	background-repeat: no-repeat;
+ 	background-size: cover;
+}

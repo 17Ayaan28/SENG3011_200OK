@@ -5,8 +5,8 @@
 	background-image: url('https://www.telegraph.co.uk/content/dam/travel/2020/11/10/VACCINE-VIRUS-TRAVEL_trans_NvBQzQNjv4BqqVzuuqpFlyLIwiB6NTmJwfSVWeZ_vEN7c6bHu2jJnT8.jpg');
     background-position: center;
     background-size: cover;
-    height: 800px;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
     background-repeat: no-repeat;
 }
 

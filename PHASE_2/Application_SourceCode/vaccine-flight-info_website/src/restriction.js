@@ -65,7 +65,7 @@ class Restriction extends React.Component {
 
 	render() {
         return(
-        <div>
+        <div id='cover1'>
         <Navbar />
         <h2 className="restriction res-title ">Travel Restrictions</h2>
         <div className="restriction">

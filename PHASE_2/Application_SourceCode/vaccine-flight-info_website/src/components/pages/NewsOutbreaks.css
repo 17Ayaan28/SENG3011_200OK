@@ -21,3 +21,11 @@
     font-weight: 900;
     font-size: 24px;
 }
+
+#news {
+    height: 100%;
+	width: 100vw;
+    background-image: url('../../travel4.jpeg');
+	background-repeat: no-repeat;
+ 	background-size: cover;
+}
