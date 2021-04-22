@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-country-select/dist/react-bootstrap-country-select.css';
 import Button from 'react-bootstrap/Button';
 import Navbar from '../Navbar'
-import DatePicker from 'react-date-picker/dist/entry.nostyle';
+import DatePicker from 'react-date-picker';
 import Card from 'react-bootstrap/Card';
 import Modal from 'react-bootstrap/Modal';
 import Axios from "axios";
@@ -13,9 +13,6 @@ import { withRouter } from 'react-router-dom';
 import { withFirebase } from '../Firebase';
 import { compose } from 'recompose';
 import code_to_name from '../../country_code.json';
-import './DatePicker.css'
-import Firebase from '../Firebase/firebase'
-
 
 class FlightRegisterBase extends React.Component {
 
@@ -23,7 +20,7 @@ class FlightRegisterBase extends React.Component {
         super(props);
       
         this.state = {
-            dod: new Date(),
+            dod: '',
             origin: '',
             destination: '',
             show: false,
@@ -76,10 +73,10 @@ class FlightRegisterBase extends React.Component {
               }
             */
             let response = await Axios.request(options);
-            //console.log(response)
+            console.log(response)
             let data = await response.data.items
-            //console.log('json');
-            //console.log(data);
+            console.log('json');
+            console.log(data);
             return data;
         } else {
            return []
@@ -140,10 +137,10 @@ class FlightRegisterBase extends React.Component {
           };
 
           let response = await Axios.request(options);
-          //console.log(response)
+          console.log(response)
           let data = await response.data.items
-          //console.log('json');
-          //console.log(data);
+          console.log('json');
+          console.log(data);
           return data;
       } else {
          return []
@@ -189,54 +186,16 @@ class FlightRegisterBase extends React.Component {
     };
 
     handleSearch = () => {
-        console.log(this.state.dod)
-        console.log(new Date())
-        let d = this.state.dod
-        let month = String((d.getMonth() + 1));
-        const pattern = /^[1-9]$/
-        if(pattern.test(month)) {
-            month = '0' + month
-        }
-        let day = String(d.getDate());
-        if(pattern.test(day)) {
-          day = '0' + day
-        }
-
-        const year = String(d.getFullYear());
-
-        const input_date = new Date(year+'-'+month+'-'+day)
-        
-        let today = new Date()
-        const y = String(today.getFullYear())
-        let m = String((today.getMonth() + 1));
-        let dd = String(today.getDate());
-
-        if(pattern.test(m)) {
-            m = '0' + m
-        }
-
-        if(pattern.test(dd)) {
-            dd = '0' + dd
-        }
-
-        today = new Date(y+'-'+m+'-'+dd)
-
-
-
 
         if(this.state.origin === '' || this.state.origin === null) {
-            this.setState({ message: "Please enter your origin!" }, () => {
-              this.setState({ show:true })
-            });
-            //this.setState({ message: "Please enter your origin!" });
+            this.setState({ show:true })
+            this.setState({ message: "Please enter your origin!" });
         } else if(this.state.destination === '' || this.state.destination === null) {
-            this.setState({ message: "Please enter your destination!" }, () => {
-              this.setState({ show:true })
-            }); 
-        } else if(this.state.dod === '' || this.state.dod === null || input_date < today) {
-            this.setState({ message: "Invalid date of depature!" }, ()=>{
-              this.setState({ show: true})
-            })
+            this.setState({ show:true })
+            this.setState({ message: "Please enter your destination!" }); 
+        } else if(this.state.dod === '' || this.state.dod === null || this.state.dod < new Date()) {
+            this.setState({ show: true})
+            this.setState({ message: "Invalid date of depature!" })
         } else {
             let origin_iata = this.state.origin.split('(')[1];
             let destination_iata = this.state.destination.split('(')[1];
@@ -374,7 +333,7 @@ class FlightRegisterBase extends React.Component {
                     .then(
                         Axios.spread((...responses) => {
                             for (let response of responses) {
-                                //console.log(response)
+                                console.log(response)
                                 let table1 = this.state.look_up
                                 let table2 = this.state.look_up_code
                                 table1[response.data['iata']] = response.data['fullName']
@@ -395,7 +354,7 @@ class FlightRegisterBase extends React.Component {
                     .then(
                         Axios.spread((...responses) => {
                             for (let response of responses) {
-                                //console.log(response)
+                                console.log(response)
                                 let table1 = this.state.look_up
                                 let table2 = this.state.look_up_code
                                 table1[response.data['iata']] = response.data['fullName']
@@ -419,7 +378,7 @@ class FlightRegisterBase extends React.Component {
     };
 
     handleRegister = (event) => {
-        const uid = localStorage.getItem('user')
+        const uid = this.props.firebase.auth.currentUser.uid
         const id = event.target.parentNode.id
         const className = event.target.parentNode.className
         let content = event.target.parentNode.textContent
@@ -469,7 +428,7 @@ class FlightRegisterBase extends React.Component {
                   console.log('departure_time ', departure_time)
                   console.log('arrival time ', arrival_time)
                   
-                  const node_ref = Firebase.database().ref(`flights/${flight_number}`).push()
+                  const node_ref = this.props.firebase.db.ref(`flights/${flight_number}`).push()
                   node_ref.set({
                       passenger_id: uid,
                       flight_number: flight_number,
@@ -484,8 +443,6 @@ class FlightRegisterBase extends React.Component {
                   .then(() => {
                     console.log('new flight registration is logged');
                     //this.props.history.push('/home');
-                    //this.setState({ show: true })
-                    //this.setState({ message: "You have registered for " + flight_number + ' successfully!' })
                   })
                   .catch(error => {
                     console.log(error);
@@ -527,7 +484,7 @@ class FlightRegisterBase extends React.Component {
                   console.log('departure_time ', departure_time)
                   console.log('arrival time ', arrival_time)
 
-                  const node_ref = Firebase.database().ref(`flights/${flight_number}`).push()
+                  const node_ref = this.props.firebase.db.ref(`flights/${flight_number}`).push()
                   node_ref.set({
                       passenger_id: uid,
                       flight_number: flight_number,
@@ -541,9 +498,6 @@ class FlightRegisterBase extends React.Component {
                   })
                   .then(() => {
                       console.log('new flight registration is logged');
-                      this.setState({ message: "You have registered for the flight successfully!" }, () => {
-                        this.setState({ show: true })
-                      })
                       //this.props.history.push('/home');
                   })
                   .catch(error => {
@@ -589,7 +543,7 @@ class FlightRegisterBase extends React.Component {
             console.log('arrival time ', arrival_time)
 
 
-            const node_ref = Firebase.database().ref(`flights/${flight_number}`).push()
+            const node_ref = this.props.firebase.db.ref(`flights/${flight_number}`).push()
             node_ref.set({
                 passenger_id: uid,
                 flight_number: flight_number,
@@ -603,9 +557,6 @@ class FlightRegisterBase extends React.Component {
             })
             .then(() => {
                 console.log('new flight registration is logged');
-                this.setState({ message: "You have registered for " + flight_number + ' successfully!'}, () => {
-                  this.setState({ show: true })
-                });
                 //this.props.history.push('/home');
             })
             .catch(error => {
@@ -642,13 +593,6 @@ class FlightRegisterBase extends React.Component {
 
         
     }
-
-    componentDidMount() {
-        const currentUser = localStorage.getItem('user')
-          if(!currentUser) {
-              this.props.history.push('/')
-        }
-    }
       
     render() {
 
@@ -664,51 +608,46 @@ class FlightRegisterBase extends React.Component {
             onChange: this.onDestinationChange
         };
         return (
-        <>
-        <Navbar />
-        <div className="flightcontainer">
-            <Card>
-                <Card.Body id='card_body'>
-                    <div>
-                        <p>Origin</p>
-                        <Autosuggest
+          <>
+          <Navbar />
+          <Card>
+              <Card.Body id='card_body'>
+                  <div>
+                      <p>Origin</p>
+                      <Autosuggest
                           suggestions={this.state.origin_suggestions}
                           onSuggestionsFetchRequested={this.onOriginSuggestionsFetchRequested}
                           onSuggestionsClearRequested={this.onOriginSuggestionsClearRequested}
                           getSuggestionValue={this.getOriginSuggestionValue}
                           renderSuggestion={this.renderOriginSuggestion}
                           inputProps={inputOriginProps}
-                        />
-                    </div>
-                    <div>
-                        <p>Destination</p>
-                        <Autosuggest
+                      />
+                  </div>
+                  <div>
+                      <p>Destination</p>
+                      <Autosuggest
                           suggestions={this.state.destination_suggestions}
                           onSuggestionsFetchRequested={this.onDestinationSuggestionsFetchRequested}
                           onSuggestionsClearRequested={this.onDestinationSuggestionsClearRequested}
                           getSuggestionValue={this.getDestinationSuggestionValue}
                           renderSuggestion={this.renderDestinationSuggestion}
                           inputProps={inputDestinationProps}
-                        />
-                    </div>
-                    <div>
-                        <p>Date of Depature</p>
-                        <DatePicker
+                      />
+                  </div>
+                  <div>
+                      <p>Date of Depature</p>
+                      <DatePicker
                         onChange={e => this.setState({ dod: e })}
                         value={this.state.dod}
                       />
                   </div>
-                  <div className="card-btn">
                   <Button variant="warning" onClick={this.handleSearch}>Search</Button>
-                  </div>
               </Card.Body>
           </Card>
           <div>
-                    <div className="card-text">
             <h2>Direct Flights</h2>
-            </div>
             {this.state.direct_flights.map((flight, index) => (
-                <Card className='flight' key={index}>
+                <Card className='flight'>
                     <Card.Body className='direct' id={index}>
                         {this.state.origin + ' -> ' + this.state.look_up[flight.Arrival.AirportCode] + ' (' + flight.Arrival.AirportCode + ')' + '  ' + flight.MarketingCarrier.AirlineID + flight.MarketingCarrier.FlightNumber}
                         <Button variant="warning" onClick={this.handleRegister}>Register</Button>
@@ -717,20 +656,16 @@ class FlightRegisterBase extends React.Component {
             ))}
           </div>
           <div>
-            <div className="card-text">
             <h2>Transit Flights</h2>
-            </div>
             {this.state.other_flights.map((flight, index) => (
-                <Card className='flight' key={index}>
+                <Card className='flight'>
                     <Card.Body id={index} className='transit'>
                         {this.state.origin}
                         {flight.map(stop => 
                             { return '  ' + stop.MarketingCarrier.AirlineID + stop.MarketingCarrier.FlightNumber + '  ' + stop.Departure.ScheduledTimeLocal.DateTime + '  ' + ' -> ' + this.state.look_up[stop.Arrival.AirportCode]  + ' (' + stop.Arrival.AirportCode + ')' + '  '}
                             //{return this.state.look_up[stop.Depature.AirportCode]}
                         )}
-                                          <div className="card-btn">
                         <Button variant="warning" onClick={this.handleRegister}>Register</Button>
-                                          </div>
                     </Card.Body>
                 </Card>
             ))}
@@ -746,7 +681,7 @@ class FlightRegisterBase extends React.Component {
               </Button>
               </Modal.Footer>
           </Modal>
-    </>
+          </>
         );
     }
 

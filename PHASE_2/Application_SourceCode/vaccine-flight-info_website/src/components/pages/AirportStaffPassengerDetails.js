@@ -14,6 +14,7 @@ import { withFirebase } from '../Firebase';
 import { compose } from 'recompose';
 import { Card } from 'react-bootstrap';
 import Axios from 'axios';
+import './AirportStaffPassengerDetails.css'
 import Firebase from '../Firebase/firebase'
 
 function unique (arr) {
@@ -139,21 +140,23 @@ class FlightDetailsBase extends React.Component {
       return (
           <>
             <Navbar />
-            <Card id='vaccines'>
-                <Card.Body>
-                    <h3>Vaccine Recommendations:</h3>
-                    <h5>{this.state.vaccines}</h5>
-                </Card.Body>
-            </Card>
-            {unique(this.state.passengers).map((p, index) => (
-                <Card >
+            <div className="passenger-container">
+                <Card id='vaccines' className="pas-card">
                     <Card.Body>
-                      <br />
-                      {p}
-                      <div>{"Vaccination History: " + unique(this.state.historys)[index]}</div>
+                        <h3>Vaccine Recommendations</h3>
+                        <h5>{this.state.vaccines}</h5>
+
                     </Card.Body>
                 </Card>
-            ))}
+                {unique(this.state.passengers).map((p, index) => (
+                    <Card className="pas-card">
+                        <Card.Body>
+                        {p}
+                        <div>{"Vaccination History: " + unique(this.state.historys)[index]}</div>
+                        </Card.Body>
+                    </Card>
+                ))}
+            </div>
           </>
       );
     }

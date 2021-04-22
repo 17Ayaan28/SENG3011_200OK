@@ -178,12 +178,17 @@ class NavbarBase extends Component {
                             </Link>
                         </li>
                         <li className="nav-item">
+                            <Link to='/profile' className="nav-links-mobile" onClick={this.handleProfile}>
+                               Profile
+                            </Link>                                
+                        </li>
+                        <li className="nav-item">
                             <Link to='/' className="nav-links-mobile" onClick={this.handleLogOut}>
                                Log out
                             </Link>                                
                         </li>
                     </ul>
-                    <Button variant="primary" type="submit" onClick={this.handleProfile}>Profile</Button>
+                    {this.state.button && <Button variant="primary" buttonStyle='btn--outline' type="submit" onClick={this.handleProfile}>Profile</Button>}
                     {this.state.button && <Button buttonStyle='btn--outline' onClick={this.handleLogOut}>LOG OUT</Button>}
                 </div>
             </nav>
