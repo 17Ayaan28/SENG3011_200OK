@@ -14,6 +14,8 @@ import { withFirebase } from '../Firebase';
 import { compose } from 'recompose';
 import code_to_name from '../../country_code.json';
 import './DatePicker.css'
+import Firebase from '../Firebase/firebase'
+
 
 class FlightRegisterBase extends React.Component {
 
@@ -74,10 +76,10 @@ class FlightRegisterBase extends React.Component {
               }
             */
             let response = await Axios.request(options);
-            console.log(response)
+            //console.log(response)
             let data = await response.data.items
-            console.log('json');
-            console.log(data);
+            //console.log('json');
+            //console.log(data);
             return data;
         } else {
            return []
@@ -138,10 +140,10 @@ class FlightRegisterBase extends React.Component {
           };
 
           let response = await Axios.request(options);
-          console.log(response)
+          //console.log(response)
           let data = await response.data.items
-          console.log('json');
-          console.log(data);
+          //console.log('json');
+          //console.log(data);
           return data;
       } else {
          return []
@@ -372,7 +374,7 @@ class FlightRegisterBase extends React.Component {
                     .then(
                         Axios.spread((...responses) => {
                             for (let response of responses) {
-                                console.log(response)
+                                //console.log(response)
                                 let table1 = this.state.look_up
                                 let table2 = this.state.look_up_code
                                 table1[response.data['iata']] = response.data['fullName']
@@ -393,7 +395,7 @@ class FlightRegisterBase extends React.Component {
                     .then(
                         Axios.spread((...responses) => {
                             for (let response of responses) {
-                                console.log(response)
+                                //console.log(response)
                                 let table1 = this.state.look_up
                                 let table2 = this.state.look_up_code
                                 table1[response.data['iata']] = response.data['fullName']
@@ -417,7 +419,7 @@ class FlightRegisterBase extends React.Component {
     };
 
     handleRegister = (event) => {
-        const uid = this.props.firebase.auth.currentUser.uid
+        const uid = localStorage.getItem('user')
         const id = event.target.parentNode.id
         const className = event.target.parentNode.className
         let content = event.target.parentNode.textContent
@@ -467,7 +469,7 @@ class FlightRegisterBase extends React.Component {
                   console.log('departure_time ', departure_time)
                   console.log('arrival time ', arrival_time)
                   
-                  const node_ref = this.props.firebase.db.ref(`flights/${flight_number}`).push()
+                  const node_ref = Firebase.database().ref(`flights/${flight_number}`).push()
                   node_ref.set({
                       passenger_id: uid,
                       flight_number: flight_number,
@@ -525,7 +527,7 @@ class FlightRegisterBase extends React.Component {
                   console.log('departure_time ', departure_time)
                   console.log('arrival time ', arrival_time)
 
-                  const node_ref = this.props.firebase.db.ref(`flights/${flight_number}`).push()
+                  const node_ref = Firebase.database().ref(`flights/${flight_number}`).push()
                   node_ref.set({
                       passenger_id: uid,
                       flight_number: flight_number,
@@ -587,7 +589,7 @@ class FlightRegisterBase extends React.Component {
             console.log('arrival time ', arrival_time)
 
 
-            const node_ref = this.props.firebase.db.ref(`flights/${flight_number}`).push()
+            const node_ref = Firebase.database().ref(`flights/${flight_number}`).push()
             node_ref.set({
                 passenger_id: uid,
                 flight_number: flight_number,
@@ -640,6 +642,13 @@ class FlightRegisterBase extends React.Component {
 
         
     }
+
+    componentDidMount() {
+        const currentUser = localStorage.getItem('user')
+          if(!currentUser) {
+              this.props.history.push('/')
+        }
+    }
       
     render() {
 
@@ -687,49 +696,45 @@ class FlightRegisterBase extends React.Component {
                         <DatePicker
                         onChange={e => this.setState({ dod: e })}
                         value={this.state.dod}
-                        />
-                    </div>
-                    <div className="card-btn">
-                        <Button variant="warning" onClick={this.handleSearch}>Search</Button>
-                    </div>
-                </Card.Body>
-            </Card>
-            <div>
-                <div className="class-text">
-                    <h2>Direct Flights</h2>
-                </div>
-                {this.state.direct_flights.map((flight, index) => (
-                    <Card className='flight'>
-                        <Card.Body className='direct' id={index}>
-                            {this.state.origin + ' -> ' + this.state.look_up[flight.Arrival.AirportCode] + ' (' + flight.Arrival.AirportCode + ')' + '  ' + flight.MarketingCarrier.AirlineID + flight.MarketingCarrier.FlightNumber}
-                            <div className="card-btn">
-                            <Button variant="warning" onClick={this.handleRegister}>Register</Button>
-                            </div>
-                        </Card.Body>
-                    </Card>
-                ))}
+                      />
+                  </div>
+                  <div className="card-btn">
+                  <Button variant="warning" onClick={this.handleSearch}>Search</Button>
+                  </div>
+              </Card.Body>
+          </Card>
+          <div>
+                    <div className="card-text">
+            <h2>Direct Flights</h2>
             </div>
-            <div>
-                <div className="class-text">
-                    <h2>Transit Flights</h2>
-                </div>
-                {this.state.other_flights.map((flight, index) => (
-                    <Card className='flight'>
-                        <Card.Body id={index} className='transit'>
-                            {this.state.origin}
-                            {flight.map(stop => 
-                                { return '  ' + stop.MarketingCarrier.AirlineID + stop.MarketingCarrier.FlightNumber + '  ' + stop.Departure.ScheduledTimeLocal.DateTime + '  ' + ' -> ' + this.state.look_up[stop.Arrival.AirportCode]  + ' (' + stop.Arrival.AirportCode + ')' + '  '}
-                                //{return this.state.look_up[stop.Depature.AirportCode]}
-                            )}
-                            <div className="card-btn">
-                                <Button variant="warning" onClick={this.handleRegister}>Register</Button>
-                            </div>
-                        </Card.Body>
-                    </Card>
-                ))}
+            {this.state.direct_flights.map((flight, index) => (
+                <Card className='flight' key={index}>
+                    <Card.Body className='direct' id={index}>
+                        {this.state.origin + ' -> ' + this.state.look_up[flight.Arrival.AirportCode] + ' (' + flight.Arrival.AirportCode + ')' + '  ' + flight.MarketingCarrier.AirlineID + flight.MarketingCarrier.FlightNumber}
+                        <Button variant="warning" onClick={this.handleRegister}>Register</Button>
+                    </Card.Body>
+                </Card>
+            ))}
+          </div>
+          <div>
+            <div className="card-text">
+            <h2>Transit Flights</h2>
             </div>
-        </div>
-
+            {this.state.other_flights.map((flight, index) => (
+                <Card className='flight' key={index}>
+                    <Card.Body id={index} className='transit'>
+                        {this.state.origin}
+                        {flight.map(stop => 
+                            { return '  ' + stop.MarketingCarrier.AirlineID + stop.MarketingCarrier.FlightNumber + '  ' + stop.Departure.ScheduledTimeLocal.DateTime + '  ' + ' -> ' + this.state.look_up[stop.Arrival.AirportCode]  + ' (' + stop.Arrival.AirportCode + ')' + '  '}
+                            //{return this.state.look_up[stop.Depature.AirportCode]}
+                        )}
+                                          <div className="card-btn">
+                        <Button variant="warning" onClick={this.handleRegister}>Register</Button>
+                                          </div>
+                    </Card.Body>
+                </Card>
+            ))}
+          </div>
           <Modal show={this.state.show} onHide={this.handleClose}>
               <Modal.Header closeButton>
               <Modal.Title></Modal.Title>

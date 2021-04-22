@@ -16,10 +16,23 @@ class TravelInfo extends React.Component {
 
 	state = {
 		country: undefined,
+		front_end_name: this.props.match.params.country,
 		vaccines: []
 	}
 
 	componentDidMount() {
+		const currentUser = localStorage.getItem('user')
+        if(!currentUser) {
+            this.props.history.push('/')
+        }
+
+		if(convert[this.props.match.params.country]) {
+			this.setState({ front_end_name: convert[this.props.match.params.country]['front_end_name'] })
+		} else {
+			let string = this.state.front_end_name
+			string = string[0].toUpperCase() + string.slice(1);
+			this.setState({ front_end_name: string })
+		}
 		console.log('1');
 		const country = this.props.match.params.country;
 		console.log(country)
@@ -63,7 +76,7 @@ class TravelInfo extends React.Component {
 			<>
 			<Navbar />
 			<div className="margin-90">
-				<h1 id="travel_head">Vaccinations for Travel to {this.props.match.params.country}</h1>
+				<h1 id="travel_head">Vaccinations for Travel to {this.state.front_end_name}</h1>
 				<br />
 				<Link className = "topbtn" to={'/news/' + this.props.match.params.country}>
 				<button className="btn btn-primary" type='button'>Outbreak News</button> 
@@ -87,8 +100,8 @@ class TravelInfo extends React.Component {
 				</tr>
 			</thead>
 			<tbody>
-				{this.state.vaccines.map(vaccine => (
-					<tr>
+				{this.state.vaccines.map((vaccine, index) => (
+					<tr key={index}>
 						<td>{vaccine['name']}</td>
 						<td>{vaccine['recommendation']}</td>
 						<td>{brands[vaccine['name']]}</td>

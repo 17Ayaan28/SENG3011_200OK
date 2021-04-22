@@ -50,7 +50,6 @@ function App() {
             <Route path='/profile' component={Profile} />
             <Route path='/restriction/:country' component={Restriction} />
             <Route path='/' exact component={LandingPage} />
-            <Route path='/fp' component={Home} /> 
           </Switch>
         </Router>
       </>

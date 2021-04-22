@@ -2,12 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Firebase, { FirebaseContext } from './components/Firebase';
+import { FirebaseContext } from './components/Firebase';
+//import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import store from './reducers/store';
+import Firebase from './components/Firebase/firebase'
+//import rootReducer from './reducers'
 
 ReactDOM.render(
-    <FirebaseContext.Provider value={new Firebase()}>
-        <App />
-    </FirebaseContext.Provider>,
+        <FirebaseContext.Provider value={Firebase}>
+             <Provider store={store}>
+                <App />
+             </Provider>
+        </FirebaseContext.Provider>,
     document.getElementById('root')
 );
 

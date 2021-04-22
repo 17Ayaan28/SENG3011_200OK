@@ -14,6 +14,7 @@
     "Ebola":"Ervebo, Mvabea, Zabdeno",
     "Smallpox":"ACAM2000, Dryvax, Imvanex",
     "Anthrax":"BioThrax",
-    "Q fever": "Q-Vax"
+    "Q fever": "Q-Vax",
+    "COVID-19": "Moderna, PfizerBioNtech, Sputnik V, Oxford-AztraZeneca, Covaxin, Novavax"
 }
 

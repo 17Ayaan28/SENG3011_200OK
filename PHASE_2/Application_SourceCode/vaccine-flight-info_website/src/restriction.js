@@ -16,6 +16,10 @@ class Restriction extends React.Component {
 	}
 
     componentDidMount() {
+        const currentUser = localStorage.getItem('user')
+        if(!currentUser) {
+            this.props.history.push('/')
+        }
 		const country = this.props.match.params.country;
 		//console.log(country)
         //console.log(typeof(country_convert))
@@ -70,8 +74,8 @@ class Restriction extends React.Component {
                     <div className="card-body">
                         <h5 className="card-title">{"Can You Enter " + this.state.country + '?'}</h5>
                         <h6 className="card-subtitle mb-2 text-muted">{""}</h6>                    
-                            {this.state.restrictions.map(r => (
-                                <p className="card-text"> 
+                            {this.state.restrictions.map((r, index) => (
+                                <p className="card-text" key={index}> 
                                     {r}
                                 </p>
                             ))}

@@ -13,6 +13,7 @@ import { InputGroup } from "react-bootstrap";
 import { withRouter } from 'react-router-dom';
 import { withFirebase } from '../Firebase';
 import { compose } from 'recompose';
+import Firebase from '../Firebase/firebase'
 
 class Vaccine_history_base extends React.Component {
 
@@ -107,7 +108,7 @@ class Vaccine_history_base extends React.Component {
 		} else {
 
 			//console.log('inputs are correct')
-			const uid = this.props.firebase.auth.currentUser.uid
+			const uid = localStorage.getItem('user')
 			let new_record = {}
 			new_record['disease'] = this.state.disease;
 			new_record['vaccine_name'] = this.state.vaccine_name;
@@ -122,7 +123,7 @@ class Vaccine_history_base extends React.Component {
 			const vaccine_name = this.state.vaccine_name;
 			const certificate = this.state.certificate;
 			console.log('You are logging new vaccination record')
-			const node_ref = this.props.firebase.db.ref(`v1/${uid}`).push()
+			const node_ref = Firebase.database().ref(`v1/${uid}`).push()
 			node_ref.set({
 				disease,
 				vaccine_name,
@@ -136,8 +137,8 @@ class Vaccine_history_base extends React.Component {
 				})
 				//this.props.history.push('/home');
 				const history = []
-				const uid = this.props.firebase.auth.currentUser.uid
-				const history_ref = this.props.firebase.db.ref(`v1/${uid}`);
+				const uid = localStorage.getItem('user')
+				const history_ref = Firebase.database().ref(`v1/${uid}`);
 				history_ref.on('value', (snapshot) => {
 					snapshot.forEach((userSnapshot) => {
 						//console.log('^^^^^^^^^^^');
@@ -184,15 +185,19 @@ class Vaccine_history_base extends React.Component {
 
 
 	componentDidMount() {
+		const currentUser = localStorage.getItem('user')
+        if(!currentUser) {
+            this.props.history.push('/')
+        }
 		// get list of history
 		const history = []
-		const uid = this.props.firebase.auth.currentUser.uid
-		const history_ref = this.props.firebase.db.ref(`v1/${uid}`);
+		const uid = currentUser
+		const history_ref = Firebase.database().ref(`v1/${uid}`);
 		history_ref.on('value', (snapshot) => {
 			snapshot.forEach((userSnapshot) => {
-				console.log('^^^^^^^^^^^');
-				console.log(userSnapshot.val())
-				console.log('^^^^^^^^^^^');
+				//console.log('^^^^^^^^^^^');
+				//console.log(userSnapshot.val())
+				//console.log('^^^^^^^^^^^');
 				const id = userSnapshot.key;
 				const userData = userSnapshot.val();
 				history.push(userData);
@@ -201,8 +206,8 @@ class Vaccine_history_base extends React.Component {
 			console.log('#######');
 			console.log(history);
 			console.log('#######');
+			this.setState({ history: history });
 		})
-		this.setState({ history: history });
 	}
 
 	showCertification(certificate) {
@@ -233,7 +238,7 @@ class Vaccine_history_base extends React.Component {
 				</thead>
 				<tbody>
 					{this.state.history.map((record, index) => (
-						<tr>
+						<tr key={index }>
 							<td>{index + 1}</td>
 							<td>{record.disease}</td>
 							<td>{record.vaccine_name}</td>
@@ -274,7 +279,7 @@ class Vaccine_history_base extends React.Component {
                     />
 				</Form.Group>	
 				<Form.Group controlId="formDate">
-					<Form.Label>Upload Certificate:</Form.Label>
+					<Form.Label>Upload Proof Document:</Form.Label>
 					<Form.Text>
 						<p>Supported format: .pdf, .png, .jpg, .jpeg</p>
 						<FileBase64

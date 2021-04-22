@@ -15,6 +15,7 @@ import { compose } from 'recompose';
 import { Card } from 'react-bootstrap';
 import Axios from 'axios';
 import './AirportStaffPassengerDetails.css'
+import Firebase from '../Firebase/firebase'
 
 function unique (arr) {
   return Array.from(new Set(arr))
@@ -36,13 +37,17 @@ class FlightDetailsBase extends React.Component {
     };
 
     componentDidMount() {
+        const currentUser = localStorage.getItem('user')
+        if(!currentUser) {
+            this.props.history.push('/')
+        }
         const flight_number = this.props.match.params.flight_number
         this.setState({ flight_number: flight_number })
-        const uid = this.props.firebase.auth.currentUser.uid 
+        const uid = localStorage.getItem('user')
         console.log('~~~~~~~~~~~~~~~~~~')
         console.log(flight_number)
         console.log('~~~~~~~~~~~~~~~~~~')
-        const flight_ref = this.props.firebase.db.ref(`flights/${flight_number}`);
+        const flight_ref = Firebase.database().ref(`flights/${flight_number}`);
         let fs = []
         let ps = []
         let hs = []
@@ -62,7 +67,7 @@ class FlightDetailsBase extends React.Component {
 
                 // Get user info
                 let user;
-                const user_ref = this.props.firebase.db.ref(`users/${id}`)
+                const user_ref = Firebase.database().ref(`users/${id}`)
                 user_ref.on('value', (snapshot) => {
                     //console.log(snapshot.val())
                     user = snapshot.val()['first_name'] + ', ' + snapshot.val()['last_name']
@@ -73,7 +78,7 @@ class FlightDetailsBase extends React.Component {
                 
                 let history = []
                 // Get history
-                const history_ref = this.props.firebase.db.ref(`v1/${id}`);
+                const history_ref = Firebase.database().ref(`v1/${id}`);
                 history_ref.on('value', (snapshot) => {
                     snapshot.forEach((userSnapshot) => {
                         //console.log('%%%%%%%%%%%%%%%%%%')
@@ -94,43 +99,41 @@ class FlightDetailsBase extends React.Component {
                 //this.setState({ historys: hs })
             });
             this.setState({ flights: fs })
+            const flight_info = fs[0]
+            const o_country = flight_info['origin_country']
+            const d_country = flight_info['destination_country']
+            console.log(o_country);
+            console.log(d_country)
+            if(o_country !== d_country) {
+                console.log('different')
+                const e = document.getElementById('vaccines')
+                e.style.display = 'block'
+                //this.setState({show: true})
+                Axios.get(
+                  'https://australia-southeast1-seng3011-306108.cloudfunctions.net/country_vaccine?country_name=' + d_country,
+                  {
+                      mode: 'cors',
+                      method: 'get',
+                      //headers: headers,
+                      country_name: d_country
+                    }
+                
+                ).then(
+                    res => {
+                        console.log(res.data.vaccines);
+                        let array = []
+                        for (let vaccine of res.data.vaccines) {
+                            array.push(vaccine['name'])
+                        }
+                        const v = array.join(', ')
+                        this.setState({ vaccines: v })
+                        //this.setState({ vaccines: res.data.vaccines });
+                    }
+                );
+            }
         })
         //console.log('ppppppppppp')
         //console.log(ps)
-
-
-        const flight_info = fs[0]
-        const o_country = flight_info['origin_country']
-        const d_country = flight_info['destination_country']
-        console.log(o_country);
-        console.log(d_country)
-        if(o_country !== d_country) {
-            console.log('different')
-            const e = document.getElementById('vaccines')
-            e.style.display = 'block'
-            //this.setState({show: true})
-            Axios.get(
-              'https://australia-southeast1-seng3011-306108.cloudfunctions.net/country_vaccine?country_name=' + d_country,
-              {
-                  mode: 'cors',
-                  method: 'get',
-                  //headers: headers,
-                  country_name: d_country
-                }
-            
-            ).then(
-                res => {
-                    console.log(res.data.vaccines);
-                    let array = []
-                    for (let vaccine of res.data.vaccines) {
-                        array.push(vaccine['name'])
-                    }
-                    const v = array.join(', ')
-                    this.setState({ vaccines: v })
-                    //this.setState({ vaccines: res.data.vaccines });
-                }
-            );
-        }
     }
 
     render() {
@@ -142,6 +145,7 @@ class FlightDetailsBase extends React.Component {
                     <Card.Body>
                         <h3>Vaccine Recommendations</h3>
                         <h5>{this.state.vaccines}</h5>
+
                     </Card.Body>
                 </Card>
                 {unique(this.state.passengers).map((p, index) => (
