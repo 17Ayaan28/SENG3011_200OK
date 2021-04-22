@@ -260,7 +260,7 @@ class FlightRegisterBase extends React.Component {
                 url: url,
                 headers: {
                     'Accept': 'application/json',
-                    'Authorization': 'Bearer y3fw5tjj7twtjyh8wg7nfghz'
+                    'Authorization': 'Bearer r6tvfxkxp5m73p7cyx9wzpt5'
                 }
             }
             /*
@@ -664,7 +664,7 @@ class FlightRegisterBase extends React.Component {
             onChange: this.onDestinationChange
         };
         return (
-        <>
+    <div>
         <Navbar />
         <div className="flightcontainer">
             <Card>
@@ -702,23 +702,25 @@ class FlightRegisterBase extends React.Component {
                   <Button variant="warning" onClick={this.handleSearch}>Search</Button>
                   </div>
               </Card.Body>
-          </Card>
-          <div>
-                    <div className="card-text">
-            <h2>Direct Flights</h2>
+            </Card>
+            <div>
+            <div className="card-text">
+                <h2>Direct Flights</h2>
             </div>
             {this.state.direct_flights.map((flight, index) => (
                 <Card className='flight' key={index}>
                     <Card.Body className='direct' id={index}>
                         {this.state.origin + ' -> ' + this.state.look_up[flight.Arrival.AirportCode] + ' (' + flight.Arrival.AirportCode + ')' + '  ' + flight.MarketingCarrier.AirlineID + flight.MarketingCarrier.FlightNumber}
+                        <div className="card-btn">
                         <Button variant="warning" onClick={this.handleRegister}>Register</Button>
+                        </div>
                     </Card.Body>
                 </Card>
             ))}
           </div>
           <div>
             <div className="card-text">
-            <h2>Transit Flights</h2>
+                <h2>Transit Flights</h2>
             </div>
             {this.state.other_flights.map((flight, index) => (
                 <Card className='flight' key={index}>
@@ -735,18 +737,19 @@ class FlightRegisterBase extends React.Component {
                 </Card>
             ))}
           </div>
-          <Modal show={this.state.show} onHide={this.handleClose}>
-              <Modal.Header closeButton>
-              <Modal.Title></Modal.Title>
-              </Modal.Header>
-              <Modal.Body>{this.state.message}</Modal.Body>
-              <Modal.Footer>
-              <Button variant="secondary" onClick={this.handleClose}>
-                  Close
-              </Button>
-              </Modal.Footer>
-          </Modal>
-    </>
+        </div>
+        <Modal show={this.state.show} onHide={this.handleClose}>
+            <Modal.Header closeButton>
+            <Modal.Title></Modal.Title>
+            </Modal.Header>
+            <Modal.Body>{this.state.message}</Modal.Body>
+            <Modal.Footer>
+            <Button variant="secondary" onClick={this.handleClose}>
+                Close
+            </Button>
+            </Modal.Footer>
+        </Modal>
+    </div>
         );
     }
 
