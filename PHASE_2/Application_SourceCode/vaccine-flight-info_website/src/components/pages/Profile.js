@@ -36,18 +36,20 @@ class ProfileBase extends React.Component {
         user_ref.on('value', (snapshot) => {
             //console.log(snapshot.val())
             const userData = snapshot.val()
-            if(userData.role === 'user') {
-                const e = document.getElementById('user');
-                e.style.display = 'block'
-            } else {
-                const e = document.getElementById('staff')
-                e.style.display = 'block'
-            }
-            this.setState({ role: userData.role })
-            this.setState({ first_name: userData.first_name })
-            this.setState({ last_name: userData.last_name })
-            this.setState({ email: userData.email })
-            this.setState({ info: userData.credential })
+	    if(userData) {
+		    if(userData.role === 'user') {
+			const e = document.getElementById('user');
+			e.style.display = 'block'
+		    } else {
+			const e = document.getElementById('staff')
+			e.style.display = 'block'
+		    }
+		    this.setState({ role: userData.role })
+		    this.setState({ first_name: userData.first_name })
+		    this.setState({ last_name: userData.last_name })
+		    this.setState({ email: userData.email })
+		    this.setState({ info: userData.credential })
+	    }
         })
     }
     
