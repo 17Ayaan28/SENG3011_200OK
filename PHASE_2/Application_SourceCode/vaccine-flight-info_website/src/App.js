@@ -6,6 +6,7 @@ import LandingPage from './home';
 import LogInPage from './login';
 import RegisterPage from './register';
 import Vaccine_history from './components/pages/vaccine_history';
+import ForgotPassword from './ForgotPassword';
 import AirportStaffFlight from './components/pages/AirportStaffFlight';
 import AirportStaffPassengerDetails from './components/pages/AirportStaffPassengerDetails';
 import Vaccine from './Vaccine_by_location'
@@ -20,11 +21,13 @@ import FlightRegister from './components/pages/FlightRegister'
 
 import { withAuthentication } from './components/Session';
 
+import { AuthProvider } from "./contexts/AuthContext"
 
 
 function App() {
+
   return (
-      <>
+    <AuthProvider>  
         <Router>
         {/* <Home /> */}
           <Switch> 
@@ -33,6 +36,7 @@ function App() {
 
             <Route path='/home' exact component={Home} />
             <Route path='/vaccine' exact component={Vaccine} />
+            <Route path='/reset'  component={ForgotPassword} />
 
             <Route path='/travelInfo/:country' component={TravelInfo} />
             <Route path='/vaccination-history' component={Vaccine_history} />
@@ -47,7 +51,7 @@ function App() {
             <Route path='/' exact component={LandingPage} />
           </Switch>
         </Router>
-      </>
+    </AuthProvider>
   );
 }
 

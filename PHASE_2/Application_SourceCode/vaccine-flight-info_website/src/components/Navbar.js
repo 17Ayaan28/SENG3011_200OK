@@ -216,6 +216,10 @@ function Navbar(props) {
     const handleClick = () => setClick(!click); 
     const closeMobileMenu = () => setClick(false); 
 
+    const { logout, currentUser } = useAuth()
+    const [error, setError] = useState('')
+    const history = useHistory()
+
     const showButton = () => {
         if (window.innerWidth <= 960) {
             setButton(false);
@@ -229,8 +233,18 @@ function Navbar(props) {
       }, []);
 
     window.addEventListener('resize', showButton);
-    console.log('hhhh')
-    console.log(this.props);
+
+    async function handleLogout() {
+        setError(' ')
+        try {
+            await logout()
+            alert("Successfuly logged out")
+            history.push('/home')
+        } catch {
+            setError("Failed to log out")
+        }
+    }
+    
     return (
             <>
             <nav className='navbar'>

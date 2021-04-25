@@ -1,9 +1,8 @@
 import {Link} from "react-router-dom";
-import React from 'react';
+import React, { useRef, useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import './home.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './home.css'
 
 class LandingPage extends React.Component {
 
