@@ -70,7 +70,7 @@ h4 {
 #f {
     height: 100%;
     width: 100vw;
-    background-image: url('../../travel6.jpeg');
+    background-image: url('../../../public/images/travel6.jpeg');
     background-repeat: no-repeat;
     background-size: cover;
 }

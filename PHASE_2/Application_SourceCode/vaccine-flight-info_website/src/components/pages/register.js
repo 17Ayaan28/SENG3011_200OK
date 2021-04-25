@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './register.css'
 import Alert from 'react-bootstrap/Alert';
-import { withFirebase } from './components/Firebase';
+import { withFirebase } from '../components/Firebase';
 import { compose } from 'recompose';
 
 function shoot() {

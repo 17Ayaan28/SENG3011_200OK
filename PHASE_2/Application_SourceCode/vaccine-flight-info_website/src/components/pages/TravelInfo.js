@@ -3,14 +3,14 @@ import React from "react";
 //import Page2 from "./Page2";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Table from 'react-bootstrap/Table';
-import Navbar from './components/Navbar'
+import Navbar from '../components/Navbar'
 import './TravelInfo.css'
-import Cards from './components/Cards'
+import Cards from '../components/Cards'
 import { Link } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Axios from 'axios';
-import convert from './country_convert.json';
-import brands from './vaccine_brands.json';
+import convert from '../../country_convert.json';
+import brands from '../../vaccine_brands.json';
 
 class TravelInfo extends React.Component {
 

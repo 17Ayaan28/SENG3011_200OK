@@ -7,11 +7,11 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import CountrySelect from 'react-bootstrap-country-select';
 import './Vaccine_by_location.css';
-import Navbar from './components/Navbar';
-import convert from './country_convert.json';
+import Navbar from '../components/Navbar';
+import convert from '../../country_convert.json';
 
 import { withRouter } from 'react-router-dom';
-import { withFirebase } from './components/Firebase';
+import { withFirebase } from '../components/Firebase';
 import { compose } from 'recompose';
 
 

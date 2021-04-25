@@ -2,21 +2,21 @@ import React from 'react'
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './components/pages/Home';
-import LandingPage from './home';
-import LogInPage from './login';
-import RegisterPage from './register';
+import LandingPage from './components/pages/landingPage';
+import LogInPage from './components/pages/login';
+import RegisterPage from './components/pages/register';
 import Vaccine_history from './components/pages/vaccine_history';
-import ForgotPassword from './ForgotPassword';
+import ForgotPassword from './components/ForgotPassword';
 import AirportStaffFlight from './components/pages/AirportStaffFlight';
 import AirportStaffPassengerDetails from './components/pages/AirportStaffPassengerDetails';
-import Vaccine from './Vaccine_by_location'
-import TravelInfo from './TravelInfo'
+import Vaccine from './components/pages/Vaccine_by_location'
+import TravelInfo from './components/pages/TravelInfo'
 import NewsOutbreaks from './components/pages/NewsOutbreaks'
 import Maps from './components/pages/Maps'
 import Profile from './components/pages/Profile'
 import Skyscanner from './skyscanner'
 import Base64 from './base64CallBack'
-import Restriction from './restriction'
+import Restriction from './components/pages/restriction'
 import FlightRegister from './components/pages/FlightRegister'
 
 import { withAuthentication } from './components/Session';

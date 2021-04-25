@@ -53,7 +53,7 @@ td {
 #tr {
     height: 100%;
 	width: 100vw;
-    background-image: url('./travel9.jpeg');
+    background-image: url('../public/images/travel9.jpeg');
 	background-repeat: no-repeat;
  	background-size: cover;
 }

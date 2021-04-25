@@ -6,10 +6,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './login.css';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
-import { withFirebase } from './components/Firebase';
+import { withFirebase } from '../components/Firebase';
 import store from './reducers/store';
 import { connect } from 'react-redux';
-import Firebase from './components/Firebase/firebase'
+import Firebase from '../components/Firebase/firebase'
 //import add_firebase from './reducers/reducer';
 
 

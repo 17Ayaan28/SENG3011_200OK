@@ -1,10 +1,10 @@
 import React from 'react'
-import Navbar from './components/Navbar';
+import Navbar from '../components/Navbar';
 import './restriction.css'
 import Axios from 'axios'
 import ReadMoreReact from 'read-more-react';
-import country_convert from './country_convert.json';
-import restriction_country from './restriction_country.json';
+import country_convert from '../../country_convert.json';
+import restriction_country from '../../restriction_country.json';
 
 
 
