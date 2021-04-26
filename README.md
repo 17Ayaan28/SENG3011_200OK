@@ -65,6 +65,6 @@ API's used on web-app:
   3. Airport info API for IATA information: [Here](https://rapidapi.com/Active-api/api/airport-info) 
   4. AeroDataBox API for autosuggestion of list of Airports: [Here](https://www.aerodatabox.com/) 
 
-Website is accessbile for smart phone users as well as desktop users at: [Here](https://seng3011-306108.web.app/home)
+Website is accessbile for smart phone users as well as desktop users at: [Here](https://seng3011-306108.web.app)
 
 
