@@ -40,7 +40,7 @@ class Restriction extends React.Component {
         console.log(region)
         //?country_name=china&country_region=asia
         Axios.get(
-            'https://australia-southeast1-seng3011-306108.cloudfunctions.net/travel_restriction?country_name=' + name + '&country_region=' + region,
+            'https://australia-southeast1-upheld-booking-311217.cloudfunctions.net/travel_restriction?country_name=' + name + '&country_region=' + region,
             {
                 method: 'GET',
                 mode: 'cors',
