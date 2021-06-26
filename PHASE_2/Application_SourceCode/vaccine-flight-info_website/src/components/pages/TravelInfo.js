@@ -46,7 +46,7 @@ class TravelInfo extends React.Component {
 
 
 		Axios.get(
-			'https://australia-southeast1-seng3011-306108.cloudfunctions.net/country_vaccine?country_name=' + country,
+			'https://us-central1-upheld-booking-311217.cloudfunctions.net/country_vaccine?country_name=' + country,
 			{
 				mode: 'cors',
 				method: 'get',
